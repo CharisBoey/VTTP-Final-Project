@@ -1,9 +1,12 @@
 package sg.com.vttp.Final.Project.Controllers;
 
+import java.io.StringReader;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,11 +19,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import jakarta.json.Json;
+import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
+import jakarta.json.JsonReader;
 import sg.com.vttp.Final.Project.Models.Login;
 import sg.com.vttp.Final.Project.Models.RequestImage;
+import sg.com.vttp.Final.Project.Models.ServiceRequest;
 import sg.com.vttp.Final.Project.Services.LoginService;
 import sg.com.vttp.Final.Project.Services.RequestImageService;
 
@@ -35,7 +42,7 @@ public class LoginController {
     @Autowired
     RequestImageService reqImgSvc;
 
-    @PostMapping("api/login")
+    @PostMapping("/api/login")
     @ResponseBody
     public ResponseEntity<String> processLogin(@RequestBody Login payload){
 
@@ -114,6 +121,32 @@ public class LoginController {
     //     return ResponseEntity.ok(Json.createArrayBuilder(products).build().toString());
     // }
     //random123
+
+
+    @PostMapping(path="/api/ServiceRequest")
+    @ResponseBody
+    public ResponseEntity<String> postOrder(@RequestBody String payload) {
+
+
+
+        JsonReader reader = Json.createReader(new StringReader(payload));
+		JsonObject json = reader.readObject();
+		System.out.printf(">>> PAYLOAD: %s\n", json.toString());
+
+        /* {"request":"qqq","duedate":"2024-03-29","priority":2,"photo":"https://astronaut.sgp1.digitaloceanspaces.com/images/7e0241b1","requestID":"7e0241b1"} */
+
+        ServiceRequest svcReq = new ServiceRequest();
+        svcReq.setRequestID(json.getString("requestID"));
+        svcReq.setRequest(json.getString("request"));
+        svcReq.setDuedate(json.getString("duedate"));
+        svcReq.setPriority(json.getInt("priority"));
+        svcReq.setPhoto(json.getString("photo"));
+
+        System.out.println(">>>>>>>>>>>>>PROCESSED"+ svcReq);
+
+        return null;
+
+  }
     
 
 }

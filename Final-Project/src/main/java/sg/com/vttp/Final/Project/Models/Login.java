@@ -1,7 +1,6 @@
 package sg.com.vttp.Final.Project.Models;
 
 public class Login {
-    //MAKE SURE CAN ONLY SET PASSWORD ONCE
     private String username;
     private String password;
     private Boolean adminPosition;
