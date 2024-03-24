@@ -1,0 +1,18 @@
+<form [formGroup]="loginForm" (submit)="processForm()">
+    <table>
+        <tr>
+            <td>Login</td>
+        </tr>
+        <tr>
+            <td>Username: </td>
+            <td><input type="text" formControlName="username"></td>
+        </tr>
+        <tr>
+            <td>Password: </td>
+            <td><input type="text" formControlName="password"></td>
+        </tr>
+        <tr>
+            <td><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+</form>

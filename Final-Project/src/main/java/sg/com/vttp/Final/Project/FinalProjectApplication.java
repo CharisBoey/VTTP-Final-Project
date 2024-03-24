@@ -3,20 +3,32 @@ package sg.com.vttp.Final.Project;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
+import jakarta.json.Json;
+import jakarta.json.JsonArrayBuilder;
+import jakarta.json.JsonObject;
 import sg.com.vttp.Final.Project.Models.Login;
+import sg.com.vttp.Final.Project.Services.ServiceRequestService;
 
 @SpringBootApplication
 public class FinalProjectApplication implements CommandLineRunner{
 
 	@Autowired
     private JdbcTemplate template;
+
+	@Autowired
+	MongoTemplate mongoTemplate;
+
+	@Autowired
+    ServiceRequestService svcReqSvc;
 
 	public static void main(String[] args) {
 		SpringApplication.run(FinalProjectApplication.class, args);
@@ -34,7 +46,15 @@ public class FinalProjectApplication implements CommandLineRunner{
 		// while(rs.next()){
 		// 	System.out.println(Utils.toLogin(rs));
 		// }
+
+		// JsonArrayBuilder arrBuilder = Json.createArrayBuilder(svcReqSvc.findAllSvcReq());
+        // System.out.println(">>"+arrBuilder.toString());
+
 		
+		
+		
+
+
 	}
 
 }

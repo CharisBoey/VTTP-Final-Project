@@ -23,18 +23,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
+import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
+import sg.com.vttp.Final.Project.Utils;
 import sg.com.vttp.Final.Project.Models.Login;
 import sg.com.vttp.Final.Project.Models.RequestImage;
 import sg.com.vttp.Final.Project.Models.ServiceRequest;
 import sg.com.vttp.Final.Project.Services.LoginService;
 import sg.com.vttp.Final.Project.Services.RequestImageService;
+import sg.com.vttp.Final.Project.Services.ServiceRequestService;
 
 @Controller
 @RequestMapping
 @CrossOrigin
-public class LoginController {
+public class AdminController {
 
     @Autowired
     LoginService loginSvc;
@@ -42,7 +45,10 @@ public class LoginController {
     @Autowired
     RequestImageService reqImgSvc;
 
-    @PostMapping("/api/login")
+    @Autowired
+    ServiceRequestService svcReqSvc;
+
+    @PostMapping("/api/Login")
     @ResponseBody
     public ResponseEntity<String> processLogin(@RequestBody Login payload){
 
@@ -127,13 +133,11 @@ public class LoginController {
     @ResponseBody
     public ResponseEntity<String> postOrder(@RequestBody String payload) {
 
-
-
         JsonReader reader = Json.createReader(new StringReader(payload));
 		JsonObject json = reader.readObject();
 		System.out.printf(">>> PAYLOAD: %s\n", json.toString());
 
-        /* {"request":"qqq","duedate":"2024-03-29","priority":2,"photo":"https://astronaut.sgp1.digitaloceanspaces.com/images/7e0241b1","requestID":"7e0241b1"} */
+        // /* {"request":"qqq","duedate":"2024-03-29","priority":2,"photo":"https://astronaut.sgp1.digitaloceanspaces.com/images/7e0241b1","requestID":"7e0241b1"} */
 
         ServiceRequest svcReq = new ServiceRequest();
         svcReq.setRequestID(json.getString("requestID"));
@@ -141,12 +145,23 @@ public class LoginController {
         svcReq.setDuedate(json.getString("duedate"));
         svcReq.setPriority(json.getInt("priority"));
         svcReq.setPhoto(json.getString("photo"));
+        svcReqSvc.insertSvcReq(svcReq);
 
-        System.out.println(">>>>>>>>>>>>>PROCESSED"+ svcReq);
-
-        return null;
-
-  }
+        return ResponseEntity.ok("successful");
+    }
     
+    @GetMapping(path="/api/RequestList")
+    @ResponseBody
+    public ResponseEntity<String> getAllResquests() {
+
+        /* JsonArrayBuilder arrBuilder = Json.createArrayBuilder(svcReqSvc.findAllSvcReq());
+        System.out.println(arrBuilder); */
+
+        List<JsonObject> svcReqArray = svcReqSvc.findAllSvcReq().stream()
+        .map(Utils::toJsonSvcReq)
+        .toList();
+        
+        return ResponseEntity.ok(Json.createArrayBuilder(svcReqArray).build().toString());
+    }
 
 }
