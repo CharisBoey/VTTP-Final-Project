@@ -1,0 +1,67 @@
+<div class="panel-view">
+    <div class="panel-item"  *ngFor="let i of icons;">
+        <div>
+        <button type="button" class="custom-button" (click)="directToPage(i.iconName)">
+        <!-- [routerLink]="['/{{i.iconName}}']" -->
+            <!-- MAYBE DO THE GUARD CHECK ADMIN POSITION -->
+            <h1>{{i.iconName}}</h1>
+            
+            
+            <img src="/assets/logos/{{i.iconName}}.png">
+        </button>
+        </div>
+    </div>  
+</div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="panel-view">
+    <div class="panel-item" data-th-each="book: ${bookList}">
+        <a onclick="snackbar()" data-th-href="@{/Home/Save/Search/{isbn}(isbn=${book.isbn})}" class="btn mediumblue-btn" >Add to Reading List</a>
+    
+    </div>  
+</div> -->
+
+<!-- <div class="panel-view">
+    <div class="panel-item" *ngFor="let i of stuff">
+       <h1>{{i}}</h1>
+       <div>
+        <img src="/assets/logos/problem.png" class="number">
+      </div>
+    </div>  
+</div> -->
+
+<!-- <div>
+    <img src="/assets/numbers/number{{ value }}.jpg" class="number">
+  </div> -->
+
+  <!-- <container-element [ngSwitch]="switch_expression">
+    <some-element *ngSwitchCase="match_expression_1">...</some-element>
+    <some-element *ngSwitchCase="match_expression_2">...</some-element>
+    <some-other-element *ngSwitchCase="match_expression_3">...</some-other-element>
+    <some-element *ngSwitchDefault>...</some-element>
+  </container-element> -->
+
+<!-- <select [(ngModel)]="selectedValue">  
+    <option *ngFor="let icon of icons;" [value]="icon.iconName">{{icon.iconName}}</option>  
+</select>  
+<div class='row' [ngSwitch]="selectedValue">  
+    <div *ngSwitchCase="'One'">One is Pressed</div>  
+    <div *ngSwitchCase="'Two'">Two is Selected</div>  
+    <div *ngSwitchDefault>Default Option</div>  
+</div>   -->
+
+

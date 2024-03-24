@@ -1,0 +1,33 @@
+<!-- <p>map-main works!</p>
+
+<app-map-autocomplete (placeChanged)="location = $event" placeholder="Enter location..." #autocomplete2></app-map-autocomplete>
+
+
+
+<div class="display-area" >
+        <div>
+            [hidden]="!location.address"
+          <app-place-card [data]="fromValue"></app-place-card>
+          <app-place-card [data]="toValue"></app-place-card>
+        </div>
+    <app-map-mapdisplay [locationDetails]="location"></app-map-mapdisplay>
+</div> -->
+
+
+<p>main works!</p>
+
+
+    <div class="container">
+      <div class="input-area">
+        <h2>I want to go from</h2>
+        <app-map-autocomplete (placeChanged)="location = $event" placeholder="Enter location..." #autocomplete2></app-map-autocomplete>
+
+      </div>
+      <div
+        class="display-area"
+        [hidden]="!location.address"
+      >
+        
+        <app-map-display [location]="location"></app-map-display>
+      </div>
+    </div>
