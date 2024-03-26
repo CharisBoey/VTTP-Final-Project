@@ -22,8 +22,18 @@ public class Utils {
         .add("requestID", svcReq.getRequestID())
         .add("request", svcReq.getRequest())
         .add("duedate", svcReq.getDuedate())
+        .add("completeddate", svcReq.getCompleteddate())
         .add("priority", svcReq.getPriority())
         .add("photo", svcReq.getPhoto())
+        .add("fixedphoto", svcReq.getFixedphoto())
+        .add("locationaddress", svcReq.getLocationaddress())
+        .add("adminname", svcReq.getAdminname())        
+        .add("contractorname", svcReq.getContractorname())        
         .build();
     }
+    
+
+    
+
+    
 }

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { icon } from '../models';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -10,12 +10,16 @@ import { Router } from '@angular/router';
 export class AdminComponent {
 
   private router = inject(Router)
+  activatedRoute = inject(ActivatedRoute);
+  username: string = this.activatedRoute.snapshot.params['username'];
 
   icons: icon[] = [{iconName: 'Service Request', value: 1}, {iconName: 'Request List', value: 2}, {iconName: 'Response Validation', value: 3}, {iconName: 'Project Timeline', value: 4}];  
 
   directToPage(iconName: string) {
     const replacedName = iconName.replace(/\s+/g, '-')
-    this.router.navigate([ '/', replacedName ])
+    this.router.navigate([ '/Admin/', this.username, replacedName ])
+
+    
     //this.router.navigate("['/{{encodeURIComponent(i.iconName)}}']")
   }
 }

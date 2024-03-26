@@ -4,11 +4,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
+import com.mongodb.client.result.UpdateResult;
+
 import sg.com.vttp.Final.Project.Models.ServiceRequest;
+import sg.com.vttp.Final.Project.Models.UpdateServiceRequest;
 
 @Repository
 public class ServiceRequestRepository {
@@ -24,8 +31,13 @@ public class ServiceRequestRepository {
 		svcReq.put("requestID", payload.getRequestID());
 		svcReq.put("request", payload.getRequest());
 		svcReq.put("duedate", payload.getDuedate());
+		svcReq.put("completeddate", payload.getCompleteddate());
 		svcReq.put("priority", payload.getPriority());
 		svcReq.put("photo", payload.getPhoto());
+		svcReq.put("fixedphoto", payload.getFixedphoto());
+		svcReq.put("locationaddress", payload.getLocationaddress());
+		svcReq.put("adminname", payload.getAdminname());
+		svcReq.put("contractorname", payload.getContractorname());
 
 		mongoTemplate.insert(svcReq, "servicerequest");
         
@@ -39,16 +51,58 @@ public class ServiceRequestRepository {
 
         for (Document d : result_findAll){
             ServiceRequest svcReq = new ServiceRequest();
+
             svcReq.setRequestID(d.getString("requestID"));
             svcReq.setRequest(d.getString("request"));
             svcReq.setDuedate(d.getString("duedate"));
+            svcReq.setCompleteddate(d.getString("completeddate"));
             svcReq.setPriority(d.getInteger("priority"));
             svcReq.setPhoto(d.getString("photo"));
+            svcReq.setFixedphoto(d.getString("fixedphoto"));
+            svcReq.setLocationaddress(d.getString("locationaddress"));
+            svcReq.setAdminname(d.getString("adminname"));
+            svcReq.setContractorname(d.getString("contractorname"));
+
             svcReqList.add(svcReq);
         }
 
-        
         return svcReqList;
+    }
+
+    public ServiceRequest findAllSvcReqByID(String requestID){
+
+        Criteria criteria = Criteria.where("requestID").is(requestID);
+        Query query = Query.query(criteria);
+        List<Document> result_findByID_Document = mongoTemplate.find(query, Document.class,"servicerequest");
+		System.out.println("FindByID_Doc:"+result_findByID_Document.toString());
+
+
+        Document d = result_findByID_Document.get(0);
+        ServiceRequest svcReq = new ServiceRequest();
+        svcReq.setRequestID(d.getString("requestID"));
+        svcReq.setRequest(d.getString("request"));
+        svcReq.setDuedate(d.getString("duedate"));
+        svcReq.setCompleteddate(d.getString("completeddate"));
+        svcReq.setPriority(d.getInteger("priority"));
+        svcReq.setPhoto(d.getString("photo"));
+        svcReq.setFixedphoto(d.getString("fixedphoto"));
+        svcReq.setLocationaddress(d.getString("locationaddress"));
+        svcReq.setAdminname(d.getString("adminname"));
+        svcReq.setContractorname(d.getString("contractorname"));
+        
+        return svcReq;
+    }
+
+    public void updateSvcReq(UpdateServiceRequest updSvcReq) {
+        Query query = Query.query(Criteria.where("requestID").is(updSvcReq.getRequestID()));
+
+        Update updateOperation = new Update()
+        .set("fixedphoto", updSvcReq.getFixedphoto())
+        .set("contractorname", updSvcReq.getContractorname());
+
+        UpdateResult result = mongoTemplate.updateMulti(query, updateOperation, "servicerequest");
+
+        System.out.printf("Documents updated: %d\n", result.getModifiedCount());
     }
 
     

@@ -1,1 +1,122 @@
-<p>progress-submission works!</p>
+
+<button type="button" [routerLink]="['/Standard', username]">STANDARD Home Page</button>
+<h1>Progress Submission Form</h1>
+<button type="button" (click)="click()">X</button>
+
+<!-- add location -->
+<form [formGroup]="progressSubmissionForm" (submit)="saveUpdatedData()">
+    <table>
+        <tr>
+            <!-- Change to drop down ID -->
+            <td>Service Request:</td>
+            <td>
+                <!-- <input placeholder="min 5 characters" type="text" formControlName="requestID"> -->
+                <select *ngIf="reqListIDs$ | async as IDs">
+                    <option *ngFor="let i of IDs" value={{i.requestID}} #requestID>
+                        [{{i.requestID}}] {{i.request}}
+                    </option>
+                </select>
+
+                <!-- <select>
+                    <option *ngFor="let i of IDs" value="{{i.requestID}}" (change)="typeDropdown($event)">{{t}}</option>
+                </select> -->
+            </td>
+        </tr>
+        
+        <tr>
+            <td>Upload Image:</td>
+            <td>
+              <input type="file" accept="images/*" formControlName="fixedphoto" #photoElem (input)="uploadedTrue()">
+              
+              <!-- <input type="file" accept="images/*" formControlName="photo" #photo (input)="uploadedTrue()" [style.display]="previewOn ? 'none' : 'block'"> -->
+            <td>
+            <td *ngIf="uploaded">
+              <button type="button" (click)="deleteUploadedPhoto()">X</button>
+            </td>
+        </tr>
+
+        <button type="button" (click)=addUpdatedImg()>Add Submission</button>
+        <button type="submit" >Submit</button>
+
+
+        <!-- <tr>
+            <td>Due Date:</td>
+            <td><input type="date" formControlName="duedate" (input)="isInvalid(serviceRequestForm.value.duedate)">&nbsp;{{message}}</td>
+        </tr> -->
+
+        <!-- <tr>
+            <td>Priority:</td>
+            <td><input type="number" min="1" max="5" formControlName="priority">&nbsp; <i>(1-most impt, 5-least impt)</i></td>
+        </tr>
+        <tr>
+            <td>Upload Image:</td>
+            <td>
+              <input type="file" accept="images/*" formControlName="photo" #photoElem (input)="uploadedTrue()"> -->
+              
+              <!-- <input type="file" accept="images/*" formControlName="photo" #photo (input)="uploadedTrue()" [style.display]="previewOn ? 'none' : 'block'"> -->
+            <!-- <td>
+            <td *ngIf="uploaded">
+              <button type="button" (click)="deleteUploadedPhoto()">X</button>
+            </td>
+        </tr>
+        <tr>
+          <td>Location:</td>
+          <td>
+            <app-map-main #autocomplete3>
+            </app-map-main>
+            <input type="checkbox" (click)="confirmlocation()" formControlName="confirm">Confirm Location
+
+          </td> -->
+        <!-- </tr>   -->
+    </table>
+    <br>
+</form>
+
+
+<!-- --------------------------------------- -->
+<div *ngIf="updatedReq$ | async as updReqs">
+    <div *ngIf="updReqs.length > 0 ; else noReq">
+      <table border="1">
+        <thead>
+          <tr>
+
+            <th>ID</th>
+            <th>Service Request</th>
+            <th>Manager Name</th>
+            <th>Contractor Name</th>
+            <th>Location</th>
+            <th>Due Date</th>
+            <th>Completed Date</th>
+            <th>Priority</th>
+            <th>Issue Image</th>
+            <th>Fixed Image</th>
+            <th>Status</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr *ngFor="let r of updReqs">
+              <td>{{r.requestID}}</td>
+              <td>{{r.request}}</td>
+              <td>{{r.adminname}}</td>
+              <td>{{r.contractorname}}</td>
+              <td>{{r.locationaddress}}</td>
+              <td>{{r.duedate}}</td>
+              <td>{{r.completeddate}}</td>
+              <td>{{r.priority}}</td>
+              <td>
+                <img width=300px src = "{{r.photo}}">
+              </td>
+              <td>
+                <img width=300px src = "{{r.fixedphoto}}">
+              </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <ng-template #noReq>
+    <h2>No Requests</h2>
+  </ng-template>

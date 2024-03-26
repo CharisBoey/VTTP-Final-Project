@@ -30,6 +30,7 @@ import sg.com.vttp.Final.Project.Utils;
 import sg.com.vttp.Final.Project.Models.Login;
 import sg.com.vttp.Final.Project.Models.RequestImage;
 import sg.com.vttp.Final.Project.Models.ServiceRequest;
+import sg.com.vttp.Final.Project.Models.UpdateServiceRequest;
 import sg.com.vttp.Final.Project.Services.LoginService;
 import sg.com.vttp.Final.Project.Services.RequestImageService;
 import sg.com.vttp.Final.Project.Services.ServiceRequestService;
@@ -143,16 +144,23 @@ public class AdminController {
         svcReq.setRequestID(json.getString("requestID"));
         svcReq.setRequest(json.getString("request"));
         svcReq.setDuedate(json.getString("duedate"));
+        svcReq.setCompleteddate(json.getString("completeddate"));
         svcReq.setPriority(json.getInt("priority"));
         svcReq.setPhoto(json.getString("photo"));
+        svcReq.setFixedphoto(json.getString("fixedphoto"));
+        svcReq.setLocationaddress(json.getString("locationaddress"));
+        svcReq.setAdminname(json.getString("adminname"));
+        svcReq.setContractorname(json.getString("contractorname"));
+        
         svcReqSvc.insertSvcReq(svcReq);
 
-        return ResponseEntity.ok("successful");
+        return ResponseEntity.ok().build();
     }
+    
     
     @GetMapping(path="/api/RequestList")
     @ResponseBody
-    public ResponseEntity<String> getAllResquests() {
+    public ResponseEntity<String> getAllRequests() {
 
         /* JsonArrayBuilder arrBuilder = Json.createArrayBuilder(svcReqSvc.findAllSvcReq());
         System.out.println(arrBuilder); */
@@ -163,5 +171,57 @@ public class AdminController {
         
         return ResponseEntity.ok(Json.createArrayBuilder(svcReqArray).build().toString());
     }
+
+    // @PostMapping(path="/api/ProgressSubmission")
+    // @ResponseBody
+    // public ResponseEntity<String> postProgressionSubmission(@RequestBody String payload) {
+
+    //     JsonReader reader = Json.createReader(new StringReader(payload));
+	// 	JsonObject json = reader.readObject();
+	// 	System.out.printf(">>> PAYLOAD: %s\n", json.toString());
+
+    //     // /* {"request":"qqq","duedate":"2024-03-29","priority":2,"photo":"https://astronaut.sgp1.digitaloceanspaces.com/images/7e0241b1","requestID":"7e0241b1"} */
+
+    //     ServiceRequest svcReq = new ServiceRequest();
+    //     svcReq.setRequestID(json.getString("requestID"));
+    //     svcReq.setRequest(json.getString("request"));
+    //     svcReq.setDuedate(json.getString("duedate"));
+    //     svcReq.setPriority(json.getInt("priority"));
+    //     svcReq.setPhoto(json.getString("photo"));
+    //     svcReq.setLocationaddress(json.getString("locationaddress"));
+    //     svcReqSvc.insertSvcReq(svcReq);
+
+    //     return ResponseEntity.ok("successful");
+    // }
+
+    @PostMapping(path="/api/UpdateServiceRequest")
+	public ResponseEntity<String> updateSvcReq (@RequestBody String payload) {
+
+        JsonReader reader = Json.createReader(new StringReader(payload));
+		JsonObject json = reader.readObject();
+		System.out.printf(">>> PAYLOAD UPDATE: %s\n", json.toString());
+
+
+        UpdateServiceRequest updSvcReq = new UpdateServiceRequest();
+        updSvcReq.setRequestID(json.getString("requestID"));
+        updSvcReq.setFixedphoto(json.getString("fixedphoto"));
+        updSvcReq.setContractorname(json.getString("contractorname"));
+        
+        svcReqSvc.updateSvcReq(updSvcReq);
+
+        return ResponseEntity.ok().build();
+	}
+
+
+
+    @GetMapping(path="/api/RequestListByID/{requestID}")
+	public ResponseEntity<String> sendTagAndCount(@PathVariable String requestID) {
+
+        JsonObject svcReqJSON = svcReqSvc.toJSON(svcReqSvc.findAllSvcReqByID(requestID));
+        
+        return ResponseEntity.ok(Json.createObjectBuilder(svcReqJSON).build().toString());
+        
+	}
+
 
 }

@@ -1,4 +1,4 @@
-<button type="button" [routerLink]="['/Admin']">Home Page</button>
+<button type="button" [routerLink]="['/Admin', username]">Home Page</button>
 
 <h1>Service Request Form</h1>
 <!-- add location -->
@@ -25,6 +25,7 @@
               <!-- <input type="file" accept="images/*" formControlName="photo" #photo (input)="uploadedTrue()" [style.display]="previewOn ? 'none' : 'block'"> -->
             <td>
             <td *ngIf="uploaded">
+              <!-- push to left  class -->
               <button type="button" (click)="deleteUploadedPhoto()">X</button>
             </td>
         </tr>
@@ -57,13 +58,25 @@
           <td></td>
           <td><button type="button" (click)="clear()">Clear</button>
             <button type="button" (click)="clear()">Upload</button></td>
-        </tr>   -->   
+        </tr>   --> 
+        <tr>
+          <td>Location:</td>
+          <td>
+            <app-map-main #autocomplete3>
+            </app-map-main>
+            
+            <input type="checkbox" (click)="confirmlocation()" formControlName="confirm">
+            <label for="confirm">Confirm Location</label>
+
+          </td>
+        </tr>  
+
     </table>
     <br>
     
     <button type="button" (click)="addRequest()" [disabled]="isInvalid(serviceRequestForm.value.duedate)">Add Request</button>
     &nbsp;&nbsp;
-    <button type="submit" >Submit</button>
+    <button *ngIf="req$ | async as reqs" type="submit" [disabled]="reqs.length <= 0">Submit</button>
 </form>
 
 <br>
@@ -74,6 +87,7 @@
         <tr>
           <th>ID</th>
           <th>Service Request</th>
+          <th>Location</th>
           <th>Due Date</th>
           <th>Priority</th>
           <th>Image</th>
@@ -83,15 +97,16 @@
       <tbody>
         
           <tr *ngFor="let r of reqs">
-            <td style="width: 15%">{{ r.requestID }}</td>
+            <td style="width: 5%">{{ r.requestID }}</td>
             <td style="width: 15%">{{ r.request }}</td>
+            <td style="width: 15%">{{ r.locationaddress }}</td>
             <td style="width: 15%">{{ r.duedate }}</td>
             <td style="width: 15%">{{ r.priority }}</td>
             <td style="width: 30%">
               <!-- {{ r.photo }} -->
               <img [width]="width" src = "{{r.photo}}">
             </td>
-            <td style="width: 10%">
+            <td style="width: 5%">
               <button type="button" (click)="deleteRequest(r.requestID)">X</button>
             </td>
           </tr>
@@ -106,13 +121,7 @@
 
 <!-- <app-map-main #autocomplete3></app-map-main> -->
 
-<app-map-main></app-map-main>
 
-
-<button type="button" (click)="locationDetails()">xxx</button>
-
-
-<!-- <button type="button" (click)="isInvalid()">X</button> -->
 
 
 

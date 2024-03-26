@@ -1,6 +1,6 @@
 import { ElementRef, Injectable, inject } from '@angular/core';
-import { imagePreview, login, serviceRequest } from './models';
-import { Observable, firstValueFrom } from 'rxjs';
+import { imagePreview, login, serviceRequest, updateServiceRequest } from './models';
+import { Observable, Subject, firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -46,6 +46,28 @@ export class MainService {
     return this.formValue;
   }
 
+
+  private locationValid: boolean = false;
+
+  setLocationValid(valid: boolean) {
+    this.locationValid = valid;
+  }
+
+  getLocationValid() : boolean {
+    return this.locationValid;
+  }
+
+
+ /*  private username = new Subject<string>();
+
+  setUsername(username: string) {
+    this.username.next(username);
+  }
+
+  getUsername(): Observable<string> {
+    return this.username.asObservable();
+  }
+   */
   
   sendImgToSB(reqId: string, photo:ElementRef): Promise<any> {
     const formData = new FormData();
@@ -82,9 +104,34 @@ export class MainService {
     return firstValueFrom(this.http.post<any>('/api/ServiceRequest', ServiceRequestData))
   }
 
+  updServiceRequestToSB(ServiceRequestData: serviceRequest): Promise<any>{
+    
+    return firstValueFrom(this.http.post<any>('/api/UpdateServiceRequest', ServiceRequestData))
+  }
+
   getAllRequest(): Observable<serviceRequest[]> {
 
     return this.http.get<serviceRequest[]>('/api/RequestList')
   }
+
+  getAllRequestByID(requestID: string): Observable<serviceRequest> {
+    
+    return this.http.get<serviceRequest>(`/api/RequestListByID/${requestID}`)
+  }
   
+  
+  /* updateServiceRequestToSB(UpdateServiceRequestData: updateServiceRequest): Promise<any>{
+    const formData = new FormData();
+
+    formData.set('requestID', UpdateServiceRequestData.requestID);
+    formData.set('completeddate', UpdateServiceRequestData.completeddate);
+    formData.set('fixedphoto', UpdateServiceRequestData.fixedphoto);
+    formData.set('contractorname', UpdateServiceRequestData.contractorname);
+
+    return firstValueFrom(
+      this.http.post<updateServiceRequest>("/api/UpdateServiceRequest", formData)    
+    )
+
+  } */
+
 }

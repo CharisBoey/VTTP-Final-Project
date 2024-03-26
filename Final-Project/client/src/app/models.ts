@@ -23,22 +23,29 @@ export interface serviceRequest {
     requestID: string
     request: string
     duedate: string
+    completeddate: string
     priority: number
     photo: string
+    fixedphoto: string
+    locationaddress: string
+    adminname: string
+    contractorname: string
 }
 
 export interface ServiceRequestSlice {
     requestLists: serviceRequest[]
 }
 
+export interface updateServiceRequest {
+    requestID: string
+    completeddate: string
+    fixedphoto: string
+    contractorname: string
+}
+
 export interface imagePreview {
     requestID: string
     photo: string
-}
-
-
-export interface Window {
-    initAutocomplete: () => void;
 }
 
 export interface PlaceSearchResult {
@@ -47,7 +54,7 @@ export interface PlaceSearchResult {
     imageUrl?: string;
     iconUrl?: string;
     name?: string;
-  }
+}
 
 // export interface searchQuery {
 //     search: string

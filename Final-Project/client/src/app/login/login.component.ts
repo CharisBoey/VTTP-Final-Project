@@ -17,8 +17,6 @@ export class LoginComponent {
   private router = inject(Router)
   private userRoleStore = inject(UserRoleStore)
 
-
-
   private createLoginForm(): FormGroup {
     return this.fb.group({
       username: this.fb.control<string>('', [ Validators.required ]),
@@ -29,28 +27,33 @@ export class LoginComponent {
   ngOnInit(): void {
     this.loginForm = this.createLoginForm()
     this.userRoleStore.reset()
+    // this.mainSvc.setUsername(this.loginForm.get("username")?.value);
 
   }
 
   processForm(){
     console.log(">>>>>FORM OUTPUT", this.loginForm.value)
+    
     this.mainSvc.processLogin(this.loginForm.value).then(resp => {
       console.info('>>> resp: ', resp)
+
+      //this.mainSvc.setUsername(this.loginForm.get("username")?.value);
+
       const adminPosition = resp
       if (adminPosition.toString()=="true"){
         //this.mainSvc.setUserRole({adminPosition: true})
         this.userRoleStore.setAdmin()
         alert("Admin Granted")
-        this.router.navigate(['/Admin'])
+        this.router.navigate(['/Admin', this.loginForm.get("username")?.value])
 
         //ADD IN THAT IT IS ADMIN!!!!!!!!
       } else {
         this.userRoleStore.setStandard()
         //this.mainSvc.setUserRole({adminPosition: false})
         alert("Admin Not Granted")
-        this.router.navigate(['/Standard'])
-
+        this.router.navigate(['/Standard', this.loginForm.get("username")?.value])
       }
+      
       //alert(JSON.stringify(resp))
       //this.router.navigate(['/'])
   

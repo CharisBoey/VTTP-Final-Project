@@ -1,4 +1,4 @@
-<p>standard works!</p>
+<h1>username {{username}}</h1>
 
 <div class="panel-view">
     <div class="panel-item"  *ngFor="let i of icons;">
@@ -7,7 +7,6 @@
         <!-- [routerLink]="['/{{i.iconName}}']" -->
             <!-- MAYBE DO THE GUARD CHECK ADMIN POSITION -->
             <h1>{{i.iconName}}</h1>
-            
             
             <img src="/assets/logos/{{i.iconName}}.png">
         </button>

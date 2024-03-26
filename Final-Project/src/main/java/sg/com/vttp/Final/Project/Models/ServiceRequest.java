@@ -1,12 +1,20 @@
 package sg.com.vttp.Final.Project.Models;
 
+import org.springframework.data.annotation.Id;
+
 public class ServiceRequest {
+    @Id
     private String requestID;
     private String request;
     private String duedate;
+    private String completeddate;
     private Integer priority;
     private String photo;
-    
+    private String fixedphoto;
+    private String locationaddress;
+    private String adminname;
+    private String contractorname;
+
     public String getRequestID() {
         return requestID;
     }
@@ -25,6 +33,12 @@ public class ServiceRequest {
     public void setDuedate(String duedate) {
         this.duedate = duedate;
     }
+    public String getCompleteddate() {
+        return completeddate;
+    }
+    public void setCompleteddate(String completeddate) {
+        this.completeddate = completeddate;
+    }
     public Integer getPriority() {
         return priority;
     }
@@ -37,16 +51,44 @@ public class ServiceRequest {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
-    public ServiceRequest(String requestID, String request, String duedate, Integer priority, String photo) {
+    public String getFixedphoto() {
+        return fixedphoto;
+    }
+    public void setFixedphoto(String fixedphoto) {
+        this.fixedphoto = fixedphoto;
+    }
+    public String getLocationaddress() {
+        return locationaddress;
+    }
+    public void setLocationaddress(String locationaddress) {
+        this.locationaddress = locationaddress;
+    }
+    public String getAdminname() {
+        return adminname;
+    }
+    public void setAdminname(String adminname) {
+        this.adminname = adminname;
+    }
+    public String getContractorname() {
+        return contractorname;
+    }
+    public void setContractorname(String contractorname) {
+        this.contractorname = contractorname;
+    }
+    public ServiceRequest(String requestID, String request, String duedate, String completeddate, Integer priority,
+            String photo, String fixedphoto, String locationaddress, String adminname, String contractorname) {
         this.requestID = requestID;
         this.request = request;
         this.duedate = duedate;
+        this.completeddate = completeddate;
         this.priority = priority;
         this.photo = photo;
+        this.fixedphoto = fixedphoto;
+        this.locationaddress = locationaddress;
+        this.adminname = adminname;
+        this.contractorname = contractorname;
     }
     public ServiceRequest() {
     }
-
     
-
 }

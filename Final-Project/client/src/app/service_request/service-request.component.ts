@@ -7,6 +7,7 @@ import { Observable, Subscription } from 'rxjs';
 import { MainService } from '../main.service';
 import { v4 as uuidv4 } from 'uuid';
 import { MapMainComponent } from '../map_main/map-main.component';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -39,6 +40,7 @@ export class ServiceRequestComponent implements OnInit{
 
   private reqStore = inject(RequestStore)
   private mainSvc = inject(MainService)
+  activatedRoute = inject(ActivatedRoute);
   protected req$!: Observable<serviceRequest[]>
   protected allReq$!: Subscription;
   //url to error maybe?
@@ -55,12 +57,23 @@ export class ServiceRequestComponent implements OnInit{
   private fb = inject(FormBuilder)
   protected serviceRequestForm!: FormGroup
   protected message: string = ""
+  protected locationValid: boolean = false
+  protected username: string = this.activatedRoute.snapshot.params['username']
+  protected contractorname: string = ''
+  protected fixedphoto: string = ''
+  protected completeddate: string = ''
+
+  //protected username$!: Observable<string>
+  // protected usnm: string =''
   //private canUpload = false
 
   capturedImage = ''
   
   @ViewChild('photoElem')
   photoElem!: ElementRef;
+
+  @ViewChild('autocomplete3')
+  autocomplete3!: MapMainComponent;
 
   
   ngOnInit(): void {
@@ -70,6 +83,8 @@ export class ServiceRequestComponent implements OnInit{
       (slice: ServiceRequestSlice) => slice.requestLists
     )
     //this.trigger$ = this.triggerSub.asObservable()
+    
+    //this.username$ = this.mainSvc.getUsername()
   }
 
   private createServiceRequestForm(): FormGroup{
@@ -78,7 +93,13 @@ export class ServiceRequestComponent implements OnInit{
       duedate: this.fb.control<string>('', [Validators.required]),
       priority: this.fb.control<number>(0, [Validators.required, Validators.min(0), Validators.max(5)]),
       photo: this.fb.control('', [Validators.required]),
+      confirm:this.fb.control<boolean>(false)
     })
+  }
+
+  confirmlocation() {
+    this.locationValid = this.mainSvc.getLocationValid()
+    console.log(">>>Location Valid: ", this.locationValid)
   }
 
   isInvalid(dateInputString: string): boolean{
@@ -89,7 +110,8 @@ export class ServiceRequestComponent implements OnInit{
       } else {
         this.message = ""
       }
-      return this.serviceRequestForm.invalid || dateInput < dateNow
+      
+    return this.serviceRequestForm.invalid || dateInput < dateNow || !this.locationValid
   }
 
   saveData(){
@@ -99,7 +121,6 @@ export class ServiceRequestComponent implements OnInit{
         for (let i = 0; i<result.length; i++){
           this.mainSvc.sendServiceRequestToSB(result[i]);
           this.reqStore.deleteReq(result[i].requestID)
-
         }
         //this.reqStore.resetReqStore()
       },
@@ -116,9 +137,14 @@ export class ServiceRequestComponent implements OnInit{
     const uuid = uuidv4().substring(0, 8)
     console.log("ID...",uuid)
     request.requestID = uuid
-    
+    request.locationaddress = this.autocomplete3.location.address
+    request.adminname = this.username    
+    request.contractorname = this.contractorname
+    request.fixedphoto = this.contractorname
+    request.completeddate = this.completeddate
+
     this.reqStore.addReq(request)
-    
+  
     this.mainSvc.sendImgToSB(request.requestID, this.photoElem)
       .then(response => { 
         alert(JSON.stringify(response));
@@ -136,11 +162,13 @@ export class ServiceRequestComponent implements OnInit{
 
     this.serviceRequestForm.reset()
     this.uploaded = false
+    this.mainSvc.setLocationValid(false)
   }
 
   deleteRequest(requestID:string){
     this.reqStore.deleteReq(requestID)
   }
+
   deleteUploadedPhoto(){
     this.serviceRequestForm.get('photo')?.reset();
     this.uploaded = false; 
@@ -150,13 +178,9 @@ export class ServiceRequestComponent implements OnInit{
     this.uploaded = true
   } 
 
-  @ViewChild('autocomplete3')
-  autocomplete3!: MapMainComponent;
+ 
 
-  locationDetails(){
-    //getting details to be saved
-    console.log(">>>LocationPARENT: ",this.autocomplete3.location)
-  }
+  
   
 
   /* webcam(){

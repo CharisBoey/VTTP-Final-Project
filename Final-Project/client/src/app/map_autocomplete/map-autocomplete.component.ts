@@ -13,9 +13,11 @@ export class MapAutocompleteComponent {
   @ViewChild('inputField')
   inputField!: ElementRef;
 
-  @Input() placeholder = 'Enter location...';
+  @Input() 
+  placeholder = 'Enter location...';
 
-  @Output() placeChanged = new Subject<PlaceSearchResult>();
+  @Output() 
+  placeChanged = new Subject<PlaceSearchResult>();
 
   autocomplete: google.maps.places.Autocomplete | undefined;
 

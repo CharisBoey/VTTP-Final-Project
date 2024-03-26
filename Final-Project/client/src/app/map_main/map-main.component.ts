@@ -10,12 +10,8 @@ import { MapAutocompleteComponent } from '../map_autocomplete/map-autocomplete.c
 export class MapMainComponent {
 
   location: PlaceSearchResult = { address: '' };
-  
 
   @ViewChild('autocomplete2')
   autocomplete2!: MapAutocompleteComponent;
-
-  fromValue: PlaceSearchResult = { address: '' };
-  toValue: PlaceSearchResult = { address: '' };
   
 }

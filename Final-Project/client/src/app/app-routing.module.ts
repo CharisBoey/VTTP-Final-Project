@@ -11,18 +11,23 @@ import { RequestListComponent } from './request_list/request-list.component';
 import { ProgressSubmissionComponent } from './progress_submission/progress-submission.component';
 
 const routes: Routes = [
-  {path: '', component: LoginComponent, title: 'Login Page'},
+  {path:'', component: LoginComponent, title: 'Login Page'},
   //{path: 'login', component: LoginComponent, title: 'Login Page'},
-  {path: 'Admin', component: AdminComponent, title: 'Admin Access Page'},
+  {path:'Admin/:username', component: AdminComponent, title: 'Admin Access Page'},
   //{path: 'Service Request', component: ServiceRequestComponent, title: 'Service Request Page'},
-  {path: 'Service-Request', component: ServiceRequestComponent, title:'Service Request Page'},
-  {path: 'Response-Validation', component: ResponseValidationComponent, title:'Response Validation Page'},
-  {path: 'Request-List', component: RequestListComponent, title:'Request List Page'},
-  {path: 'Project-Timeline', component: ProjectTimelineComponent, title:'Project Timeline Page'},
-  {path: 'Progress-Submission', component: ProgressSubmissionComponent, title:'Progress Submission Page'},
-  {path: 'Standard', component: StandardComponent, title: 'Standard Page'},
+  {path:'Admin/:username/Service-Request', component: ServiceRequestComponent, title:'Service Request Page'},
+  {path:'Admin/:username/Response-Validation', component: ResponseValidationComponent, title:'Response Validation Page'},
+  {path:'Admin/:username/Request-List', component: RequestListComponent, title:'Request List Page'},
+  {path:'Admin/:username/Project-Timeline', component: ProjectTimelineComponent, title:'Project Timeline Page'},
+  
+  {path:'Standard/:username', component: StandardComponent, title: 'Standard Page'},
+  {path:'Standard/:username/Request-List', component: RequestListComponent, title:'Request List Page'},
+  {path:'Standard/:username/Progress-Submission', component: ProgressSubmissionComponent, title:'Progress Submission Page'},
+  {path:'Standard/:username/Project-Timeline', component: ProjectTimelineComponent, title:'Project Timeline Page'},
   {path: '**', redirectTo: ''}
+  
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {useHash: true})],
