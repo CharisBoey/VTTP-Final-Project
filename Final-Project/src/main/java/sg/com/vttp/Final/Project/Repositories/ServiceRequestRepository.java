@@ -16,6 +16,7 @@ import com.mongodb.client.result.UpdateResult;
 
 import sg.com.vttp.Final.Project.Models.ServiceRequest;
 import sg.com.vttp.Final.Project.Models.UpdateServiceRequest;
+import sg.com.vttp.Final.Project.Models.UpdateServiceRequestStatus;
 
 @Repository
 public class ServiceRequestRepository {
@@ -38,6 +39,8 @@ public class ServiceRequestRepository {
 		svcReq.put("locationaddress", payload.getLocationaddress());
 		svcReq.put("adminname", payload.getAdminname());
 		svcReq.put("contractorname", payload.getContractorname());
+		svcReq.put("approvalstatus", payload.getApprovalstatus());
+		svcReq.put("rejectreason", payload.getRejectreason());
 
 		mongoTemplate.insert(svcReq, "servicerequest");
         
@@ -62,6 +65,8 @@ public class ServiceRequestRepository {
             svcReq.setLocationaddress(d.getString("locationaddress"));
             svcReq.setAdminname(d.getString("adminname"));
             svcReq.setContractorname(d.getString("contractorname"));
+            svcReq.setApprovalstatus(d.getString("approvalstatus"));
+            svcReq.setRejectreason(d.getString("rejectreason"));
 
             svcReqList.add(svcReq);
         }
@@ -89,6 +94,8 @@ public class ServiceRequestRepository {
         svcReq.setLocationaddress(d.getString("locationaddress"));
         svcReq.setAdminname(d.getString("adminname"));
         svcReq.setContractorname(d.getString("contractorname"));
+        svcReq.setApprovalstatus(d.getString("approvalstatus"));
+        svcReq.setRejectreason(d.getString("rejectreason"));
         
         return svcReq;
     }
@@ -99,6 +106,19 @@ public class ServiceRequestRepository {
         Update updateOperation = new Update()
         .set("fixedphoto", updSvcReq.getFixedphoto())
         .set("contractorname", updSvcReq.getContractorname());
+
+        UpdateResult result = mongoTemplate.updateMulti(query, updateOperation, "servicerequest");
+
+        System.out.printf("Documents updated: %d\n", result.getModifiedCount());
+    }
+
+    
+    public void updateSvcReqStatus(UpdateServiceRequestStatus updSvcReqStatus) {
+        Query query = Query.query(Criteria.where("requestID").is(updSvcReqStatus.getRequestID()));
+
+        Update updateOperation = new Update()
+        .set("approvalstatus", updSvcReqStatus.getApprovalstatus())
+        .set("rejectreason", updSvcReqStatus.getRejectreason());
 
         UpdateResult result = mongoTemplate.updateMulti(query, updateOperation, "servicerequest");
 

@@ -109,6 +109,11 @@ export class MainService {
     return firstValueFrom(this.http.post<any>('/api/UpdateServiceRequest', ServiceRequestData))
   }
 
+  updServiceRequestStatusToSB(ServiceRequestData: serviceRequest): Promise<any>{
+    
+    return firstValueFrom(this.http.post<any>('/api/UpdateServiceRequestStatus', ServiceRequestData))
+  }
+  
   getAllRequest(): Observable<serviceRequest[]> {
 
     return this.http.get<serviceRequest[]>('/api/RequestList')

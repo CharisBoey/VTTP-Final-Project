@@ -3,6 +3,7 @@ package sg.com.vttp.Final.Project.Models;
 import org.springframework.data.annotation.Id;
 
 public class ServiceRequest {
+
     @Id
     private String requestID;
     private String request;
@@ -14,7 +15,8 @@ public class ServiceRequest {
     private String locationaddress;
     private String adminname;
     private String contractorname;
-
+    private String approvalstatus;
+    private String rejectreason;
     public String getRequestID() {
         return requestID;
     }
@@ -75,8 +77,21 @@ public class ServiceRequest {
     public void setContractorname(String contractorname) {
         this.contractorname = contractorname;
     }
+    public String getApprovalstatus() {
+        return approvalstatus;
+    }
+    public void setApprovalstatus(String approvalstatus) {
+        this.approvalstatus = approvalstatus;
+    }
+    public String getRejectreason() {
+        return rejectreason;
+    }
+    public void setRejectreason(String rejectreason) {
+        this.rejectreason = rejectreason;
+    }
     public ServiceRequest(String requestID, String request, String duedate, String completeddate, Integer priority,
-            String photo, String fixedphoto, String locationaddress, String adminname, String contractorname) {
+            String photo, String fixedphoto, String locationaddress, String adminname, String contractorname,
+            String approvalstatus, String rejectreason) {
         this.requestID = requestID;
         this.request = request;
         this.duedate = duedate;
@@ -87,8 +102,12 @@ public class ServiceRequest {
         this.locationaddress = locationaddress;
         this.adminname = adminname;
         this.contractorname = contractorname;
+        this.approvalstatus = approvalstatus;
+        this.rejectreason = rejectreason;
     }
     public ServiceRequest() {
     }
+
+   
     
 }

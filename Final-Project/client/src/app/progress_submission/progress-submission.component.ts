@@ -23,8 +23,6 @@ export class ProgressSubmissionComponent implements OnInit{
   protected sub$!: Subscription;
   protected allReqUpd$!: Subscription;
 
-
-
   private reqStore = inject(RequestStore)
 
   @ViewChild('requestID')

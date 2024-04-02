@@ -29,6 +29,8 @@ public class Utils {
         .add("locationaddress", svcReq.getLocationaddress())
         .add("adminname", svcReq.getAdminname())        
         .add("contractorname", svcReq.getContractorname())        
+        .add("approvalstatus", svcReq.getApprovalstatus())        
+        .add("rejectreason", svcReq.getRejectreason())        
         .build();
     }
     

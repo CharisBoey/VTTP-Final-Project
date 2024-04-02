@@ -31,6 +31,7 @@ import sg.com.vttp.Final.Project.Models.Login;
 import sg.com.vttp.Final.Project.Models.RequestImage;
 import sg.com.vttp.Final.Project.Models.ServiceRequest;
 import sg.com.vttp.Final.Project.Models.UpdateServiceRequest;
+import sg.com.vttp.Final.Project.Models.UpdateServiceRequestStatus;
 import sg.com.vttp.Final.Project.Services.LoginService;
 import sg.com.vttp.Final.Project.Services.RequestImageService;
 import sg.com.vttp.Final.Project.Services.ServiceRequestService;
@@ -151,6 +152,9 @@ public class AdminController {
         svcReq.setLocationaddress(json.getString("locationaddress"));
         svcReq.setAdminname(json.getString("adminname"));
         svcReq.setContractorname(json.getString("contractorname"));
+        svcReq.setApprovalstatus(json.getString("approvalstatus"));
+        svcReq.setRejectreason(json.getString("rejectreason"));
+
         
         svcReqSvc.insertSvcReq(svcReq);
 
@@ -208,6 +212,24 @@ public class AdminController {
         updSvcReq.setContractorname(json.getString("contractorname"));
         
         svcReqSvc.updateSvcReq(updSvcReq);
+
+        return ResponseEntity.ok().build();
+	}
+
+    @PostMapping(path="/api/UpdateServiceRequestStatus")
+	public ResponseEntity<String> updateSvcReqStatus (@RequestBody String payload) {
+
+        JsonReader reader = Json.createReader(new StringReader(payload));
+		JsonObject json = reader.readObject();
+		System.out.printf(">>> PAYLOAD UPDATE: %s\n", json.toString());
+
+
+        UpdateServiceRequestStatus updSvcReqStatus = new UpdateServiceRequestStatus();
+        updSvcReqStatus.setRequestID(json.getString("requestID"));
+        updSvcReqStatus.setApprovalstatus(json.getString("approvalstatus"));
+        updSvcReqStatus.setRejectreason(json.getString("rejectreason"));
+        
+        svcReqSvc.updateSvcReqStatus(updSvcReqStatus);
 
         return ResponseEntity.ok().build();
 	}

@@ -5,9 +5,9 @@ export interface login {
 }
 
 export const enum userRoleState {
-    UNDETERMINED = "UNDETERMINED",
-    ADMIN = "ADMIN",
-    STANDARD = "STANDARD"
+    UNDETERMINED = "Undetermined",
+    ADMIN = "Admin",
+    STANDARD = "Standard"
 }
 
 export interface userRole{ 
@@ -30,6 +30,14 @@ export interface serviceRequest {
     locationaddress: string
     adminname: string
     contractorname: string
+    approvalstatus: approvalStatus
+    rejectreason: string
+}
+
+export const enum approvalStatus {
+    APPROVED = "Approved",
+    REJECTED = "Rejected",
+    PENDING = "Pending"
 }
 
 export interface ServiceRequestSlice {

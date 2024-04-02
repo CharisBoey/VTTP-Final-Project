@@ -16,6 +16,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogTitle } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -34,7 +36,12 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatToolbarModule,
     MatCheckboxModule,
     MatSlideToggleModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    FormsModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
   ],
   exports: [
     CommonModule,
@@ -51,7 +58,12 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatToolbarModule,
     MatCheckboxModule,
     MatSlideToggleModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    FormsModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
   ],
 })
 export class MaterialModuleModule { }

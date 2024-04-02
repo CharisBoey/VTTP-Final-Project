@@ -28,6 +28,7 @@ import { MaterialModuleModule } from './material/material.module';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MainComponent } from './main/main.component';
 import { MapDisplayComponent } from './map_display/map-display.component';
+import { EvaluationComponent } from './evaluation/evaluation.component';
 
 
 
@@ -53,9 +54,9 @@ const appRoutes: Routes = [
     MapMapimageComponent,
     MapMainComponent,
     MainComponent,
-    MapDisplayComponent
-    
-    
+    MapDisplayComponent,
+    EvaluationComponent
+
   ],
   imports: [
     BrowserModule,

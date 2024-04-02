@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RequestStore } from '../stores/request.store';
-import { ServiceRequestSlice, serviceRequest } from '../models';
+import { ServiceRequestSlice, approvalStatus, serviceRequest } from '../models';
 import { Observable, Subscription } from 'rxjs';
 //import { WebcamImage } from 'ngx-webcam';
 import { MainService } from '../main.service';
@@ -50,7 +50,7 @@ export class ServiceRequestComponent implements OnInit{
   protected uploaded: boolean = false
   protected width: number = 300
   protected height: number = 300
-  protected trial:boolean=false
+  protected trial:boolean = false
 
  /*  protected trigger$!: Observable<void>
   protected triggerSub = new Subject<void>() */
@@ -62,6 +62,7 @@ export class ServiceRequestComponent implements OnInit{
   protected contractorname: string = ''
   protected fixedphoto: string = ''
   protected completeddate: string = ''
+  protected rejectreason: string = ''
 
   //protected username$!: Observable<string>
   // protected usnm: string =''
@@ -142,6 +143,8 @@ export class ServiceRequestComponent implements OnInit{
     request.contractorname = this.contractorname
     request.fixedphoto = this.contractorname
     request.completeddate = this.completeddate
+    request.approvalstatus = approvalStatus.PENDING
+    request.rejectreason = this.rejectreason
 
     this.reqStore.addReq(request)
   

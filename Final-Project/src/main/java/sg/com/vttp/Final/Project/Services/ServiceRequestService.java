@@ -9,6 +9,7 @@ import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import sg.com.vttp.Final.Project.Models.ServiceRequest;
 import sg.com.vttp.Final.Project.Models.UpdateServiceRequest;
+import sg.com.vttp.Final.Project.Models.UpdateServiceRequestStatus;
 import sg.com.vttp.Final.Project.Repositories.ServiceRequestRepository;
 
 @Service
@@ -32,6 +33,11 @@ public class ServiceRequestService {
     public void updateSvcReq (UpdateServiceRequest updSvcReq) {
         svcReqRepo.updateSvcReq(updSvcReq);
     }
+
+    public void updateSvcReqStatus (UpdateServiceRequestStatus updSvcReqStatus) {
+        svcReqRepo.updateSvcReqStatus(updSvcReqStatus);
+    }
+
 
     public JsonObject toJSON(ServiceRequest svcReq){
         return Json.createObjectBuilder()

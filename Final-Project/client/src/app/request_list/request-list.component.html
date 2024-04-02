@@ -28,18 +28,47 @@
               <td style="width: 10%">{{ r.requestID }}</td>
               <td style="width: 10%">{{ r.request }}</td>
               <td style="width: 10%">{{ r.adminname }}</td>
-              <td style="width: 10%">{{ r.contractorname }}</td>
+              <td>
+                <div *ngIf="r.contractorname; else defaultcontractname" style="width: 10%">
+                {{ r.contractorname }}
+                </div>
+                <ng-template #defaultcontractname>
+                  ---NIL---
+                </ng-template>
+              </td>
+              
               <td style="width: 10%">{{ r.locationaddress }}</td>
               <td style="width: 10%">{{ r.duedate }}</td>
               <td style="width: 10%">{{ r.priority }}</td>
-              <td style="width: 20%">
+              <td style="width: 10%">
                 <img width=300px src = "{{r.photo}}">
               </td>
-              <td style="width: 20%">
+              
+              <td>
+              <div *ngIf="r.fixedphoto; else defaultphoto" style="width: 10%">
                 <img width=300px src = "{{r.fixedphoto}}">
+              </div>
+              <ng-template #defaultphoto>
+                <img width=300px src = "/assets/logos/WorkInProgress.png">
+
+              </ng-template>
               </td>
+              
               <!-- <td style="width: 20%"><img width=300px src="/assets/logos/WorkInProgress.png">EITHER INPUT IMAGE OR DEFAULT</td> -->
-              <td style="width: 10%">Approved/Not Approved/Pending Completion/To be Validated</td>
+              <!-- <td style="width: 10%">Approved/Not Approved/Pending Completion/To be Validated</td> -->
+              <!-- <td style="width: 10%">{{r.approvalstatus}}</td> -->
+              <td style="width: 10%">
+                <img width=300px src="/assets/logos/{{r.approvalstatus}}.png">
+              <button mat-button (click)="updateStatus(r.requestID)">Update Status</button>
+              </td>
+
+
+
+              <!-- <td style="width: 10%">
+                <button type="button" (click)="review()">Review & Process Submission</button>
+              </td> -->
+
+              
             </tr>
         </tbody>
     </table>
