@@ -1,0 +1,31 @@
+<button type="button" [routerLink]="['/Standard', username]">STANDARD Home Page</button>
+<h1>Progress Submission Form</h1>
+
+<h1>Schedule Date: [ {{requestId}} ]</h1>
+<form [formGroup]="scheduleForm" (ngSubmit)="scheduleMeeting()">
+  <table>
+    <tr>
+      <td>Summary:</td>
+      <td><input type="text" formControlName="summary"/></td>
+    <tr>
+      <td>Location:</td>
+      <td>{{locationaddress}}
+      </td>
+    <tr>
+      <td>Details:</td>
+      <td><input type="details" formControlName="details"/>
+      </td>
+    <tr>
+      <td>Scheduled Time: </td>
+      <td> <input type="datetime-local" formControlName="scheduleTime"/>&nbsp;{{message}}
+      </td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td><input type="email"  formControlName="email"/>
+      </td>
+    </tr>
+  </table>
+  <br/>
+  <button type="submit" [disabled]="isInvalid(scheduleForm.value.scheduleTime)">Schedule Appointment</button>
+</form>

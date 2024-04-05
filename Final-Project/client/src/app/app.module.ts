@@ -29,6 +29,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { MainComponent } from './main/main.component';
 import { MapDisplayComponent } from './map_display/map-display.component';
 import { EvaluationComponent } from './evaluation/evaluation.component';
+import { ScheduleDateComponent } from './schedule_date/schedule-date.component';
 
 
 
@@ -55,7 +56,8 @@ const appRoutes: Routes = [
     MapMainComponent,
     MainComponent,
     MapDisplayComponent,
-    EvaluationComponent
+    EvaluationComponent,
+    ScheduleDateComponent
 
   ],
   imports: [
@@ -66,7 +68,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, {useHash: true}),
     FormsModule,
     MaterialModuleModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    // NgxSlackhttps://hooks.slack.com/services/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
     //WebcamModule,
     
   ],

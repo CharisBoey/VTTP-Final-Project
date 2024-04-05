@@ -18,6 +18,7 @@ export class RequestListComponent implements OnInit{
   private mainSvc = inject(MainService)
   activatedRoute = inject(ActivatedRoute);
   username: string = this.activatedRoute.snapshot.params['username'];
+  
 
   ngOnInit(): void {
     this.reqList$ = this.mainSvc.getAllRequest()
@@ -37,8 +38,28 @@ export class RequestListComponent implements OnInit{
       this.reqList$ = this.mainSvc.getAllRequest()
     });
   }
- 
 
- 
+  //only can if contractor
+  scheduledate(requestId: string, locationaddress: string){
+    // const scheduleDetails = {
+    //   reqId: requestId,
+    //   locationAdd: locationAddress
+    // }
 
+    // this.router.navigate(['/Standard/', this.username, 'Schedule-Date' ] , {state: {scheduleDetails}})
+
+    //console.log("!@#$", requestId, locationAddress)
+    this.router.navigate(['/Standard', this.username, 'Schedule-Date'], {
+      queryParams: { requestId, locationaddress }// Pass scheduleDetails in the state object
+    });
+  }
+
+  // slack(){
+  //   console.log("SLACK")
+  //   this.mainSvc.slackNotification("TESTING SLACK MESSAGE")
+  // }
+
+  
+
+  
 }

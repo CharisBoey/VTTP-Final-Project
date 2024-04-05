@@ -1,11 +1,15 @@
 package sg.com.vttp.Final.Project.Controllers;
 
 import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.http.protocol.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
@@ -245,5 +250,17 @@ public class AdminController {
         
 	}
 
+    @PostMapping(path="/api/SlackNotification")
+    public ResponseEntity<String> slackNotif(@RequestBody String payload){
+
+        JsonReader reader = Json.createReader(new StringReader(payload));
+		JsonObject json = reader.readObject();
+		System.out.printf(">>> PAYLOAD SLACK: %s\n", json.toString());
+
+        String challenge = json.getString("challenge");
+
+        System.out.println("Challenge:" + challenge);
+        return ResponseEntity.ok().contentType(MediaType.TEXT_PLAIN).body(challenge);
+    }
 
 }

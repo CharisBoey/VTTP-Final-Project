@@ -1,7 +1,7 @@
 import { ElementRef, Injectable, inject } from '@angular/core';
 import { imagePreview, login, serviceRequest, updateServiceRequest } from './models';
 import { Observable, Subject, firstValueFrom } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -122,6 +122,67 @@ export class MainService {
   getAllRequestByID(requestID: string): Observable<serviceRequest> {
     
     return this.http.get<serviceRequest>(`/api/RequestListByID/${requestID}`)
+  }
+  
+//   POST https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
+// Content-type: application/json
+// {
+//     "text": "Gotta get the bread and milk!"
+// }
+  // slackNotification(text: string):Promise<any>{
+  //   const payload = {text: text};
+    
+  //   // const headers = new HttpHeaders({
+  //   //   'Content-Type': 'application/json'
+  //   // });
+
+  //   return firstValueFrom(this.http.post<any>('https://hooks.slack.com/services/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', payload))
+  // }
+  
+  // slackNotification(text: string): Promise<any> {
+  //   const payload = {
+  //     text: text
+  //   };
+
+  //   // const headers = new HttpHeaders({
+  //   //   'Content-Type': 'application/json'
+  //   // });
+
+  //   //const slackAccessToken = { token: "xoxb-6902130349319-6930608810129-LbjvDEO8b9ibLAwNywmvj9e0"};
+
+  //   return firstValueFrom(this.http.post<any>(
+  //     'https://hooks.slack.com/services/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',
+  //     payload
+  //     // { headers: headers }, 
+  //   ));
+  // }
+
+  // slackNotification(message: string): Promise<any> {
+  //   const payload = {
+  //     channel: '#developertesting', // Replace with your desired channel
+  //     username: 'webhookbot',
+  //     text: message,
+  //     icon_emoji: ':ghost:'
+  //   };
+
+  //   const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+
+  //   return firstValueFrom(this.http.post("https://hooks.slack.com/services/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", new URLSearchParams(payload), { headers }));
+  // }
+
+  slackNotification(message: string): Promise<any> {
+    const payload = {
+      text: message, // Ensure required field is present
+      channel: '#developertesting',
+      username: 'NotificationBot',
+      icon_emoji: ':Loudspeaker:' // Optional field (replace with your desired channel)
+    };
+
+    // username\": \"webhookbot\", \"text\": \"This is posted to #developertesting and comes from a bot named webhookbot.\", \"icon_emoji\": \":ghost:\"}" 
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }); // Set correct Content-Type
+
+    return firstValueFrom(this.http.post("https://hooks.slack.com/services/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", payload, { headers }));
   }
   
   

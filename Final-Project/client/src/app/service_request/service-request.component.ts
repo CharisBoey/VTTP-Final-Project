@@ -129,6 +129,7 @@ export class ServiceRequestComponent implements OnInit{
       complete: () => { this.allReq$.unsubscribe() }
     });
 
+    this.mainSvc.slackNotification("New Service Request Submitted!")
   }
 
   addRequest(){
@@ -181,6 +182,12 @@ export class ServiceRequestComponent implements OnInit{
     this.uploaded = true
   } 
 
+  slack(message: string) {
+  
+    const response = this.mainSvc.slackNotification(message); // If using a service
+    response.then(data => console.log(data)).catch(error => console.log(error))
+    
+  }
  
 
   

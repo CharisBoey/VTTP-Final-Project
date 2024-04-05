@@ -107,6 +107,7 @@ export class ProgressSubmissionComponent implements OnInit{
       complete: () => { this.allReqUpd$.unsubscribe() }
     });
 
+    this.mainSvc.slackNotification("New Progress Submission Submitted!")
   }
     
   addUpdatedImg(){

@@ -9,6 +9,7 @@ import { ResponseValidationComponent } from './response_validation/response-vali
 import { ProjectTimelineComponent } from './project_timeline/project-timeline.component';
 import { RequestListComponent } from './request_list/request-list.component';
 import { ProgressSubmissionComponent } from './progress_submission/progress-submission.component';
+import { ScheduleDateComponent } from './schedule_date/schedule-date.component';
 
 const routes: Routes = [
   {path:'', component: LoginComponent, title: 'Login Page'},
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path:'Standard/:username', component: StandardComponent, title: 'Standard Page'},
   {path:'Standard/:username/Request-List', component: RequestListComponent, title:'Request List Page'},
   {path:'Standard/:username/Progress-Submission', component: ProgressSubmissionComponent, title:'Progress Submission Page'},
+  {path:'Standard/:username/Schedule-Date', component: ScheduleDateComponent, title:'Schedule Date Page'},
   {path:'Standard/:username/Project-Timeline', component: ProjectTimelineComponent, title:'Project Timeline Page'},
   {path: '**', redirectTo: ''}
   
