@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { icon } from '../models';
 import { ActivatedRoute, Router } from '@angular/router';
+import emailjs from '@emailjs/browser';
 
 @Component({
   selector: 'app-admin',
@@ -22,4 +23,33 @@ export class AdminComponent {
     
     //this.router.navigate("['/{{encodeURIComponent(i.iconName)}}']")
   }
+
+ 
+  async send(){
+    emailjs.init('rayelJTKYKRy_K73S')
+    let response = await emailjs.send("service_vttpfinalproject","template_vly3jbj",{
+      from_name: "a",
+      to_name: "b",
+      from_email: "c@mail.com",
+      subject: "asdf",
+      message: "asdf",
+      });
+
+    // const templateParams = {
+    //   name:'JJJ',
+    //   notes:'CHECK IT'
+    // }
+
+    // emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', '#myForm').then(
+    //   (response) => {
+    //     console.log('SUCCESS!', response.status, response.text);
+    //   },
+    //   (error) => {
+    //     console.log('FAILED...', error);
+    //   },
+    // );
+
+  }
+
+  
 }

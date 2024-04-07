@@ -1,0 +1,56 @@
+@font-face {
+    font-family: "Raleway";
+    src: url('/Final-Project/client/src/assets/fonts/Raleway-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    color: #304757;
+}
+
+.background {
+    background-color: #D6EDED;
+
+}
+/* 
+.montserrat-font> {
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+  } */
+
+
+/* .h1 {
+    margin: 100px;
+    padding: 100px;
+} */
+
+h1 {
+    display: flex;
+    font-family: "Montserrat", sans-serif;
+    font-weight: lighter;
+    font-size: 100px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+}
+
+.userstatus{
+    /* display: flex; */
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+    font-size: 20px;
+    /* text-align: right; */
+    display: flex;
+    justify-content: flex-end;
+    align-items: left;
+    /* justify-content: space-between;
+    text-align: left; */
+    /* align-items: right; */
+    padding: 20px 60px;
+
+}
+
