@@ -10,30 +10,35 @@
 .panel-view {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 20px;
+    gap: 25px;
     padding: 20px 60px;
 }
 
 .panel-item {
     border: 15px solid #D6EDED;
-    padding: 15px;
+    padding: 20px;
     text-align: center;
-    border-radius: 25px
+    border-radius: 25px;
     /* background-color: #EDF5FB; */
 }
 
-.panel-item h5 {
+/* .panel-item h5 {
     height: 75px; 
-    font-family: Montserrat;
+    font-family: "Montserrat";
     font-weight: bold;
+} */
+.icon-heading{
+    font-family: "Montserrat";
+    font-size: 30px;
+    font-weight: normal;
 }
 
 .panel-item img {
     height: 235px; 
     width: 165px;
     object-fit: contain; 
-    background-color: #FFF;
-    border: 10px solid #FFF; 
+    /* background-color: #FFF;
+    border: 10px solid #FFF;  */
     border-radius: 5px;
 }
 

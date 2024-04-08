@@ -2,13 +2,13 @@
 <div class="name-heading">Hello {{username}}!</div>
 <br>
 <div class="panel-view">
-    <div class="panel-item"  *ngFor="let i of icons;">
+    <div class="panel-item" *ngFor="let i of icons;">
         <div>
         <button type="button" class="custom-button" (click)="directToPage(i.iconName)">
         <!-- [routerLink]="['/{{i.iconName}}']" -->
             <!-- MAYBE DO THE GUARD CHECK ADMIN POSITION -->
-            <h1>{{i.iconName}}</h1>
-            
+            <br><br>
+            <h1 class="icon-heading">{{i.iconName}}</h1>
             
             <img src="/assets/logos/{{i.iconName}}.png">
         </button>
