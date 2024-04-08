@@ -1,8 +1,9 @@
+<div class="login">
+
+    <h1>Login</h1>
+
 <form [formGroup]="loginForm" (submit)="processForm()">
     <table>
-        <tr>
-            <td>Login</td>
-        </tr>
         <tr>
             <td>Username: </td>
             <td><input type="text" formControlName="username"></td>
@@ -16,3 +17,58 @@
         </tr>
     </table>
 </form>
+
+</div>
+
+
+
+
+<!-- <div class="background">
+
+    
+
+    <div class="normalheaders">
+        <h1>Welcome to InkIt.</h1>
+        <br>
+        <h4>Login</h4>
+        <br>
+    </div>
+    
+    <form data-th-action="@{/Home/Login}" method="POST" data-th-object="${login}">
+        <table>
+            <tr>
+                <td class="styleleft"> 
+                    <label for="email">Email:</label> 
+                </td>
+                <td>
+                    <input type="text" id="email" style="width: 16.5em"
+                            placeholder="Please type in your email" data-th-field="*{email}" >
+                    <div class="btn-btn-primary mediumblue-btn" data-th-if="${#fields.hasErrors('email')}" data-th-errors="*{email}"></div>
+                </td>
+            </tr>
+            <td>
+                <p></p>
+            </td>
+            <tr>
+                
+                <td class="styleleft">
+                    <label for="password">Password:</label>
+                </td>
+                <td>
+                
+                    <input type="password" id="password" style="width: 16.5em" 
+                            placeholder="Please type in your password" data-th-field="*{password}">
+                    <div class="btn-btn-primary mediumblue-btn" data-th-if="${#fields.hasErrors('password')}" data-th-errors="*{password}"></div>
+                
+                </td>
+                
+            </tr>
+            
+        </table>
+        <br>
+
+        <button type="submit" class="btn darkblue-btn" style="width: 345px;" >Login</button>
+
+    </form>
+    
+</div> -->
