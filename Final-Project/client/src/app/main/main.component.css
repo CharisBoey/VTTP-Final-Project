@@ -5,11 +5,10 @@
     font-style: normal;
 } */
 
-body {
+/* body {
     margin: 0;
     padding: 0;
-    color: #304757;
-}
+} */
 
 h1 {
     display: flex;

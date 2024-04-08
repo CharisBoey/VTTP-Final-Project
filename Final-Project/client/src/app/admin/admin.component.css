@@ -1,20 +1,24 @@
-body {
-    font-family:Montserrat;
+.name-heading {
+    font-family: "Cormorant Garamond";
     margin: 0;
     padding: 0;
-    color: #1A273E;
+    font-size: 40px;
+    font-weight: normal;
+    padding: 0px 60px;
 }
 
 .panel-view {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     gap: 20px;
+    padding: 20px 60px;
 }
 
 .panel-item {
-    border: 10px solid #E0F1E0;
+    border: 15px solid #D6EDED;
     padding: 15px;
     text-align: center;
+    border-radius: 25px
     /* background-color: #EDF5FB; */
 }
 

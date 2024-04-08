@@ -5,7 +5,8 @@
     </tr>
     <tr>
         <!-- "*ngIf="userStatus != 'Undetermined'" -->
-        <td><p class="userstatus">{{userStatus}} &nbsp;&nbsp;<button mat-raised-button type="button" [routerLink]="['/Login']">Logout</button></td>
+    
+        <td class="userstatus"><p style="line-height:200%">{{userStatus}}</p> &nbsp;&nbsp;&nbsp;<button class="userstatus" mat-raised-button type="button" [routerLink]="['/Login']">Logout</button></td>
     </tr>
 </table>
 
@@ -13,8 +14,7 @@
     
 
 <br><br><br>
-<br><br><br>
-<br><br><br>
+
 
 <router-outlet></router-outlet>
 

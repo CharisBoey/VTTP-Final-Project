@@ -1,22 +1,39 @@
+h1 {
+    display: flex;
+    font-family: "Cormorant Garamond";
+    font-weight: normal;
+    font-size: 75px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    /* line-height:175%; */
+
+    border-bottom: 1px solid black;
+    padding: 10 0 4px;
+    padding-bottom: 50px
+}
+
 .login{
     background-color: #D6EDED;
-    width: 700px;
-    height: 500px;
+    width: 850px;
+    height: 600px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0 auto; 
+    font-family: "Cormorant Garamond";
 }
 
-h1 {
-    display: flex;
+.main-font{
+    font-weight: lighter;
+    font-size: 40px;
+}
+
+.button{
     font-family: "Montserrat", sans-serif;
     font-weight: normal;
-    font-size: 35px;
-    justify-content: space-between;
-    align-items: center;
+    font-size: 20px;
     padding: 20px 60px;
-    /* line-height:175%; */
 }
