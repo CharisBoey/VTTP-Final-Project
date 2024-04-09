@@ -37,6 +37,16 @@ h1{
     width: 75%; */
 }
 
+.btns{
+    /* color-scheme: #D6EDED; */
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+    font-size: 20px;
+    padding: 20px 60px;
+    background-color: #D6EDED;
+    color: black;
+}
+
 
 
 
