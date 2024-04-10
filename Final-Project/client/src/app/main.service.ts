@@ -56,8 +56,9 @@ export class MainService {
   getLocationValid() : boolean {
     return this.locationValid;
   }
+  
 
-
+  
  /*  private username = new Subject<string>();
 
   setUsername(username: string) {

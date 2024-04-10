@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RequestStore } from '../stores/request.store';
 import { ServiceRequestSlice, approvalStatus, serviceRequest } from '../models';
@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './service-request.component.html',
   styleUrl: './service-request.component.css'
 })
-export class ServiceRequestComponent implements OnInit{
+export class ServiceRequestComponent implements OnInit, Validators{
 
  /*  protected requestcompNum: string[]=[]
   protected requestNo: number=0
@@ -89,6 +89,7 @@ export class ServiceRequestComponent implements OnInit{
   }
 
   private createServiceRequestForm(): FormGroup{
+    this.message=""
     return this.fb.group({
       request: this.fb.control<string>('', [Validators.required, Validators.minLength(5)]),
       duedate: this.fb.control<string>('', [Validators.required]),
@@ -102,6 +103,7 @@ export class ServiceRequestComponent implements OnInit{
     this.locationValid = this.mainSvc.getLocationValid()
     console.log(">>>Location Valid: ", this.locationValid)
   }
+  
 
   isInvalid(dateInputString: string): boolean{
     const dateNow = new Date()
@@ -164,7 +166,8 @@ export class ServiceRequestComponent implements OnInit{
       });
     //this.previewOn = false
 
-    this.serviceRequestForm.reset()
+    // this.serviceRequestForm.reset()
+    this.serviceRequestForm = this.createServiceRequestForm()  
     this.uploaded = false
     this.mainSvc.setLocationValid(false)
   }

@@ -1,14 +1,16 @@
 <button type="button" [routerLink]="['/Admin', username]">ADMIN Home Page</button>
 <button type="button" [routerLink]="['/Standard', username]">STANDARD Home Page</button>
 
-<h1>Request List XXX</h1>
+<br><br><br>
 
-<div *ngIf="reqList$ | async as reqs">
+<h1>Request List</h1>
+<br>
+<div class="spacing" *ngIf="reqList$ | async as reqs">
 
-    <!-- {{reqs|json}} -->
+    <!-- {{reqs|json}} border="1"-->
 
-    <table border="1">
-        <thead>
+    <table class="table table-striped" style="text-align: center">
+        <thead style="font-size: 20px;">
           <tr>
             <th>ID</th>
             <th>Service Request</th>
@@ -26,11 +28,11 @@
         <tbody>
           
             <tr *ngFor="let r of reqs">
-              <td style="width: 10%">{{ r.requestID }}</td>
-              <td style="width: 10%">{{ r.request }}</td>
-              <td style="width: 10%">{{ r.adminname }}</td>
-              <td>
-                <div *ngIf="r.contractorname; else defaultcontractname" style="width: 10%">
+              <td style="width: 3%">{{ r.requestID }}</td>
+              <td style="width: 12%">{{ r.request }}</td>
+              <td style="width: 12%">{{ r.adminname }}</td>
+              <td style="width: 12%">
+                <div *ngIf="r.contractorname; else defaultcontractname">
                 {{ r.contractorname }}
                 </div>
                 <ng-template #defaultcontractname>
@@ -39,15 +41,15 @@
               </td>
               
               <td style="width: 10%">{{ r.locationaddress }}</td>
-              <td style="width: 10%">{{ r.duedate }}</td>
-              <td style="width: 10%">{{ r.priority }}</td>
-              <td style="width: 10%">
-                <img width=300px src = "{{r.photo}}">
+              <td style="width: 3%">{{ r.duedate }}</td>
+              <td style="width: 3%">{{ r.priority }}</td>
+              <td style="width: 15%">
+                <img width=300px src="{{r.photo}}">
               </td>
               
               <td>
-              <div *ngIf="r.fixedphoto; else defaultphoto" style="width: 10%">
-                <img width=300px src = "{{r.fixedphoto}}">
+              <div style="text-align: center; vertical-align: middle;" *ngIf="r.fixedphoto; else defaultphoto" style="width: 15%">
+                <img class="photo" width=300px src = "{{r.fixedphoto}}">
               </div>
               <ng-template #defaultphoto>
                 <img width=300px src = "/assets/logos/WorkInProgress.png">
@@ -58,15 +60,15 @@
               <!-- <td style="width: 20%"><img width=300px src="/assets/logos/WorkInProgress.png">EITHER INPUT IMAGE OR DEFAULT</td> -->
               <!-- <td style="width: 10%">Approved/Not Approved/Pending Completion/To be Validated</td> -->
               <!-- <td style="width: 10%">{{r.approvalstatus}}</td> -->
-              <td style="width: 10%">
+              <td style="width: 5%">
                 <img width=300px src="/assets/logos/{{r.approvalstatus}}.png">
                 <div *ngIf="r.rejectreason">
                  {{r.rejectreason}}
                 </div>
-              <button mat-button (click)="updateStatus(r.requestID)">Update Status</button>
+                <button mat-button (click)="updateStatus(r.requestID)">Update Status</button>
               </td>
 
-              <td>
+              <td style="width: 10%">
                 <button type="button" (click)="scheduledate(r.requestID, r.locationaddress)">Schedule Date</button> 
               </td>
 

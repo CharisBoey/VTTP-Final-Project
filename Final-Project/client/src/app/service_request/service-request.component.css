@@ -44,10 +44,22 @@ h1{
     font-size: 20px;
     padding: 20px 60px;
     background-color: #D6EDED;
-    color: black;
+    border-radius: 8px;
+    /* color: black;
+    border-radius: 8px; */
+    border-color: transparent;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
 
+.error-msg{
+    color: #F44336;
+    font-size: 11px;
+}
 
+button:disabled {
+    opacity: 0.6;
+    /* background-color: green; */
+ }
 
 
 

@@ -28,9 +28,10 @@
             <td>
               <mat-form-field>
                 <mat-label> due date &nbsp;&nbsp;&nbsp;</mat-label>
-                <input matInput formControlName="duedate" type="text" [matDatepicker]="picker"/>
+                <input matInput formControlName="duedate" type="texT" [matDatepicker]="picker" (dateChange)="isInvalid(serviceRequestForm.value.duedate)"/>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
+                <span class="error-msg" *ngIf="message">{{message}}</span>
               </mat-form-field>
       
             </td>
@@ -78,7 +79,7 @@
             <td></td>
             <td colspan="2" >
               <!-- [disabled]="isInvalid(serviceRequestForm.value.duedate)" -->
-              <button class="btns" type="button" (click)="addRequest()" >Add Request</button>
+              <button class="btns" type="button" (click)="addRequest()" [disabled]="isInvalid(serviceRequestForm.value.duedate)">Add Request</button>
               &nbsp;&nbsp;
               <button class="btns" *ngIf="req$ | async as reqs" type="submit" [disabled]="reqs.length <= 0">Submit</button>
             </td>
@@ -91,7 +92,7 @@
       <td>
         <div *ngIf="req$ | async as reqs">
         <div *ngIf="reqs.length > 0 ; else noReq">
-          <table border="1">
+          <table mat-table border="1">
             <thead>
               <tr>
                 <th>ID</th>

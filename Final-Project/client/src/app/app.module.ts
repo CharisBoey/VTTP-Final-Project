@@ -22,7 +22,6 @@ import { RequestStore } from './stores/request.store';
 import { ProgressSubmissionComponent } from './progress_submission/progress-submission.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MapAutocompleteComponent } from './map_autocomplete/map-autocomplete.component';
-import { MapMapimageComponent } from './map_mapimage/map-mapimage.component';
 import { MapMainComponent } from './map_main/map-main.component';
 import { MaterialModuleModule } from './material/material.module';
 import { GoogleMapsModule } from '@angular/google-maps';
@@ -52,7 +51,6 @@ const appRoutes: Routes = [
     RequestListComponent,
     ProgressSubmissionComponent,
     MapAutocompleteComponent,
-    MapMapimageComponent,
     MapMainComponent,
     MainComponent,
     MapDisplayComponent,

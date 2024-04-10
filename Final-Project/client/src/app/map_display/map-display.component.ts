@@ -9,7 +9,7 @@ import { MainService } from '../main.service';
   templateUrl: './map-display.component.html',
   styleUrl: './map-display.component.css'
 })
-export class MapDisplayComponent implements OnInit{
+export class MapDisplayComponent {
 
   @ViewChild('map', { static: true })
   map!: GoogleMap;
@@ -24,14 +24,9 @@ export class MapDisplayComponent implements OnInit{
   protected errormsg : string =''
   private mainSvc = inject(MainService)
 
-
-  directionsResult$ = new BehaviorSubject<
-    google.maps.DirectionsResult | undefined
-  >(undefined);
+  directionsResult$ = new BehaviorSubject< google.maps.DirectionsResult | undefined >(undefined);
 
   constructor(private directionsService: MapDirectionsService) {}
-
-  ngOnInit(): void {}
 
   ngOnChanges() {
     this.errormsg=''

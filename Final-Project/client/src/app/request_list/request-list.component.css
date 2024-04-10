@@ -1,0 +1,19 @@
+.spacing{
+    padding: 20px 60px;
+    display: flex;
+    flex-direction: flex-end;
+    justify-content: left;
+    font-family: "Cormorant Garamond";
+    font-weight: normal;
+    font-size: 18px;
+}
+
+
+h1{
+    font-family: "Cormorant Garamond";
+    margin: 0;
+    padding: 0;
+    font-size: 50px;
+    font-weight: normal;
+    padding: 0px 60px;
+}

@@ -1,6 +1,7 @@
-import { Component, ElementRef, EventEmitter, Input, NgZone, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, NgZone, Output, ViewChild, inject } from '@angular/core';
 import { PlaceSearchResult } from '../models';
-import { Subject } from 'rxjs';
+import { Observable, Subject, Subscriber, Subscription } from 'rxjs';
+import { MainService } from '../main.service';
 
 @Component({
   selector: 'app-map-autocomplete',
@@ -12,17 +13,24 @@ export class MapAutocompleteComponent {
   
   @ViewChild('inputField')
   inputField!: ElementRef;
-
+  
   @Input() 
   placeholder = 'Enter location...';
 
   @Output() 
   placeChanged = new Subject<PlaceSearchResult>();
 
-  autocomplete: google.maps.places.Autocomplete | undefined;
+  protected value:string="";
 
+  autocomplete: google.maps.places.Autocomplete | undefined;
+  
   listener: any;
 
+  protected locationReset$!: Observable<boolean>;
+
+  private mainSvc = inject(MainService)
+
+  
   constructor(private ngZone: NgZone) {}
 
   ngOnInit() {}
@@ -46,8 +54,10 @@ export class MapAutocompleteComponent {
         this.placeChanged.next(result);
       });
     });
+
   }
 
+  //if need photo??
   getPhotoUrl(
     place: google.maps.places.PlaceResult | undefined
   ): string | undefined {
@@ -62,11 +72,19 @@ export class MapAutocompleteComponent {
     }
   }
 
+  
+
+
+
+
   // locationDetails(){
   //   console.log(">>>Location: ",this.inputField.nativeElement.value)
 
   // }
   
+  // print(){
+  //   console.log("LocationInput", this.locationInput);
+  // }
 
   
 }

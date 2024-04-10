@@ -2,7 +2,23 @@
 <mat-form-field>
     <mat-label> Enter location... &nbsp;&nbsp;&nbsp;</mat-label>
     <mat-icon matSuffix>location_on</mat-icon>
-    <input matInput type="text" #inputField/>
+    <input matInput type="text" #inputField [(ngModel)]="value"/>
+        @if (value) {
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            <mat-icon>close</mat-icon>
+        </button>
+        }
 </mat-form-field>
 
+
+<!-- <mat-form-field>
+    <mat-label> Enter location... &nbsp;&nbsp;&nbsp;</mat-label>
+    <mat-icon matSuffix>location_on</mat-icon>
+    <div *ngIf="locationReset$ | async as locReset; else noReset">
+        <input matInput type="text" value="" #inputField/>
+    </div>
+    <ng-template #noReset>
+        <input matInput type="text" #inputField/>
+    </ng-template>
+</mat-form-field> -->
 
