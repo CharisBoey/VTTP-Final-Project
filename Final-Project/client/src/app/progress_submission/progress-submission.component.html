@@ -1,24 +1,144 @@
-
+<!-- 
 <button type="button" [routerLink]="['/Standard', username]">STANDARD Home Page</button>
-<h1>Progress Submission Form</h1>
+<h1>Progress Submission Form</h1> -->
+
+<div class="spacing"><button class="home-btn" type="button" [routerLink]="['/Standard', username]" mat-raised-button>STANDARD Home Page</button></div>
+
+<br>
+
+<table>
+  <tr>
+    <!-- SECTION 1 -->
+    <td>
+      <h1>Progress Submission Form</h1>
+      <br><br>
+      <form class="form-details" [formGroup]="progressSubmissionForm" (ngSubmit)="saveUpdatedData()">
+        <table>
+          <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            
+
+            <td>Service Request:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>
+              <!-- <mat-form-field>
+                <mat-label>Select ID</mat-label>
+                <mat-select formControlName="requestID" *ngIf="reqListIDs$ | async as IDs" >
+                  <mat-option *ngFor="let i of IDs" value={{i.requestID}} #requestID [value]="i.requestID">
+                    [{{i.requestID}}] {{i.request}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field> -->
+
+
+              <mat-form-field>
+                <mat-label>Select ID</mat-label>
+                <mat-select formControlName="requestID">
+                  <mat-option *ngFor="let i of reqListIDs$|async as IDs" [value]="i.requestID">
+                    [{{i.requestID}}] {{i.request}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>Upload Image:</td>
+            <td style="font-size: 20px">
+              <input type="file" accept="images/*" formControlName="fixedphoto" #photoElem (input)="uploadedTrue()">
+              <button *ngIf="uploaded" type="button" (click)="deleteUploadedPhoto()">X</button>
+            </td>
+          </tr>
+          <br><br>
+          <tr>
+            <td></td>
+            <td colspan="2" >
+              <button class="btns" type="button" (click)=addUpdatedImg()>Add Submission</button>
+              &nbsp;&nbsp;&nbsp;
+              <button class="btns" type="submit" >Submit</button>
+              <!-- <button class="btns" type="button" (click)="addRequest()" [disabled]="isInvalid(serviceRequestForm.value.duedate)">Add Request</button>
+              &nbsp;&nbsp;
+              <button class="btns" *ngIf="req$ | async as reqs" type="submit" [disabled]="reqs.length <= 0">Submit</button> -->
+            </td>
+          </tr>
+        </table>
+      </form>
+    </td>
+  </tr>
+
+  <!-- SECTION 2 -->
+  <tr> 
+    <td>
+      <div *ngIf="updatedReq$ | async as updReqs">
+        <div *ngIf="updReqs.length > 0 ; else noReq">
+          <table border="1">
+            <thead>
+              <tr>
+    
+                <th>ID</th>
+                <th>Service Request</th>
+                <th>Manager Name</th>
+                <th>Contractor Name</th>
+                <th>Location</th>
+                <th>Due Date</th>
+                <th>Completed Date</th>
+                <th>Priority</th>
+                <th>Issue Image</th>
+                <th>Fixed Image</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              
+                <tr *ngFor="let r of updReqs">
+                  <td>{{r.requestID}}</td>
+                  <td>{{r.request}}</td>
+                  <td>{{r.adminname}}</td>
+                  <td>{{r.contractorname}}</td>
+                  <td>{{r.locationaddress}}</td>
+                  <td>{{r.duedate}}</td>
+                  <td>{{r.completeddate}}</td>
+                  <td>{{r.priority}}</td>
+                  <td>
+                    <img width=300px src = "{{r.photo}}">
+                  </td>
+                  <td>
+                    <img width=300px src = "{{r.fixedphoto}}">
+                  </td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <ng-template #noReq>
+        <h2>No Requests</h2>
+      </ng-template>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
 
 <!-- add location -->
-<form [formGroup]="progressSubmissionForm" (submit)="saveUpdatedData()">
+
+<!-- <form [formGroup]="progressSubmissionForm" (submit)="saveUpdatedData()">
     <table>
         <tr>
-            <!-- Change to drop down ID -->
             <td>Service Request:</td>
             <td>
-                <!-- <input placeholder="min 5 characters" type="text" formControlName="requestID"> -->
                 <select *ngIf="reqListIDs$ | async as IDs">
                     <option *ngFor="let i of IDs" value={{i.requestID}} #requestID>
                         [{{i.requestID}}] {{i.request}}
                     </option>
                 </select>
-
-                <!-- <select>
-                    <option *ngFor="let i of IDs" value="{{i.requestID}}" (change)="typeDropdown($event)">{{t}}</option>
-                </select> -->
             </td>
         </tr>
         
@@ -27,7 +147,6 @@
             <td>
               <input type="file" accept="images/*" formControlName="fixedphoto" #photoElem (input)="uploadedTrue()">
               
-              <!-- <input type="file" accept="images/*" formControlName="photo" #photo (input)="uploadedTrue()" [style.display]="previewOn ? 'none' : 'block'"> -->
             <td>
             <td *ngIf="uploaded">
               <button type="button" (click)="deleteUploadedPhoto()">X</button>
@@ -36,7 +155,9 @@
 
         <button type="button" (click)=addUpdatedImg()>Add Submission</button>
         <button type="submit" >Submit</button>
-
+      </table>
+      <br>
+  </form> -->
 
         <!-- <tr>
             <td>Due Date:</td>
@@ -67,54 +188,7 @@
 
           </td> -->
         <!-- </tr>   -->
-    </table>
-    <br>
-</form>
+ 
 
 
 <!-- --------------------------------------- -->
-<div *ngIf="updatedReq$ | async as updReqs">
-    <div *ngIf="updReqs.length > 0 ; else noReq">
-      <table border="1">
-        <thead>
-          <tr>
-
-            <th>ID</th>
-            <th>Service Request</th>
-            <th>Manager Name</th>
-            <th>Contractor Name</th>
-            <th>Location</th>
-            <th>Due Date</th>
-            <th>Completed Date</th>
-            <th>Priority</th>
-            <th>Issue Image</th>
-            <th>Fixed Image</th>
-            
-          </tr>
-        </thead>
-        <tbody>
-          
-            <tr *ngFor="let r of updReqs">
-              <td>{{r.requestID}}</td>
-              <td>{{r.request}}</td>
-              <td>{{r.adminname}}</td>
-              <td>{{r.contractorname}}</td>
-              <td>{{r.locationaddress}}</td>
-              <td>{{r.duedate}}</td>
-              <td>{{r.completeddate}}</td>
-              <td>{{r.priority}}</td>
-              <td>
-                <img width=300px src = "{{r.photo}}">
-              </td>
-              <td>
-                <img width=300px src = "{{r.fixedphoto}}">
-              </td>
-            </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  
-  <ng-template #noReq>
-    <h2>No Requests</h2>
-  </ng-template>

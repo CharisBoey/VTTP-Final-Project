@@ -12,10 +12,10 @@
         <table>
           <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td>Service Request: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>Service Request: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td>
               <mat-form-field>
-                <mat-label> min 5 characters &nbsp;&nbsp;&nbsp;</mat-label>
+                <mat-label> min 5 characters</mat-label>
                 <input matInput formControlName="request" type="text" />
                 <mat-icon matSuffix>text_format</mat-icon>
               </mat-form-field>  
@@ -27,7 +27,7 @@
             <td>Due Date:</td>
             <td>
               <mat-form-field>
-                <mat-label> due date &nbsp;&nbsp;&nbsp;</mat-label>
+                <mat-label> due date</mat-label>
                 <input matInput formControlName="duedate" type="texT" [matDatepicker]="picker" (dateChange)="isInvalid(serviceRequestForm.value.duedate)"/>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
@@ -41,7 +41,7 @@
             <td>Priority:</td>
             <td>
               <mat-form-field>
-                <mat-label> (1-most impt, 5-least impt) &nbsp;&nbsp;&nbsp;</mat-label>
+                <mat-label> (1-most impt, 5-least impt)</mat-label>
                 <input matInput min="1" max="5" formControlName="priority" type="number" />
                 <mat-icon matSuffix>format_list_numbered</mat-icon>
               </mat-form-field> 
@@ -51,7 +51,7 @@
           <tr>
             <td></td>
             <td>Upload Image:</td>
-            <td>
+            <td style="font-size: 20px">
               <input type="file" accept="images/*" formControlName="photo"  #photoElem (input)="uploadedTrue()">
               <button *ngIf="uploaded" type="button" (click)="deleteUploadedPhoto()">X</button>
             </td>
@@ -70,8 +70,9 @@
             <td></td>
             <td></td>
             <td>
+              <br>
               <input type="checkbox" (click)="confirmlocation()" formControlName="confirm">
-              <label for="confirm" style="font-size: 20px"> &nbsp;&nbsp;Confirm Location</label>
+              <label for="confirm" style="font-size: 20px"> &nbsp;&nbsp;&nbsp;Confirm Location</label>
             </td>
           </tr>
           <br>
@@ -80,7 +81,7 @@
             <td colspan="2" >
               <!-- [disabled]="isInvalid(serviceRequestForm.value.duedate)" -->
               <button class="btns" type="button" (click)="addRequest()" [disabled]="isInvalid(serviceRequestForm.value.duedate)">Add Request</button>
-              &nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;
               <button class="btns" *ngIf="req$ | async as reqs" type="submit" [disabled]="reqs.length <= 0">Submit</button>
             </td>
           </tr>

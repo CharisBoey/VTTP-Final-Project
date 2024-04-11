@@ -148,6 +148,9 @@ export class ServiceRequestComponent implements OnInit, Validators{
     request.completeddate = this.completeddate
     request.approvalstatus = approvalStatus.PENDING
     request.rejectreason = this.rejectreason
+    //Reformatdate
+    const dateObject = new Date(request.duedate);
+    request.duedate = dateObject.toISOString().slice(0,10)
 
     this.reqStore.addReq(request)
   

@@ -1,26 +1,31 @@
-<button type="button" [routerLink]="['/Admin', username]">ADMIN Home Page</button>
-<button type="button" [routerLink]="['/Standard', username]">STANDARD Home Page</button>
+<!-- <button type="button" [routerLink]="['/Admin', username]">ADMIN Home Page</button>
+<button type="button" [routerLink]="['/Standard', username]">STANDARD Home Page</button> -->
 
-<br><br><br>
+<div class="spacing">
+  <button class="home-btn" type="button" [routerLink]="['/Admin', username]" mat-raised-button>ADMIN Home Page</button>
+  <button class="home-btn" type="button" [routerLink]="['/Standard', username]" mat-raised-button>STANDARD Home Page</button>
+  <!-- <button class="home-btn" type="button" [routerLink]="['/Admin', username]" mat-raised-button>Home Page</button> -->
+</div>
 
+<br><br>
 <h1>Request List</h1>
 <br>
-<div class="spacing" *ngIf="reqList$ | async as reqs">
+<div class="spacing-table" *ngIf="reqList$ | async as reqs">
 
     <!-- {{reqs|json}} border="1"-->
 
     <table class="table table-striped" style="text-align: center">
-        <thead style="font-size: 20px;">
+        <thead style="font-weight: bolder; font-size: 25px;">
           <tr>
             <th>ID</th>
             <th>Service Request</th>
-            <th>Manager Name</th>
-            <th>Contractor Name</th>
+            <th>Manager</th>
+            <th>Contractor</th>
             <th>Location</th>
             <th>Due Date</th>
             <th>Priority</th>
             <th>Issue Image</th>
-            <th>Fixed Image</th>
+            <th>Resolved Image</th>
             <th>Status</th>
             <th>Action</th>
           </tr>
@@ -30,8 +35,8 @@
             <tr *ngFor="let r of reqs">
               <td style="width: 3%">{{ r.requestID }}</td>
               <td style="width: 12%">{{ r.request }}</td>
-              <td style="width: 12%">{{ r.adminname }}</td>
-              <td style="width: 12%">
+              <td style="width: 10%">{{ r.adminname }}</td>
+              <td style="width: 10%">
                 <div *ngIf="r.contractorname; else defaultcontractname">
                 {{ r.contractorname }}
                 </div>
@@ -40,19 +45,19 @@
                 </ng-template>
               </td>
               
-              <td style="width: 10%">{{ r.locationaddress }}</td>
-              <td style="width: 3%">{{ r.duedate }}</td>
+              <td style="width: 8%">{{ r.locationaddress }}</td>
+              <td style="width: 9%">{{ r.duedate }}</td>
               <td style="width: 3%">{{ r.priority }}</td>
-              <td style="width: 15%">
-                <img width=300px src="{{r.photo}}">
+              <td style="width: 12%; vertical-align:middle;">
+                <img class="img-crop" src="{{r.photo}}">
               </td>
               
-              <td>
-              <div style="text-align: center; vertical-align: middle;" *ngIf="r.fixedphoto; else defaultphoto" style="width: 15%">
-                <img class="photo" width=300px src = "{{r.fixedphoto}}">
+              <td style="vertical-align:middle;">
+              <div *ngIf="r.fixedphoto; else defaultphoto" style="width: 12%">
+                <img class="img-crop" width=250px src = "{{r.fixedphoto}}">
               </div>
               <ng-template #defaultphoto>
-                <img width=300px src = "/assets/logos/WorkInProgress.png">
+                <img width=250px src = "/assets/logos/WorkInProgress.png">
 
               </ng-template>
               </td>
@@ -60,16 +65,20 @@
               <!-- <td style="width: 20%"><img width=300px src="/assets/logos/WorkInProgress.png">EITHER INPUT IMAGE OR DEFAULT</td> -->
               <!-- <td style="width: 10%">Approved/Not Approved/Pending Completion/To be Validated</td> -->
               <!-- <td style="width: 10%">{{r.approvalstatus}}</td> -->
-              <td style="width: 5%">
-                <img width=300px src="/assets/logos/{{r.approvalstatus}}.png">
-                <div *ngIf="r.rejectreason">
-                 {{r.rejectreason}}
+              <td style="width: 11%; vertical-align:middle;">
+                <img width=93% src="/assets/logos/{{r.approvalstatus}}.png">
+                <div *ngIf="r.rejectreason" style="text-align: left;">
+                <br>
+                 <u style="padding: 10px; font-weight: bold;">Rejected Reason:</u> <p style="font-weight: normal; padding:10px">{{r.rejectreason}}</p>
+                
                 </div>
-                <button mat-button (click)="updateStatus(r.requestID)">Update Status</button>
+                <br><br>
+
+                <button class="btns" style="width: 93%" type="button" mat-button  (click)="updateStatus(r.requestID)">Update Status</button>
               </td>
 
-              <td style="width: 10%">
-                <button type="button" (click)="scheduledate(r.requestID, r.locationaddress)">Schedule Date</button> 
+              <td style="width: 11%; vertical-align:middle;">
+                <button class="btns" style="width: 100%" type="button" mat-button (click)="scheduledate(r.requestID, r.locationaddress)">Schedule Date</button> 
               </td>
 
 

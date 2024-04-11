@@ -113,12 +113,18 @@ export class ProgressSubmissionComponent implements OnInit{
   addUpdatedImg(){
 
     const requestUpdateSvcReq = this.progressSubmissionForm.value as serviceRequest
+    
+    console.log("!@#$", this.progressSubmissionForm.value)
+    console.log("ID HEREEEEEE", requestUpdateSvcReq.requestID)
 
-    requestUpdateSvcReq.requestID = this.requestID.nativeElement.value
+
+    // console.log("!@#$", this.progressSubmissionForm.get("fixedphoto")?.value)
+
+    //requestUpdateSvcReq.requestID = this.requestID.nativeElement.value
     requestUpdateSvcReq.completeddate = new Date().toISOString().split('T')[0]   
     requestUpdateSvcReq.contractorname = this.username
 
-    const fixedPhotoRequestID = "fixed" + this.requestID.nativeElement.value
+    const fixedPhotoRequestID = "fixed" + requestUpdateSvcReq.requestID
 
     console.log(fixedPhotoRequestID, this.photoElem.nativeElement.value)
     this.mainSvc.sendImgToSB(fixedPhotoRequestID, this.photoElem)

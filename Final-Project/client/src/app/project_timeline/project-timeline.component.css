@@ -1,0 +1,45 @@
+.spacing{
+    padding: 20px 60px;
+    display: flex;
+    flex-direction: flex-end;
+    justify-content: left;
+}
+
+.spacing-calendar{
+    padding: 20px 60px;
+    display: flex;
+    flex-direction: flex-end;
+    justify-content: center;
+    border: #D6EDED;
+    border-width: 100px;
+}
+
+.home-btn{
+    color-scheme: #D6EDED;
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+    font-size: 20px;
+    padding: 20px 60px;
+    background-color: #D6EDED;
+}
+
+h1{
+    font-family: "Cormorant Garamond";
+    margin: 0;
+    padding: 0;
+    font-size: 50px;
+    font-weight: normal;
+    padding: 0px 60px;
+}
+
+/* background-color: #D6EDED;
+    width: 850px;
+    height: 600px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; 
+    font-family: "Cormorant Garamond";
+} */

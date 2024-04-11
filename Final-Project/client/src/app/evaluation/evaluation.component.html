@@ -1,10 +1,12 @@
-<h2 mat-dialog-title>Update Status</h2>
+<h2 mat-dialog-title>&nbsp;Update Status</h2>
 
 <mat-dialog-content class="mat-typography">
     <button mat-button [mat-dialog-close]="true" (click)="updateApproved()">Approve Submission</button>
+    &nbsp;&nbsp;&nbsp; 
     <button mat-button (click)="processReject()" [class.highlighted]="clicked">Reject Submission</button>
     <div *ngIf="rejected">
-        <mat-form-field  style="width:300px !important">
+        <br>
+        <mat-form-field  style="width:400px !important">
             <mat-label>Please provide reason for rejection</mat-label>
             <input matInput [(ngModel)]="reason" >
         </mat-form-field>

@@ -30,6 +30,8 @@ export class RequestListComponent implements OnInit{
   // ** only can if admin!!!
   updateStatus(reqId: string) {
     const dialogRef = this.dialog.open(EvaluationComponent, {
+      // height: '25%',
+      // width: '20%',
       data: { reqId: reqId }
     });
 
