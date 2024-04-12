@@ -12,6 +12,7 @@ import { RequestStore } from '../stores/request.store';
   styleUrl: './progress-submission.component.css'
 })
 export class ProgressSubmissionComponent implements OnInit{
+[x: string]: any;
 
   private fb = inject(FormBuilder)
   protected progressSubmissionForm!: FormGroup
@@ -63,15 +64,15 @@ export class ProgressSubmissionComponent implements OnInit{
     )
   }
 
-  click(){
-    console.log(">>> ", this.progressSubmissionForm)
-    console.log("<<< ", this.requestID.nativeElement.value)
+  // click(){
+  //   console.log(">>> ", this.progressSubmissionForm)
+  //   console.log("<<< ", this.requestID.nativeElement.value)
 
-    this.updatedReq$ = this.reqStore.select(
-      (slice: ServiceRequestSlice) => slice.requestLists
-    )
+  //   this.updatedReq$ = this.reqStore.select(
+  //     (slice: ServiceRequestSlice) => slice.requestLists
+  //   )
 
-  }
+  // }
 
 
   // process(){
@@ -160,6 +161,13 @@ export class ProgressSubmissionComponent implements OnInit{
       this.updatedReq$ = this.reqStore.select(
         (slice: ServiceRequestSlice) => slice.requestLists
       )
+      
+      this.progressSubmissionForm = this.createProgressSubmissionForm()
+
+
+    //   this.serviceRequestForm = this.createServiceRequestForm()  
+    // this.uploaded = false
+    // this.mainSvc.setLocationValid(false)
   }
 
 }

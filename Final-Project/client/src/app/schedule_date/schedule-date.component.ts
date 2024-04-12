@@ -57,7 +57,6 @@ export class ScheduleDateComponent implements OnInit{
       } else {
         this.message = ""
       }
-      
     return this.scheduleForm.invalid || dateInput < dateNow
   }
 
@@ -132,6 +131,7 @@ export class ScheduleDateComponent implements OnInit{
     // Trigger the download
     downloadLink.click();
   }
+
   
 
 }

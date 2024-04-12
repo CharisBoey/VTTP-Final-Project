@@ -28,7 +28,7 @@
             <td>
               <mat-form-field>
                 <mat-label> due date</mat-label>
-                <input matInput formControlName="duedate" type="texT" [matDatepicker]="picker" (dateChange)="isInvalid(serviceRequestForm.value.duedate)"/>
+                <input matInput formControlName="duedate" type="text" [matDatepicker]="picker" (dateChange)="isInvalid(serviceRequestForm.value.duedate)"/>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
                 <span class="error-msg" *ngIf="message">{{message}}</span>

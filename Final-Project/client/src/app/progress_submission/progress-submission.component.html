@@ -9,7 +9,7 @@
 <table>
   <tr>
     <!-- SECTION 1 -->
-    <td>
+    <td width="40%">
       <h1>Progress Submission Form</h1>
       <br><br>
       <form class="form-details" [formGroup]="progressSubmissionForm" (ngSubmit)="saveUpdatedData()">
@@ -18,7 +18,7 @@
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
             
 
-            <td>Service Request:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>Service Request:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td>
               <!-- <mat-form-field>
                 <mat-label>Select ID</mat-label>
@@ -52,9 +52,9 @@
           <tr>
             <td></td>
             <td colspan="2" >
-              <button class="btns" type="button" (click)=addUpdatedImg()>Add Submission</button>
+              <button class="btns" type="button" (click)=addUpdatedImg() [disabled]="progressSubmissionForm.invalid">Add Submission</button>
               &nbsp;&nbsp;&nbsp;
-              <button class="btns" type="submit" >Submit</button>
+              <button *ngIf="updatedReq$ | async as updReqs" class="btns" type="submit" [disabled]="updReqs.length <= 0" >Submit</button>
               <!-- <button class="btns" type="button" (click)="addRequest()" [disabled]="isInvalid(serviceRequestForm.value.duedate)">Add Request</button>
               &nbsp;&nbsp;
               <button class="btns" *ngIf="req$ | async as reqs" type="submit" [disabled]="reqs.length <= 0">Submit</button> -->
@@ -63,46 +63,49 @@
         </table>
       </form>
     </td>
-  </tr>
+  
+
+
 
   <!-- SECTION 2 -->
-  <tr> 
-    <td>
-      <div *ngIf="updatedReq$ | async as updReqs">
+  
+    <td class="results-table" width="60%">
+      <div class="spacing-table" *ngIf="updatedReq$ | async as updReqs">
         <div *ngIf="updReqs.length > 0 ; else noReq">
-          <table border="1">
-            <thead>
+          <h2>Submissions Added:</h2>
+          <br><br>
+          <table class="table table-striped" style="text-align: center">
+            <thead style="font-weight: bolder; font-size: 20px;">
               <tr>
-    
                 <th>ID</th>
                 <th>Service Request</th>
-                <th>Manager Name</th>
-                <th>Contractor Name</th>
+                <th>Manager</th>
+                <th>Contractor</th>
                 <th>Location</th>
                 <th>Due Date</th>
                 <th>Completed Date</th>
                 <th>Priority</th>
                 <th>Issue Image</th>
-                <th>Fixed Image</th>
+                <th>Resolved Image</th>
                 
               </tr>
             </thead>
             <tbody>
               
                 <tr *ngFor="let r of updReqs">
-                  <td>{{r.requestID}}</td>
-                  <td>{{r.request}}</td>
-                  <td>{{r.adminname}}</td>
-                  <td>{{r.contractorname}}</td>
-                  <td>{{r.locationaddress}}</td>
-                  <td>{{r.duedate}}</td>
-                  <td>{{r.completeddate}}</td>
-                  <td>{{r.priority}}</td>
-                  <td>
-                    <img width=300px src = "{{r.photo}}">
+                  <td width="2%">{{r.requestID}}</td>
+                  <td width="18%">{{r.request}}</td>
+                  <td width="8%">{{r.adminname}}</td>
+                  <td width="8%">{{r.contractorname}}</td>
+                  <td width="12%">{{r.locationaddress}}</td>
+                  <td width="13%">{{r.duedate}}</td>
+                  <td width="15%">{{r.completeddate}}</td>
+                  <td width="2%">{{r.priority}}</td>
+                  <td width="12%">
+                    <img class="img-crop" src = "{{r.photo}}">
                   </td>
-                  <td>
-                    <img width=300px src = "{{r.fixedphoto}}">
+                  <td width="12%">
+                    <img class="img-crop" width=300px src = "{{r.fixedphoto}}">
                   </td>
                 </tr>
             </tbody>
@@ -111,7 +114,7 @@
       </div>
       
       <ng-template #noReq>
-        <h2>No Requests</h2>
+        <h2><u>No Submissions Added:</u></h2>
       </ng-template>
     </td>
   </tr>

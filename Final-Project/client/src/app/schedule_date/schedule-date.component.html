@@ -1,10 +1,87 @@
-<button type="button" [routerLink]="['/Standard', username]">STANDARD Home Page</button>
-<h1>Progress Submission Form</h1>
+<!-- <button type="button" [routerLink]="['/Standard', username]">STANDARD Home Page</button> -->
+<div class="spacing"><button class="home-btn" type="button" [routerLink]="['/Standard', username]" mat-raised-button>STANDARD Home Page</button></div>
 
+<br>
 <h1>Schedule Date: [ {{requestId}} ]</h1>
-<form [formGroup]="scheduleForm" (ngSubmit)="scheduleMeeting()">
+<br>
+<form class="form-details" [formGroup]="scheduleForm" (ngSubmit)="scheduleMeeting()">
+  <br>
   <table>
     <tr>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      <td>Summary: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      <td>
+        <mat-form-field>
+          <mat-label>enter summary</mat-label>
+          <input matInput formControlName="summary" type="text" />
+          <mat-icon matSuffix>text_format</mat-icon>
+        </mat-form-field>  
+      </td>
+    </tr>
+    <br>
+    <tr>
+      <td></td>
+      <td>Location:</td>
+      <td style="font-size: 30px"><i>{{locationaddress}}</i><br></td>
+    </tr>
+    <br>
+    <tr>
+      <td></td>
+      <td>Details:</td>
+      <td>
+        <mat-form-field>
+          <mat-label>enter details</mat-label>
+          <input matInput formControlName="details" type="text" />
+          <mat-icon matSuffix>text_format</mat-icon>
+        </mat-form-field>  
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Scheduled Time: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      <td>
+        <input class="calendar" type="datetime-local" formControlName="scheduleTime" (dateChange)="isInvalid(scheduleForm.value.scheduleTime)"/>
+        <!-- &nbsp;{{message}} -->
+        <span class="error-msg" *ngIf="message">{{message}}</span>
+        <br>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Email: <br></td>
+      <td>
+        <!-- <input type="email"  formControlName="email"/> -->
+        <mat-form-field>
+          <mat-label>email</mat-label>
+          <mat-icon matSuffix>email</mat-icon>
+          <input type="email" matInput formControlName="email" placeholder="e.g. abc@example.com">
+          <mat-error *ngIf="scheduleForm.get('email')?.hasError('email')">Please enter a valid email address</mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+    <br>
+    <tr>
+      <td></td>
+      <td colspan="2">
+        <button class="btns" type="submit" [disabled]="isInvalid(scheduleForm.value.scheduleTime)">Schedule Appointment</button>
+      </td>
+    </tr>
+  </table>
+
+</form>
+
+    
+    <!-- <mat-form-field>
+      <mat-label> due date</mat-label>
+      <input matInput formControlName="duedate" type="texT" [matDatepicker]="picker" (dateChange)="isInvalid(serviceRequestForm.value.duedate)"/>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <span class="error-msg" *ngIf="message">{{message}}</span>
+    </mat-form-field> -->
+
+<!-- <form [formGroup]="scheduleForm" (ngSubmit)="scheduleMeeting()">
+  <table class="spacing"> -->
+    <!-- <tr>
       <td>Summary:</td>
       <td><input type="text" formControlName="summary"/></td>
     <tr>
@@ -28,4 +105,4 @@
   </table>
   <br/>
   <button type="submit" [disabled]="isInvalid(scheduleForm.value.scheduleTime)">Schedule Appointment</button>
-</form>
+</form> -->
