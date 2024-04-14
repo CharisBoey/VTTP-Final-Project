@@ -30,12 +30,4 @@ public class UpdateServiceRequest {
     }
     public UpdateServiceRequest() {
     }
-    public void setApprovalstatus(String string) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setApprovalstatus'");
-    }
-    public void setRejectreason(String string) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setRejectreason'");
-    }
 }

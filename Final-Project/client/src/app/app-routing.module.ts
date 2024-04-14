@@ -25,6 +25,7 @@ const routes: Routes = [
   {path:'Standard/:username', component: StandardComponent, title: 'Standard Page', canActivate:[ canProceedStandard]},
   {path:'Standard/:username/Request-List', component: RequestListComponent, title:'Request List Page', canActivate:[ canProceedStandard ]},
   {path:'Standard/:username/Progress-Submission', component: ProgressSubmissionComponent, title:'Progress Submission Page', canActivate:[ canProceedStandard ]},
+  // {path:'Standard/:username/Progress-Submission', component: ProgressSubmissionComponent, title:'Progress Submission Page'},
   {path:'Standard/:username/Schedule-Date', component: ScheduleDateComponent, title:'Schedule Date Page', canActivate:[ canProceedStandard ]},
   {path:'Standard/:username/Project-Timeline', component: ProjectTimelineComponent, title:'Project Timeline Page', canActivate:[ canProceedStandard ]},
   {path:'Standard/:username/Email', component: EmailComponent, title:'Email Page',canActivate:[ canProceedStandard ]},

@@ -34,8 +34,9 @@ public class RequestImageService {
 	  return "unsuccessful";
 	}
 
-    /* public void deleteImage(String requestID) {
-        return reqImgRepo.deleteImage(requestID);
-    } */
+  // public String updUrl(Integer count, String requestID){
+  //   String url = "https://astronaut.sgp1.digitaloceanspaces.com/images/" + count + "fixed" + requestID;
+  //   return url;
+  // }
 
 }

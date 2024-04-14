@@ -2,8 +2,10 @@
 <button type="button" [routerLink]="['/Standard', username]">STANDARD Home Page</button>
 <h1>Progress Submission Form</h1> -->
 
-<div class="spacing"><button class="home-btn" type="button" [routerLink]="['/Standard', username]" mat-raised-button>Home Page</button></div>
-
+<!-- <div class="spacing"><button class="home-btn" type="button" [routerLink]="['/Standard', username]" mat-raised-button>Home Page</button></div> -->
+<div class="spacing">
+  <button class="homebtn" type="button" [routerLink]="['/Standard', username]" mat-raised-button>Home Page</button>
+</div>
 <br>
 
 <table>
@@ -34,9 +36,6 @@
             <td style="font-size: 20px">
               <input type="file" accept="images/*" formControlName="fixedphoto" #photoElem (input)="uploadedTrue()">
             </td>
-            <td>
-              <button *ngIf="uploaded" type="button" class="del-btn" (click)="deleteUploadedPhoto()" mat-button>X</button>
-            </td>
           </tr>
           <br><br>
           <tr>
@@ -44,7 +43,9 @@
             <td colspan="2" >
               <button class="btns" type="button" (click)=addUpdatedImg() [disabled]="progressSubmissionForm.invalid">Add Submission</button>
               &nbsp;&nbsp;&nbsp;
-              <button *ngIf="updatedReq$ | async as updReqs" class="btns" type="submit" [disabled]="updReqs.length <= 0" >Submit</button>
+              <!-- <button *ngIf="updatedReq$ | async as updReqs" class="btns" type="submit" [disabled]="updReqs.length <= 0" >Submit</button> -->
+              <button class="btns" type="submit" [disabled]="listOfReq.length <= 0" >Submit</button>
+
               <!-- <button class="btns" type="button" (click)="addRequest()" [disabled]="isInvalid(serviceRequestForm.value.duedate)">Add Request</button>
               &nbsp;&nbsp;
               <button class="btns" *ngIf="req$ | async as reqs" type="submit" [disabled]="reqs.length <= 0">Submit</button> -->
@@ -58,10 +59,11 @@
 
 
   <!-- SECTION 2 -->
-  
     <td class="results-table" width="50%">
-      <div class="spacing-table" *ngIf="updatedReq$ | async as updReqs">
-        <div *ngIf="updReqs.length > 0 ; else noReq">
+      <!-- <div class="spacing-table" *ngIf="updatedReq$ | async as updReqs"> -->
+        <!-- {{updReqs|json}} -->
+      <div class="spacing-table">
+        <div *ngIf="listOfReq.length ; else noReq">
           <h2><u>Submissions Added:</u></h2>
           <br><br>
           <table class="table table-striped" style="text-align: center">
@@ -82,7 +84,7 @@
               </tr>
             </thead>
             <tbody>              
-                <tr *ngFor="let r of updReqs">
+                <tr *ngFor="let r of listOfReq">
                   <td width="2%">{{r.requestID}}</td>
                   <td width="16%">{{r.request}}</td>
                   <td width="8%">{{r.adminname}}</td>

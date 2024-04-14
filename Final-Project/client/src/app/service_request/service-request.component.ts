@@ -61,6 +61,9 @@ export class ServiceRequestComponent implements OnInit, Validators{
   protected fixedphoto: string = ''
   protected completeddate: string = ''
   protected rejectreason: string = ''
+  protected listOfReq: serviceRequest[]=[];
+  protected listOfReqIDs: string[]=[];
+  // protected checkValid:boolean = false;
 
   //protected username$!: Observable<string>
   // protected usnm: string =''
@@ -78,9 +81,24 @@ export class ServiceRequestComponent implements OnInit, Validators{
   ngOnInit(): void {
     this.serviceRequestForm = this.createServiceRequestForm()  
 
-    this.req$ = this.reqStore.select(
-      (slice: ServiceRequestSlice) => slice.requestLists
-    )
+    // this.req$ = this.reqStore.select(
+    //   (slice: ServiceRequestSlice) => slice.requestLists
+    // )
+    this.reqStore.getReq.subscribe({
+      next: (result) => {
+        for (let i = 0; i<result.length; i++){
+          const svcReq: serviceRequest = result[i];
+          if(!this.listOfReqIDs.includes(svcReq.requestID)){
+            this.listOfReqIDs.push(svcReq.requestID);
+            this.listOfReq.push(svcReq);
+          }
+          // if (this.listOfReq.includes(svcReq.requestID)){}
+          // this.sentence = result[i].adminname+ result[i].photo
+        }
+        //this.reqStore.resetReqStore()
+      },
+    })
+
     //this.trigger$ = this.triggerSub.asObservable()
     
     //this.username$ = this.mainSvc.getUsername()
@@ -103,17 +121,22 @@ export class ServiceRequestComponent implements OnInit, Validators{
   }
   
 
-  isInvalid(dateInputString: string): boolean{
+  isInvalid(): boolean{
+    const request = this.serviceRequestForm.value as serviceRequest
+    
     const dateNow = new Date()
-    const dateInput = new Date(dateInputString)
+    const dateInput = new Date(request.duedate)
       if(dateInput<dateNow){
         this.message = "Invalid Date, must be future date"
       } else {
         this.message = ""
       }
+    
+      // console.log("090980809808", this.serviceRequestForm.value.confirm)
       
-    return this.serviceRequestForm.invalid || dateInput < dateNow || !this.locationValid
+    return this.serviceRequestForm.invalid || dateInput < dateNow || !this.locationValid || !this.serviceRequestForm.value.confirm
   }
+  
 
   saveData(){
     console.log("clicked")
@@ -122,6 +145,7 @@ export class ServiceRequestComponent implements OnInit, Validators{
         for (let i = 0; i<result.length; i++){
           this.mainSvc.sendServiceRequestToSB(result[i]);
           this.reqStore.deleteReq(result[i].requestID)
+          // this.reqStore.reset()
         }
         //this.reqStore.resetReqStore()
       },
@@ -129,6 +153,8 @@ export class ServiceRequestComponent implements OnInit, Validators{
       complete: () => { this.allReq$.unsubscribe() }
     });
 
+    this.listOfReq=[];
+    this.listOfReqIDs=[];
     this.mainSvc.slackNotification("New Service Request Submitted!")
   }
 
@@ -175,11 +201,6 @@ export class ServiceRequestComponent implements OnInit, Validators{
 
   deleteRequest(requestID:string){
     this.reqStore.deleteReq(requestID)
-  }
-
-  deleteUploadedPhoto(){
-    this.serviceRequestForm.get('photo')?.reset();
-    this.uploaded = false; 
   }
 
   uploadedTrue(){

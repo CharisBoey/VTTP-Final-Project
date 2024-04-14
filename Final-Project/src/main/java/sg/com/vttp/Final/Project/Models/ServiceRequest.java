@@ -17,6 +17,7 @@ public class ServiceRequest {
     private String contractorname;
     private String approvalstatus;
     private String rejectreason;
+    
     public String getRequestID() {
         return requestID;
     }

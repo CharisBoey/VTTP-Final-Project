@@ -107,6 +107,18 @@ export class MainService {
       this.http.post<imagePreview>("/api/ImageUpload", formData)    
     )
   }
+  
+
+  sendResolvedImgtoSB(reqId: string, photo:ElementRef): Promise<any> {
+    const formData = new FormData();
+
+    formData.set('requestID', reqId);
+    formData.set('photo', photo.nativeElement.files[0]);
+
+    return firstValueFrom(
+      this.http.post<imagePreview>("/api/ResolvedImageUpload", formData)    
+    )
+  }
 
   /* getURL(payload : string){
     console.log("SVC",payload)

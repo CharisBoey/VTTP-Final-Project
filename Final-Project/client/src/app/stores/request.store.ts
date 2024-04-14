@@ -41,6 +41,10 @@ export class RequestStore extends ComponentStore<ServiceRequestSlice>{
           }
         )
       }
+    
+    // readonly reset = this.updater(() => {
+    //   return { requestLists: [] }
+    // })
 
     // updateReq(requestUpdateSvcReq: serviceRequest){
     //     this.deleteReq(requestUpdateSvcReq.requestID)

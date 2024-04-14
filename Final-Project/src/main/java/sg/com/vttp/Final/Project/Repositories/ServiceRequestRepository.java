@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.bson.Document;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.mongodb.client.result.UpdateResult;
 
+import sg.com.vttp.Final.Project.Models.FixedPhoto;
 import sg.com.vttp.Final.Project.Models.ServiceRequest;
 import sg.com.vttp.Final.Project.Models.UpdateServiceRequest;
 import sg.com.vttp.Final.Project.Models.UpdateServiceRequestStatus;
@@ -24,8 +24,10 @@ public class ServiceRequestRepository {
     @Autowired
     MongoTemplate mongoTemplate;
 
-    public void insertSvcReq(ServiceRequest payload){
+    @Autowired
+    FixedPhotoRepository fixedPhotoRepo;
 
+    public void insertSvcReq(ServiceRequest payload){
 
 		Document svcReq = new Document();
 
@@ -47,6 +49,7 @@ public class ServiceRequestRepository {
     }
 
     public List<ServiceRequest> findAllSvcReq(){
+        
         List<Document> result_findAll = mongoTemplate.findAll(Document.class, "servicerequest");
         System.out.println("FindAll:"+result_findAll.toString());
 
@@ -101,15 +104,24 @@ public class ServiceRequestRepository {
     }
 
     public void updateSvcReq(UpdateServiceRequest updSvcReq) {
-        Query query = Query.query(Criteria.where("requestID").is(updSvcReq.getRequestID()));
+
+        String reqID = updSvcReq.getRequestID();
+
+        //FIRST TIME CONTRACTOR SUBMITS PHOTO
+        Query query = Query.query(Criteria.where("requestID").is(reqID));
 
         Update updateOperation = new Update()
         .set("fixedphoto", updSvcReq.getFixedphoto())
         .set("contractorname", updSvcReq.getContractorname());
 
         UpdateResult result = mongoTemplate.updateMulti(query, updateOperation, "servicerequest");
+        
+        
+        
+
 
         System.out.printf("Documents updated: %d\n", result.getModifiedCount());
+        
     }
 
     
@@ -124,7 +136,5 @@ public class ServiceRequestRepository {
 
         System.out.printf("Documents updated: %d\n", result.getModifiedCount());
     }
-
-    
 
 }

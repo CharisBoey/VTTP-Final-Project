@@ -16,6 +16,7 @@ export class ScheduleDateComponent implements OnInit{
   protected requestId!: string;
   protected locationaddress!: string;
   protected message: string='';
+  
 
   //constructor(private route: ActivatedRoute) { }
   // constructor(

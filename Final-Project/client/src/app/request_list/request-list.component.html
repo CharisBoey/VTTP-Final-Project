@@ -8,12 +8,14 @@
   <!-- <button class="home-btn" type="button" [routerLink]="['/Admin', username]" mat-raised-button>Home Page</button> -->
 </div>
 
+
 <br><br>
 <h1>Request List</h1>
 <br>
 <div class="spacing-table" *ngIf="reqList$ | async as reqs">
 
     <!-- {{reqs|json}} border="1"-->
+    <div *ngIf="reqs.length > 0 ; else noReqList">
 
     <table class="table table-striped" style="text-align: center">
         <thead style="font-weight: bolder; font-size: 25px;">
@@ -94,4 +96,11 @@
             </tr>
         </tbody>
     </table>
+    </div>
 </div>
+   
+    <div>
+      <ng-template #noReqList>
+        <h2><u>No Requests</u></h2>
+      </ng-template>
+    </div>

@@ -37,6 +37,8 @@ import sg.com.vttp.Final.Project.Models.RequestImage;
 import sg.com.vttp.Final.Project.Models.ServiceRequest;
 import sg.com.vttp.Final.Project.Models.UpdateServiceRequest;
 import sg.com.vttp.Final.Project.Models.UpdateServiceRequestStatus;
+import sg.com.vttp.Final.Project.Repositories.FixedPhotoRepository;
+import sg.com.vttp.Final.Project.Services.FixedPhotoService;
 import sg.com.vttp.Final.Project.Services.LoginService;
 import sg.com.vttp.Final.Project.Services.RequestImageService;
 import sg.com.vttp.Final.Project.Services.ServiceRequestService;
@@ -54,6 +56,9 @@ public class AdminController {
 
     @Autowired
     ServiceRequestService svcReqSvc;
+
+    @Autowired
+    FixedPhotoService fixedPhotoSvc;
 
     @PostMapping("/api/Login")
     @ResponseBody
@@ -102,6 +107,33 @@ public class AdminController {
 		return ResponseEntity.ok(returnObj.toString());
 	}
 
+    @PostMapping(path="/api/ResolvedImageUpload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<String> storeResolvedData(@RequestPart String requestID, @RequestPart MultipartFile photo) {
+
+        System.out.println(">>> DIRECTLY FROM ANGULAR RESOLVED " + " | " + requestID +" | "+ photo);
+
+        Integer fixedphotocount = fixedPhotoSvc.findSvcReqFixedPhotoCountByID(requestID);
+        fixedphotocount += 1;
+        System.out.println("NEW COUNT"+fixedphotocount);
+        requestID = fixedphotocount + "fixed" + requestID;
+        String url = reqImgSvc.postImage(requestID, photo);
+        System.out.println("URLLLLLLLLLLLLLLLLLLLLLLLLL"+url);
+
+		//String newsId = newsSvc.postNews(title, description, photo, tags); 
+
+        JsonObject returnObj = Json.createObjectBuilder()
+				.add("requestID", requestID)
+                .add("imageURL", url)
+				.build();
+
+		return ResponseEntity.ok(returnObj.toString());
+	}
+
+    
+
+
+
+
     /* @GetMapping("/Image/{requestID}}")
     @ResponseBody
     public ResponseEntity<byte[]> getPicture(@PathVariable String requestID) {
@@ -145,7 +177,6 @@ public class AdminController {
 		System.out.printf(">>> PAYLOAD: %s\n", json.toString());
 
         // /* {"request":"qqq","duedate":"2024-03-29","priority":2,"photo":"https://astronaut.sgp1.digitaloceanspaces.com/images/7e0241b1","requestID":"7e0241b1"} */
-
         ServiceRequest svcReq = new ServiceRequest();
         svcReq.setRequestID(json.getString("requestID"));
         svcReq.setRequest(json.getString("request"));
@@ -159,7 +190,7 @@ public class AdminController {
         svcReq.setContractorname(json.getString("contractorname"));
         svcReq.setApprovalstatus(json.getString("approvalstatus"));
         svcReq.setRejectreason(json.getString("rejectreason"));
-
+        
         
         svcReqSvc.insertSvcReq(svcReq);
 
