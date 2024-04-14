@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { UserRoleStore } from '../stores/userRole.store';
-import { MainService } from '../main.service';
 import { ActivatedRoute } from '@angular/router';
+import { MainService } from '../main.service';
 
 @Component({
   selector: 'app-main',
@@ -12,16 +12,18 @@ import { ActivatedRoute } from '@angular/router';
 export class MainComponent implements OnInit{
   
   
-  private readonly ngUnsubscribe = new Subject();
-  private userRoleStore = inject(UserRoleStore)
-  activatedRoute = inject(ActivatedRoute);
-  username: string = this.activatedRoute.snapshot.params['username'];
+  // private readonly ngUnsubscribe = new Subject();
+  // private userRoleStore = inject(UserRoleStore)
+  private mainSvc = inject(MainService);
+  protected activatedRoute = inject(ActivatedRoute);
+  protected username: string = this.activatedRoute.snapshot.params['username'];
 
-  userStatus: String= ""
+  protected userStatus: String= ""
   //private mainSvc = inject(MainService)
 
   ngOnInit(): void {
-    this.userRoleStore.getRole.pipe(takeUntil(this.ngUnsubscribe)).subscribe(status => this.userStatus = status);
+    // this.userRoleStore.getRole.pipe(takeUntil(this.ngUnsubscribe)).subscribe(status => this.userStatus = status);
+    this.mainSvc.getUserStatus().subscribe(status => this.userStatus = status)
   }
 
 }

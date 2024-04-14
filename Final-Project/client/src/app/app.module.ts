@@ -14,7 +14,6 @@ import { UserRoleStore } from './stores/userRole.store';
 import { FormsModule } from '@angular/forms';
 import { ServiceRequestComponent } from './service_request/service-request.component';
 import { ProjectTimelineComponent } from './project_timeline/project-timeline.component';
-import { ResponseValidationComponent } from './response_validation/response-validation.component';
 import { RequestListComponent } from './request_list/request-list.component';
 import { RequestStore } from './stores/request.store';
 //import { WebcamModule } from 'ngx-webcam';
@@ -28,6 +27,7 @@ import { MainComponent } from './main/main.component';
 import { MapDisplayComponent } from './map_display/map-display.component';
 import { EvaluationComponent } from './evaluation/evaluation.component';
 import { ScheduleDateComponent } from './schedule_date/schedule-date.component';
+import { EmailComponent } from './email/email.component';
 
 
 
@@ -45,7 +45,6 @@ const appRoutes: Routes = [
     StandardComponent,
     ServiceRequestComponent,
     ProjectTimelineComponent,
-    ResponseValidationComponent,
     RequestListComponent,
     ProgressSubmissionComponent,
     MapAutocompleteComponent,
@@ -53,8 +52,8 @@ const appRoutes: Routes = [
     MainComponent,
     MapDisplayComponent,
     EvaluationComponent,
-    ScheduleDateComponent
-
+    ScheduleDateComponent,
+    EmailComponent,
   ],
   imports: [
     BrowserModule,

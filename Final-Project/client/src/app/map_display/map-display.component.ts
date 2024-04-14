@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, ViewChild, inject } from '@angular/core';
+import { Component, Input, ViewChild, inject } from '@angular/core';
 import { GoogleMap, MapDirectionsService } from '@angular/google-maps';
 import { PlaceSearchResult } from '../models';
 import { BehaviorSubject, map } from 'rxjs';
@@ -26,7 +26,7 @@ export class MapDisplayComponent {
 
   directionsResult$ = new BehaviorSubject< google.maps.DirectionsResult | undefined >(undefined);
 
-  constructor(private directionsService: MapDirectionsService) {}
+  // constructor(private directionsService: MapDirectionsService) {}
 
   ngOnChanges() {
     this.errormsg=''
@@ -60,23 +60,24 @@ export class MapDisplayComponent {
     
   }
 
-  getDirections(
-    fromLocation: google.maps.LatLng,
-    toLocation: google.maps.LatLng
-  ) {
-    const request: google.maps.DirectionsRequest = {
-      destination: toLocation,
-      origin: fromLocation,
-      travelMode: google.maps.TravelMode.DRIVING,
-    };
+  // getDirections(
+  //   fromLocation: google.maps.LatLng,
+  //   toLocation: google.maps.LatLng
+  // ) {
+  //   const request: google.maps.DirectionsRequest = {
+  //     destination: toLocation,
+  //     origin: fromLocation,
+  //     travelMode: google.maps.TravelMode.DRIVING,
+  //   };
 
-    this.directionsService
-      .route(request)
-      .pipe(map((response) => response.result))
-      .subscribe((res) => {
-        this.directionsResult$.next(res);
-        this.markerPositions = [];
-      });
-  }
+  //   this.directionsService
+  //     .route(request)
+  //     .pipe(map((response) => response.result))
+  //     .subscribe((res) => {
+  //       this.directionsResult$.next(res);
+  //       this.markerPositions = [];
+  //     });
+  // }
+  
 
 }

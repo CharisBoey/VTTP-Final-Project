@@ -1,13 +1,40 @@
 import { ElementRef, Injectable, inject } from '@angular/core';
 import { imagePreview, login, serviceRequest, updateServiceRequest } from './models';
-import { Observable, Subject, firstValueFrom } from 'rxjs';
+import { Observable, Subject, Subscription, firstValueFrom, takeUntil } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UserRoleStore } from './stores/userRole.store';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class MainService {
+
+  //GUARDDDDDDD
+  protected proceed:boolean = true;
+  private userRoleStore = inject(UserRoleStore);
+  private readonly ngUnsubscribe = new Subject();
+
+  getUserStatus(): Observable<string>{
+    return this.userRoleStore.getRole.pipe(takeUntil(this.ngUnsubscribe));
+  }
+    
+    /* if this.userRole$ = 
+
+    this.userRole$$ = this.reqStore.getReq.subscribe({
+      next: (result) => {
+        for (let i = 0; i<result.length; i++){
+          this.mainSvc.sendServiceRequestToSB(result[i]);
+          this.reqStore.deleteReq(result[i].requestID)
+        }
+        //this.reqStore.resetReqStore()
+      },
+      error: (err) => { console.log(err) },
+      complete: () => { this.allReq$.unsubscribe() }
+    });
+  } */
+
+
   private http = inject(HttpClient)
   //Use observable/promise?
   processLogin(loginDetails: login): Promise<String>{

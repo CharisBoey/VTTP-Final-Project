@@ -13,7 +13,7 @@ export class StandardComponent {
   activatedRoute = inject(ActivatedRoute);
   username: string = this.activatedRoute.snapshot.params['username'];
 
-  icons: icon[] = [{iconName: 'Request List', value: 1}, {iconName: 'Progress Submission', value: 2}, {iconName: 'Project Timeline', value: 4}];  
+  icons: icon[] = [{iconName: 'Request List', value: 1}, {iconName: 'Progress Submission', value: 2}, {iconName: 'Project Timeline', value: 3}, {iconName: 'Email', value: 4}];  
 
   directToPage(iconName: string) {
     const replacedName = iconName.replace(/\s+/g, '-')

@@ -48,8 +48,6 @@ export class ServiceRequestComponent implements OnInit, Validators{
   //protected webcamOn: boolean = false
   //protected previewOn: boolean = false
   protected uploaded: boolean = false
-  protected width: number = 300
-  protected height: number = 300
   protected trial:boolean = false
 
  /*  protected trigger$!: Observable<void>

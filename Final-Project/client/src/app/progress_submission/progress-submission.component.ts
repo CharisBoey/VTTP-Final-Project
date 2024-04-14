@@ -170,4 +170,8 @@ export class ProgressSubmissionComponent implements OnInit{
     // this.mainSvc.setLocationValid(false)
   }
 
+  deleteRequest(requestID:string){
+    this.reqStore.deleteReq(requestID)
+  }
+  
 }

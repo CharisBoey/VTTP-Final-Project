@@ -4,8 +4,10 @@
 <button type="button" [routerLink]="['/Standard', username]">STANDARD Home Page</button> -->
 
 <div class="spacing">
-    <button class="home-btn" type="button" [routerLink]="['/Admin', username]" mat-raised-button>ADMIN Home Page</button>
-    <button class="home-btn" type="button" [routerLink]="['/Standard', username]" mat-raised-button>STANDARD Home Page</button>
+  <button *ngIf="userStatus==='Admin'" class="home-btn" type="button" [routerLink]="['/Admin', username]" mat-raised-button>Home Page</button>
+  <button *ngIf="userStatus==='Standard'"class="home-btn" type="button" [routerLink]="['/Standard', username]" mat-raised-button>Home Page</button>
+    <!-- <button class="home-btn" type="button" [routerLink]="['/Admin', username]" mat-raised-button>ADMIN Home Page</button>
+    <button class="home-btn" type="button" [routerLink]="['/Standard', username]" mat-raised-button>STANDARD Home Page</button> -->
   </div>
 
   <br>

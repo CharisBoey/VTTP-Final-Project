@@ -60,7 +60,83 @@ h1{
 button:disabled {
     opacity: 0.6;
     /* background-color: green; */
- }
+}
 
+.img-crop{
+    width: 180px; 
+    height: 202px; 
+    object-fit: cover; 
+    object-position: 50% 50;
+}
 
+.results-table{
+    display: flex;
+    flex-direction: flex-end;
+    justify-content: left;
+    width: 100%;
+    /* padding: 0px 60px; */
+}
 
+.spacing-table{
+    padding: 10px 30px;
+    display: flex;
+    flex-direction: flex-end;
+    justify-content: left;
+    font-family: "Cormorant Garamond";
+    font-weight: normal;
+    font-size: 22px;
+}
+h2{
+    font-family: "Cormorant Garamond";
+    margin: 0;
+    padding: 0;
+    font-size: 35px;
+    font-weight: normal;
+}
+
+.del-btn{
+    color-scheme: #F5F5F5;
+    font-family: "Montserrat", sans-serif;
+    background-color: #F5F5F5;
+    padding: 0px 0px;
+}
+/* 
+.del-btn2{
+    font-family: "Montserrat", sans-serif;
+    background-color: #304757;
+    color: white;
+    padding: 0px 0px;
+} */
+
+.del-btn2{
+    /* color-scheme: #D6EDED; */
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+    padding: 20px 10px;
+    background-color: #D6EDED;
+    border-radius: 8px;
+    color: black;
+    /* border-radius: 8px; */
+    border-color: transparent;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);  
+}
+
+.del-btn2:hover {
+    background-color: #FFF; 
+    border-color:#304757;
+    color: #304757;
+    /* font-weight: bold; */
+}
+
+/* .del-btn2:hover{
+    background: #626262;
+} */
+
+/* .del-btn2:hover{
+    background: #E4E4E4;
+    transition: none;
+    border-radius: 4px 4px 0px 0px;
+    border: 0;
+    border-bottom: 1px solid #626262;
+} */

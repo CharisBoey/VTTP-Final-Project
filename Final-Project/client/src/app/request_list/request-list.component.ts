@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { serviceRequest } from '../models';
 import { MainService } from '../main.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,12 +16,15 @@ export class RequestListComponent implements OnInit{
   protected reqList$!: Observable<serviceRequest[]>
   private router = inject(Router)
   private mainSvc = inject(MainService)
-  activatedRoute = inject(ActivatedRoute);
-  username: string = this.activatedRoute.snapshot.params['username'];
-  
+  protected activatedRoute = inject(ActivatedRoute);
+  protected username: string = this.activatedRoute.snapshot.params['username'];
+  protected userStatus: String= ""
+
+
 
   ngOnInit(): void {
-    this.reqList$ = this.mainSvc.getAllRequest()
+    this.reqList$ = this.mainSvc.getAllRequest();
+    this.mainSvc.getUserStatus().subscribe(status => this.userStatus = status)
   }
 
   constructor(public dialog: MatDialog) {}

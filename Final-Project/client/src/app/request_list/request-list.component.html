@@ -2,8 +2,9 @@
 <button type="button" [routerLink]="['/Standard', username]">STANDARD Home Page</button> -->
 
 <div class="spacing">
-  <button class="home-btn" type="button" [routerLink]="['/Admin', username]" mat-raised-button>ADMIN Home Page</button>
-  <button class="home-btn" type="button" [routerLink]="['/Standard', username]" mat-raised-button>STANDARD Home Page</button>
+  
+  <button *ngIf="userStatus==='Admin'" class="home-btn" type="button" [routerLink]="['/Admin', username]" mat-raised-button>Home Page</button>
+  <button *ngIf="userStatus==='Standard'"class="home-btn" type="button" [routerLink]="['/Standard', username]" mat-raised-button>Home Page</button>
   <!-- <button class="home-btn" type="button" [routerLink]="['/Admin', username]" mat-raised-button>Home Page</button> -->
 </div>
 
@@ -74,11 +75,12 @@
                 </div>
                 <br><br>
 
-                <button class="btns" style="width: 93%" type="button" mat-button  (click)="updateStatus(r.requestID)">Update Status</button>
               </td>
 
               <td style="width: 11%; vertical-align:middle;">
-                <button class="btns" style="width: 100%" type="button" mat-button (click)="scheduledate(r.requestID, r.locationaddress)">Schedule Date</button> 
+                <button *ngIf="userStatus==='Admin'"  class="btns" style="width: 100%" type="button" mat-button  (click)="updateStatus(r.requestID)">Update Status</button>
+
+                <button *ngIf="userStatus==='Standard'" class="btns" style="width: 100%" type="button" mat-button (click)="scheduledate(r.requestID, r.locationaddress)">Schedule Date</button> 
               </td>
 
 
