@@ -1,6 +1,7 @@
 package sg.com.vttp.Final.Project.Repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,38 +43,13 @@ public class FixedPhotoRepository {
     }
 
 
-    public Integer findSvcReqFixedPhotoCountByID(String requestID){
+    public List<Document> findSvcReqFixedPhotoCountByID(String requestID){
 
         Criteria criteria = Criteria.where("requestID").is(requestID);
         Query query = Query.query(criteria);
         List<Document> result_findByID_Document = mongoTemplate.find(query, Document.class,"servicerequestfixedcount");
         		
-        //if first update... add to mongotemplate to keep track of count --> 1
-        //return number 1
-		if (result_findByID_Document.isEmpty()){
-			System.out.println("EMPTY");
-			FixedPhoto fixedphoto = new FixedPhoto();
-            fixedphoto.setRequestID(requestID);
-            fixedphoto.setFixedphotocount(1);
-            insertSvcReqFixedPhotoCount(fixedphoto);
-            return 1;
-		} else {
-            //not first update, increase by 1
-            Document d = result_findByID_Document.get(0);
-            Integer fixedPhotoCount = d.getInteger("fixedphotocount");
-            fixedPhotoCount += 1;
-            FixedPhoto fixedphoto = new FixedPhoto();
-            fixedphoto.setRequestID(requestID);
-            fixedphoto.setFixedphotocount(fixedPhotoCount);
-            updateSvcReqFixedPhotoCount(fixedphoto);
-            return fixedPhotoCount;
-        }
+        return result_findByID_Document;
        
     }
 }
-
-
-
-
-// Find Fixed Photo Count:[Document{{_id=661bd734250a814bd3dcf12f, requestID=052b1168, fixedphotocount=1}}]
-// COUNT>>>>>>>>>null2024-04-14T21:21:22.264+08:00 ERROR 756 --- [nio-8080-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "sg.com.vttp.Final.Project.Repositories.FixedPhotoRepository.findSvcReqFixedPhotoCountByID(String)" is null] with root cause

@@ -117,7 +117,7 @@ public class AdminController {
         System.out.println("NEW COUNT"+fixedphotocount);
         requestID = fixedphotocount + "fixed" + requestID;
         String url = reqImgSvc.postImage(requestID, photo);
-        System.out.println("URLLLLLLLLLLLLLLLLLLLLLLLLL"+url);
+        System.out.println("URL:"+url);
 
 		//String newsId = newsSvc.postNews(title, description, photo, tags); 
 

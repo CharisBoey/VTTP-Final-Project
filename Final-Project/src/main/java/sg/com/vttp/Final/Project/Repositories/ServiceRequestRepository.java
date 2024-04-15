@@ -115,10 +115,6 @@ public class ServiceRequestRepository {
         .set("contractorname", updSvcReq.getContractorname());
 
         UpdateResult result = mongoTemplate.updateMulti(query, updateOperation, "servicerequest");
-        
-        
-        
-
 
         System.out.printf("Documents updated: %d\n", result.getModifiedCount());
         
