@@ -38,6 +38,7 @@ import sg.com.vttp.Final.Project.Models.ServiceRequest;
 import sg.com.vttp.Final.Project.Models.UpdateServiceRequest;
 import sg.com.vttp.Final.Project.Models.UpdateServiceRequestStatus;
 import sg.com.vttp.Final.Project.Repositories.FixedPhotoRepository;
+import sg.com.vttp.Final.Project.Services.FixedPhotoException;
 import sg.com.vttp.Final.Project.Services.FixedPhotoService;
 import sg.com.vttp.Final.Project.Services.LoginService;
 import sg.com.vttp.Final.Project.Services.RequestImageService;
@@ -108,7 +109,7 @@ public class AdminController {
 	}
 
     @PostMapping(path="/api/ResolvedImageUpload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<String> storeResolvedData(@RequestPart String requestID, @RequestPart MultipartFile photo) {
+	public ResponseEntity<String> storeResolvedData(@RequestPart String requestID, @RequestPart MultipartFile photo) throws FixedPhotoException {
 
         System.out.println(">>> DIRECTLY FROM ANGULAR RESOLVED " + " | " + requestID +" | "+ photo);
 

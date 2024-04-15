@@ -69,3 +69,34 @@ h2{
     font-size: 35px;
     font-weight: normal;
 }
+
+.form-details{
+    font-family: "Cormorant Garamond";
+    margin: 0;
+    padding: 0;
+    font-size: 35px;
+    font-weight: normal;
+    padding: 0px 60px;
+}
+
+.all-btn2{
+    /* color-scheme: #D6EDED; */
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+    padding: 20px 10px;
+    background-color: #D6EDED;
+    border-radius: 8px;
+    color: black;
+    /* border-radius: 8px; */
+    border-color: transparent;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    vertical-align: 50%;
+}
+
+.all-btn2:hover {
+    background-color: #FFF; 
+    border-color:#304757;
+    color: #304757;
+    /* font-weight: bold; */
+}

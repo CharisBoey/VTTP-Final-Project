@@ -24,7 +24,6 @@ export class ScheduleDateComponent implements OnInit{
 
   private router = inject(Router)
   activatedRoute = inject(ActivatedRoute);
-  private mainSvc = inject(MainService)
   username: string = this.activatedRoute.snapshot.params['username'];
 
   ngOnInit() {

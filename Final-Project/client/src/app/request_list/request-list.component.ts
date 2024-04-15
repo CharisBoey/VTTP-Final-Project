@@ -1,10 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, filter, map } from 'rxjs';
 import { serviceRequest } from '../models';
 import { MainService } from '../main.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { EvaluationComponent } from '../evaluation/evaluation.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-request-list',
@@ -14,20 +15,44 @@ import { EvaluationComponent } from '../evaluation/evaluation.component';
 export class RequestListComponent implements OnInit{
 
   protected reqList$!: Observable<serviceRequest[]>
+  protected filteredList$!: Observable<serviceRequest[]>
+
   private router = inject(Router)
   private mainSvc = inject(MainService)
   protected activatedRoute = inject(ActivatedRoute);
   protected username: string = this.activatedRoute.snapshot.params['username'];
-  protected userStatus: String= ""
-
+  protected userStatus: string= ""
+  // protected priorityList$!: Observable<number[]>
+  protected priorityListSet$!: Observable<number[]>;
+  private fb = inject(FormBuilder)
+  protected priorityForm!: FormGroup
+  constructor(public dialog: MatDialog) {}
+  protected filter: boolean = false;
 
 
   ngOnInit(): void {
-    this.reqList$ = this.mainSvc.getAllRequest();
+    this.filter = false;
+    this.reqList$ = this.mainSvc.getAllRequest()
+  
+    this.priorityListSet$ = this.mainSvc.getAllRequest().pipe(map
+      (arr => { 
+        const setPriority: number[]=[];
+        for(let a = 0; a < arr.length; a++){
+          if (!setPriority.includes(arr[a].priority)){
+            setPriority.push(arr[a].priority);
+          }
+          // Array.from(new Set(a))
+          //console.log(arr[a].request);
+        }
+        return setPriority.sort((n1,n2) => n1 - n2);
+      }
+      ))
+
+      this.priorityForm = this.fb.group({priority: this.fb.control<number>(0, [Validators.required])})
+
     this.mainSvc.getUserStatus().subscribe(status => this.userStatus = status)
   }
 
-  constructor(public dialog: MatDialog) {}
 
 
   // ** only can if admin!!!
@@ -59,12 +84,18 @@ export class RequestListComponent implements OnInit{
     });
   }
 
-  // slack(){
-  //   console.log("SLACK")
-  //   this.mainSvc.slackNotification("TESTING SLACK MESSAGE")
-  // }
-
+  typeDropdown(priority:number){
+    this.filter = true
+    console.log("CHOSEN TYPE>>>",priority)
+    //set the type 
+    this.filteredList$ = this.reqList$.pipe(map(v => v.filter(x => x.priority
+       === priority
+    )))
+  }
   
+  cancelFilter(){
+    this.filter = false;
+  }
 
   
 }

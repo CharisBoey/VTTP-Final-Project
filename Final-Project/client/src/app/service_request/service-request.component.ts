@@ -152,10 +152,11 @@ export class ServiceRequestComponent implements OnInit, Validators{
       error: (err) => { console.log(err) },
       complete: () => { this.allReq$.unsubscribe() }
     });
+    this.mainSvc.slackNotification("@ContractorTeam New Service Request Submitted!\n RequestIDs: " + this.listOfReqIDs.toString() + ", ")
 
     this.listOfReq=[];
     this.listOfReqIDs=[];
-    this.mainSvc.slackNotification("New Service Request Submitted!")
+    // this.mainSvc.slackNotification("New Service Request Submitted!")
   }
 
   addRequest(){

@@ -19,14 +19,8 @@
     padding: 20px;
     text-align: center;
     border-radius: 25px;
-    /* background-color: #EDF5FB; */
 }
 
-/* .panel-item h5 {
-    height: 75px; 
-    font-family: "Montserrat";
-    font-weight: bold;
-} */
 .icon-heading{
     font-family: "Montserrat";
     font-size: 30px;
@@ -37,8 +31,6 @@
     height: 235px; 
     width: 165px;
     object-fit: contain; 
-    /* background-color: #FFF;
-    border: 10px solid #FFF;  */
     border-radius: 5px;
 }
 

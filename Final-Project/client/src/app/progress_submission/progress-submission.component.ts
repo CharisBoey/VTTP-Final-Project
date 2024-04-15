@@ -80,6 +80,7 @@ export class ProgressSubmissionComponent implements OnInit{
           if(!this.listOfReqIDs.includes(svcReq.requestID)){
             this.listOfReqIDs.push(svcReq.requestID);
             this.listOfReq.push(svcReq);
+            console.log("..,.,.,.,.", this.listOfReqIDs.forEach.toString())
           }
           // if (this.listOfReq.includes(svcReq.requestID)){}
           // this.sentence = result[i].adminname+ result[i].photo
@@ -105,10 +106,11 @@ export class ProgressSubmissionComponent implements OnInit{
       error: (err) => { console.log(err) },
       complete: () => { this.allReqUpd$.unsubscribe() }
     });
+    
+    this.mainSvc.slackNotification("@ManagementTeam New Progress Submission Submitted!\n RequestIDs: " + this.listOfReqIDs.toString() + ", ")
 
     this.listOfReq=[];
     this.listOfReqIDs=[];
-    this.mainSvc.slackNotification("New Progress Submission Submitted!")
   }
     
   addUpdatedImg(){
@@ -129,13 +131,13 @@ export class ProgressSubmissionComponent implements OnInit{
     console.log(fixedPhotoRequestID, this.photoElem.nativeElement.value)
     this.mainSvc.sendResolvedImgtoSB(fixedPhotoRequestID, this.photoElem)
       .then(response => { 
-        alert(JSON.stringify(response));
+        alert("Successfully uploaded to Digital Ocean: "+ JSON.stringify(response));
         //this.mainSvc.getURL(JSON.stringify(response));
         console.log("Image URL",response.imageURL);
         requestUpdateSvcReq.fixedphoto = response.imageURL;
       })
       .catch(error => {
-        alert(JSON.stringify(error));
+        alert("Error unsuccessful: "+JSON.stringify(error));
         console.log("ERROR RESPONSE>>>", error);
       });
     
