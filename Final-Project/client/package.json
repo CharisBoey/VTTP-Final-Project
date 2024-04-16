@@ -26,6 +26,7 @@
     "@ngrx/component-store": "^17.1.1",
     "@slack/web-api": "^7.0.2",
     "bootstrap": "^5.3.3",
+    "dotenv": "^16.4.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "uuid": "^9.0.1",
@@ -44,5 +45,10 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.3.2"
-  }
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.0.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

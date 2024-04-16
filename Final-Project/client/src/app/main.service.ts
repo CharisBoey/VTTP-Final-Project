@@ -13,6 +13,7 @@ export class MainService {
   protected proceed: boolean = true;
   private userRoleStore = inject(UserRoleStore);
   private readonly ngUnsubscribe = new Subject();
+  private SLACKURL=process.env['SLACK_HOOK_LINK'] as string;
 
   getUserStatus(): Observable<string>{
     return this.userRoleStore.getRole.pipe(takeUntil(this.ngUnsubscribe));
@@ -96,6 +97,7 @@ export class MainService {
   
 
   slackNotification(message: string): Promise<any> {
+
     const payload = {
       text: message, 
       channel: '#developertesting',
@@ -105,7 +107,7 @@ export class MainService {
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }); 
 
-    return firstValueFrom(this.http.post("https://hooks.slack.com/services/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", payload, { headers }));
+    return firstValueFrom(this.http.post(this.SLACKURL, payload, { headers }));
   }
   
 }
