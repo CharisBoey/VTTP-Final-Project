@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -16,7 +15,6 @@ import { ServiceRequestComponent } from './service_request/service-request.compo
 import { ProjectTimelineComponent } from './project_timeline/project-timeline.component';
 import { RequestListComponent } from './request_list/request-list.component';
 import { RequestStore } from './stores/request.store';
-//import { WebcamModule } from 'ngx-webcam';
 import { ProgressSubmissionComponent } from './progress_submission/progress-submission.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MapAutocompleteComponent } from './map_autocomplete/map-autocomplete.component';
@@ -29,13 +27,7 @@ import { EvaluationComponent } from './evaluation/evaluation.component';
 import { ScheduleDateComponent } from './schedule_date/schedule-date.component';
 import { EmailComponent } from './email/email.component';
 
-
-
-
-const appRoutes: Routes = [
-  //change to use official way --> sunil's
-  
-]
+const appRoutes: Routes = []
 
 @NgModule({
   declarations: [
@@ -63,10 +55,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, {useHash: true}),
     FormsModule,
     MaterialModuleModule,
-    GoogleMapsModule,
-    // NgxSlackhttps://hooks.slack.com/services/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
-    //WebcamModule,
-    
+    GoogleMapsModule,    
   ],
   providers: [MainService, UserRoleStore, RequestStore, provideAnimationsAsync()],
   bootstrap: [AppComponent]

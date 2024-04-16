@@ -48,30 +48,6 @@ public class FinalProjectApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception { 	
 
-		// SqlRowSet rs = template.queryForRowSet(SQL_PROCESS_LOGIN, "Samantha", "SamanthaPW");
-		// List<Login> results = new LinkedList<>();
-		// while(rs.next()){
-		// 	System.out.println(Utils.toLogin(rs));
-		// }
-
-		// JsonArrayBuilder arrBuilder = Json.createArrayBuilder(svcReqSvc.findAllSvcReq());
-        // System.out.println(">>"+arrBuilder.toString());
-
-		// Criteria criteria = Criteria.where("requestID").is("aaaaaaaaaaaaaaa");
-        // Query query = Query.query(criteria);
-        // List<Document> result_findByID_Document = mongoTemplate.find(query, Document.class,"servicerequestfixedcount");
-
-		// Document d = result_findByID_Document.get(0);
-        //     Integer fixedPhotoCount = d.getInteger("fixedphotocount");
-        //     fixedPhotoCount += 1;
-		// 	System.out.println("l"+fixedPhotoCount);
-        //     FixedPhoto fixedphoto = new FixedPhoto();
-        //     fixedphoto.setRequestID("aaaaaaaaaaaaaaa");
-        //     fixedphoto.setFixedphotocount(fixedPhotoCount);
-        //     fixedPhotoRepo.updateSvcReqFixedPhotoCount(fixedphoto);
-
-		
-
 
 	}
 

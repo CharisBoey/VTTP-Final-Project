@@ -27,8 +27,6 @@ export class LoginComponent {
   ngOnInit(): void {
     this.loginForm = this.createLoginForm()
     this.userRoleStore.reset()
-    // this.mainSvc.setUsername(this.loginForm.get("username")?.value);
-
   }
 
   async processForm(){
@@ -37,33 +35,21 @@ export class LoginComponent {
     this.mainSvc.processLogin(this.loginForm.value).then(resp => {
       console.info('>>> resp: ', resp)
 
-      //this.mainSvc.setUsername(this.loginForm.get("username")?.value);
-
         const adminPosition = resp
         if (adminPosition.toString()=="true"){
-          //this.mainSvc.setUserRole({adminPosition: true})
           this.userRoleStore.setAdmin()
           console.log("Welcome Management Team")
           this.router.navigate(['/Admin', this.loginForm.get("username")?.value])
 
-          //ADD IN THAT IT IS ADMIN!!!!!!!!
         } else {
           this.userRoleStore.setStandard()
-          //this.mainSvc.setUserRole({adminPosition: false})
           console.log("Welcome Contractor Team")
           this.router.navigate(['/Standard', this.loginForm.get("username")?.value])
         }
-        
-      //alert(JSON.stringify(resp))
-      //this.router.navigate(['/'])
   
     })
     .catch(err => alert("ERROR: "+JSON.stringify(err.error)))
 
   }
-
-  // isTodoInvalid(): boolean {
-  //   return this.loginForm.invalid || this.taskArray.length <= 0
-  // }
 
 }

@@ -26,13 +26,10 @@ export class MapDisplayComponent {
 
   directionsResult$ = new BehaviorSubject< google.maps.DirectionsResult | undefined >(undefined);
 
-  // constructor(private directionsService: MapDirectionsService) {}
-
   ngOnChanges() {
     this.errormsg=''
 
     const location = this.location?.location;
-    //const toLocation = this.to?.location;
 
     if(location){
       this.gotoLocation(location)
@@ -42,14 +39,6 @@ export class MapDisplayComponent {
       this.gotoLocation(new google.maps.LatLng({ lat: 0, lng: 0 }))
       this.mainSvc.setLocationValid(false)
     }
-
-    // if (fromLocation && toLocation) {
-    //   this.getDirections(fromLocation, toLocation);
-    // } else if (fromLocation) {
-    //   this.gotoLocation(fromLocation);
-    // } else if (toLocation) {
-    //   this.gotoLocation(toLocation);
-    // }
   }
 
   gotoLocation(location: google.maps.LatLng) {
@@ -59,25 +48,4 @@ export class MapDisplayComponent {
     this.directionsResult$.next(undefined);
     
   }
-
-  // getDirections(
-  //   fromLocation: google.maps.LatLng,
-  //   toLocation: google.maps.LatLng
-  // ) {
-  //   const request: google.maps.DirectionsRequest = {
-  //     destination: toLocation,
-  //     origin: fromLocation,
-  //     travelMode: google.maps.TravelMode.DRIVING,
-  //   };
-
-  //   this.directionsService
-  //     .route(request)
-  //     .pipe(map((response) => response.result))
-  //     .subscribe((res) => {
-  //       this.directionsResult$.next(res);
-  //       this.markerPositions = [];
-  //     });
-  // }
-  
-
 }

@@ -1,15 +1,12 @@
-<!-- <div class="spacing"><button class="home-btn" type="button" [routerLink]="['/Standard', username]" mat-raised-button>Home Page</button></div> -->
 <div class="spacing">
   
   <button *ngIf="userStatus==='Admin'" class="home-btn" type="button" [routerLink]="['/Admin', username]" mat-raised-button>Home Page</button>
   <button *ngIf="userStatus==='Standard'"class="home-btn" type="button" [routerLink]="['/Standard', username]" mat-raised-button>Home Page</button>
-  <!-- <button class="home-btn" type="button" [routerLink]="['/Admin', username]" mat-raised-button>Home Page</button> -->
 </div>
 
 <br>
 <h1>Email:</h1>
 <br>
-<!-- <button type="button" (click)="send()">SENDING......</button> -->
 
 <form class="form-details" [formGroup]="emailForm">
   <br>
@@ -22,34 +19,12 @@
         <td>From:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
         <td colspan="2">
           <p style="font-size: 25px;"><b> &nbsp;&nbsp;&nbsp;{{username}}</b></p>
-            <!-- <mat-form-field  style="width: 500px;">
-                <mat-label> min 3 characters</mat-label>
-                <input matInput formControlName="fromName" type="text" />
-                <mat-icon matSuffix>text_format</mat-icon>
-            </mat-form-field>   -->
         </td>
       </tr>
       <tr>
         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>    
-        <!-- <td>From Email:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-        <td colspan="2">
-            <mat-form-field>
-                <mat-label> min 5 characters</mat-label>
-                <input matInput formControlName="toName" type="text" />
-                <mat-icon matSuffix>text_format</mat-icon>
-            </mat-form-field>  
-
-
-        </td> -->
         <td>From Email: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
         <td colspan="2">
-        <!-- <input type="email"  formControlName="email"/> -->
-        <!-- <mat-form-field>
-          <mat-label>email</mat-label>
-          <mat-icon matSuffix>email</mat-icon>
-          <input type="email" matInput formControlName="fromEmail" placeholder="e.g. abc@example.com">
-          <mat-error *ngIf="emailForm.get('fromEmail')?.hasError('fromEmail')">Please enter a valid email address</mat-error>
-        </mat-form-field> -->
 
         <mat-form-field style="width: 500px;">
             <mat-label>email</mat-label>
@@ -66,7 +41,6 @@
             <mat-form-field style="width: 1500px;">
                 <mat-label> min 5 characters </mat-label>
                 <textarea matInput formControlName="subject"></textarea>
-                <!-- <input matInput formControlName="subject" type="text" /> -->
                 <mat-icon matSuffix>text_format</mat-icon>
             </mat-form-field>  
         </td>
@@ -77,7 +51,6 @@
         <td colspan="2">
             <mat-form-field style="width: 1500px; height:300px">
                 <mat-label> min 5 characters </mat-label>
-                <!-- <input matInput formControlName="subject" type="text" /> -->
                 <textarea matInput formControlName="message"></textarea>
                 <mat-icon matSuffix>text_format</mat-icon>
             </mat-form-field>  
@@ -85,10 +58,8 @@
       </tr>
     </table>
     <br>
-    <!-- <button class="btns" type="button" (click)="addRequest()" [disabled]="isInvalid(serviceRequestForm.value.duedate)">Add Request</button> -->
     <div *ngIf="userStatus==='Admin'" class="email-btn-position"><button type="submit" class="email-btn" (click)="sendContractor()" [disabled]="emailForm.invalid">Submit to Contractor Team</button></div>
 
     <div *ngIf="userStatus==='Standard'" class="email-btn-position"><button type="submit" class="email-btn" (click)="sendManagement()" [disabled]="emailForm.invalid">Submit to Management Team</button></div>
-
     <br><br>
 </form>

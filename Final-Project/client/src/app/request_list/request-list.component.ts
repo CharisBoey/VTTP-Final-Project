@@ -22,7 +22,6 @@ export class RequestListComponent implements OnInit{
   protected activatedRoute = inject(ActivatedRoute);
   protected username: string = this.activatedRoute.snapshot.params['username'];
   protected userStatus: string= ""
-  // protected priorityList$!: Observable<number[]>
   protected priorityListSet$!: Observable<number[]>;
   private fb = inject(FormBuilder)
   protected priorityForm!: FormGroup
@@ -41,8 +40,6 @@ export class RequestListComponent implements OnInit{
           if (!setPriority.includes(arr[a].priority)){
             setPriority.push(arr[a].priority);
           }
-          // Array.from(new Set(a))
-          //console.log(arr[a].request);
         }
         return setPriority.sort((n1,n2) => n1 - n2);
       }
@@ -55,11 +52,9 @@ export class RequestListComponent implements OnInit{
 
 
 
-  // ** only can if admin!!!
+  // ** only can for Admin!!!
   updateStatus(reqId: string) {
     const dialogRef = this.dialog.open(EvaluationComponent, {
-      // height: '25%',
-      // width: '20%',
       data: { reqId: reqId }
     });
 
@@ -69,16 +64,8 @@ export class RequestListComponent implements OnInit{
     });
   }
 
-  //only can if contractor
+  //only can for contractor!!!
   scheduledate(requestId: string, locationaddress: string){
-    // const scheduleDetails = {
-    //   reqId: requestId,
-    //   locationAdd: locationAddress
-    // }
-
-    // this.router.navigate(['/Standard/', this.username, 'Schedule-Date' ] , {state: {scheduleDetails}})
-
-    //console.log("!@#$", requestId, locationAddress)
     this.router.navigate(['/Standard', this.username, 'Schedule-Date'], {
       queryParams: { requestId, locationaddress }// Pass scheduleDetails in the state object
     });

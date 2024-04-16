@@ -17,41 +17,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ServiceRequestComponent implements OnInit, Validators{
 
- /*  protected requestcompNum: string[]=[]
-  protected requestNo: number=0
-  private mainSvc = inject(MainService)
-  
-
-  ngOnInit(): void {
-    this.requestNo = 1
-    this.requestcompNum.push("Req No."+ this.requestNo)
-  }
-
-  addRequest(){
-    this.requestNo += 1
-    this.requestcompNum.push("Req No."+ this.requestNo)
-    console.log(">>>",this.requestcompNum)
-  }
-
-  process(){
-    console.log("!!!", this.mainSvc.getFormValue)
-    
-  } */
-
   private reqStore = inject(RequestStore)
   private mainSvc = inject(MainService)
   activatedRoute = inject(ActivatedRoute);
   protected req$!: Observable<serviceRequest[]>
   protected allReq$!: Subscription;
-  //url to error maybe?
   protected imageTitle: string='no img'
-  //protected webcamOn: boolean = false
-  //protected previewOn: boolean = false
   protected uploaded: boolean = false
   protected trial:boolean = false
-
- /*  protected trigger$!: Observable<void>
-  protected triggerSub = new Subject<void>() */
   private fb = inject(FormBuilder)
   protected serviceRequestForm!: FormGroup
   protected message: string = ""
@@ -63,11 +36,6 @@ export class ServiceRequestComponent implements OnInit, Validators{
   protected rejectreason: string = ''
   protected listOfReq: serviceRequest[]=[];
   protected listOfReqIDs: string[]=[];
-  // protected checkValid:boolean = false;
-
-  //protected username$!: Observable<string>
-  // protected usnm: string =''
-  //private canUpload = false
 
   capturedImage = ''
   
@@ -81,9 +49,6 @@ export class ServiceRequestComponent implements OnInit, Validators{
   ngOnInit(): void {
     this.serviceRequestForm = this.createServiceRequestForm()  
 
-    // this.req$ = this.reqStore.select(
-    //   (slice: ServiceRequestSlice) => slice.requestLists
-    // )
     this.reqStore.getReq.subscribe({
       next: (result) => {
         for (let i = 0; i<result.length; i++){
@@ -92,16 +57,9 @@ export class ServiceRequestComponent implements OnInit, Validators{
             this.listOfReqIDs.push(svcReq.requestID);
             this.listOfReq.push(svcReq);
           }
-          // if (this.listOfReq.includes(svcReq.requestID)){}
-          // this.sentence = result[i].adminname+ result[i].photo
         }
-        //this.reqStore.resetReqStore()
       },
     })
-
-    //this.trigger$ = this.triggerSub.asObservable()
-    
-    //this.username$ = this.mainSvc.getUsername()
   }
 
   private createServiceRequestForm(): FormGroup{
@@ -131,9 +89,6 @@ export class ServiceRequestComponent implements OnInit, Validators{
       } else {
         this.message = ""
       }
-    
-      // console.log("090980809808", this.serviceRequestForm.value.confirm)
-      
     return this.serviceRequestForm.invalid || dateInput < dateNow || !this.locationValid || !this.serviceRequestForm.value.confirm
   }
   
@@ -145,9 +100,7 @@ export class ServiceRequestComponent implements OnInit, Validators{
         for (let i = 0; i<result.length; i++){
           this.mainSvc.sendServiceRequestToSB(result[i]);
           this.reqStore.deleteReq(result[i].requestID)
-          // this.reqStore.reset()
         }
-        //this.reqStore.resetReqStore()
       },
       error: (err) => { console.log(err) },
       complete: () => { this.allReq$.unsubscribe() }
@@ -156,7 +109,6 @@ export class ServiceRequestComponent implements OnInit, Validators{
 
     this.listOfReq=[];
     this.listOfReqIDs=[];
-    // this.mainSvc.slackNotification("New Service Request Submitted!")
   }
 
   addRequest(){
@@ -182,19 +134,15 @@ export class ServiceRequestComponent implements OnInit, Validators{
     this.mainSvc.sendImgToSB(request.requestID, this.photoElem)
       .then(response => { 
         alert(JSON.stringify(response));
-        //this.mainSvc.getURL(JSON.stringify(response));
         console.log("Image URL",response.imageURL);
         request.photo = response.imageURL;
 
-        //this.router.navigate(['/'])
       })
       .catch(error => {
         alert(JSON.stringify(error));
         console.log("ERROR RESPONSE>>>", error);
       });
-    //this.previewOn = false
 
-    // this.serviceRequestForm.reset()
     this.serviceRequestForm = this.createServiceRequestForm()  
     this.uploaded = false
     this.mainSvc.setLocationValid(false)
@@ -209,68 +157,8 @@ export class ServiceRequestComponent implements OnInit, Validators{
   } 
 
   slack(message: string) {
-  
-    const response = this.mainSvc.slackNotification(message); // If using a service
+    const response = this.mainSvc.slackNotification(message);
     response.then(data => console.log(data)).catch(error => console.log(error))
     
   }
- 
-
-  
-  
-
-  /* webcam(){
-    this.webcamOn=true
-  }*/
-
-  //webcam
-  /* snap() {
-    this.triggerSub.next()
-    this.webcamOn = false
-    this.previewOn = true
-  } */
-
-  //webcam
-  /* captured(image: WebcamImage) {
-    this.capturedImage = image.imageAsDataUrl
-    // Convert the data url to binary/blob
-    console.info('>>> ', this.capturedImage)
-    //this.canUpload = true
-    this.serviceRequestForm.get('photo')?.setValue(image)
-    //get('photo').setValue(image);
-    
-  } */
-
-  //webcam
-  /* clear() {
-    //this.canUpload = false
-    this.previewOn = false
-    this.capturedImage = ''
-  } */
-
-/*   cannotUpl(){
-    return false;
-  } */
-
- 
-
-  /* upload() {
-    if (!this.canUpload)
-      return
-    this.uploadSvc.upload(this.capturedImage)
-      .then(result => {
-        console.info('response: ', result)
-      })
-  } */
-  
-  /* diaryStore = inject(DiaryStore)
-  entries$!: Observable<DiaryEntry[]>
-
-  ngOnInit(): void {
-    this.entries$ = this.diaryStore.onEntries.asObservable()
-        // .pipe(
-        //  map(e => e.map(v => ({ text: v.text, date: v.date}))
-        // ))
-  } */
-
 }

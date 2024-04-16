@@ -16,22 +16,13 @@ export class ScheduleDateComponent implements OnInit{
   protected requestId!: string;
   protected locationaddress!: string;
   protected message: string='';
-  
-
-  //constructor(private route: ActivatedRoute) { }
-  // constructor(
-  //   private route: ActivatedRoute,){}
-
   private router = inject(Router)
   activatedRoute = inject(ActivatedRoute);
   username: string = this.activatedRoute.snapshot.params['username'];
 
   ngOnInit() {
     this.scheduleForm = this.createScheduleForm()  
-    // this.scheduleDetails = this.route.snapshot?.data?.['scheduleDetails'];
-    // console.log("SCHDET", this.scheduleDetails)
-    //this.scheduleDetails = this.route.snapshot.state?.scheduleDetails;
-    //this.scheduleDetails = this.route.snapshot.data['scheduleDetails'];
+    
     this.activatedRoute.queryParams.subscribe(params => {
       this.requestId = params['requestId'];
       this.locationaddress = params['locationaddress'];
@@ -60,10 +51,8 @@ export class ScheduleDateComponent implements OnInit{
     return this.scheduleForm.invalid || dateInput < dateNow
   }
 
-  // Function to handle the button click event to schedule a meeting.
   scheduleMeeting() {
     let scheduleTime = new Date(this.scheduleForm.value.scheduleTime);
-    // Convert the date to the desired format with a custom offset (e.g., -07:00)
     const startTime = scheduleTime.toISOString().slice(0, 18) + '+08:00';
     const endTime = this.getEndTime(scheduleTime);
     const eventDetails = {
@@ -75,7 +64,6 @@ export class ScheduleDateComponent implements OnInit{
       endTime: endTime,
     };
     console.info(eventDetails);
-    //this.generateICSFile()
     createGoogleEvent(eventDetails);
     this.router.navigate(['/Standard', this.username, 'Request-List']);
 
@@ -93,7 +81,6 @@ export class ScheduleDateComponent implements OnInit{
     const date = new Date(datetimeValue);
     const endTime = new Date(date);
     endTime.setHours(endTime.getHours() + 1);
-    // Format dates to be in the proper format for the .ics file
     const formattedStartDate = date
       .toISOString()
       .replace(/-/g, '')
@@ -104,34 +91,27 @@ export class ScheduleDateComponent implements OnInit{
       .replace(/-/g, '')
       .replace(/:/g, '')
       .slice(0, -5);
-    // Event details
-    const eventName = 'Sample Event';
-    const eventDescription = 'This is a sample event';
-    const location = 'Sample Location';
-    // Create the .ics content
+    const eventName = 'name';
+    const eventDescription = 'description';
+    const location = 'location';
     const icsContent = `BEGIN:VCALENDAR
-  VERSION:2.0
-  BEGIN:VEVENT
-  DTSTAMP:${formattedStartDate}Z
-  DTSTART:${formattedStartDate}Z
-  DTEND:${formattedEndDate}Z
-  SUMMARY:${eventName}
-  DESCRIPTION:${eventDescription}
-  LOCATION:${location}
-  END:VEVENT
-  END:VCALENDAR`;
-    // Create a Blob containing the .ics content
+    VERSION:2.0
+    BEGIN:VEVENT
+    DTSTAMP:${formattedStartDate}Z
+    DTSTART:${formattedStartDate}Z
+    DTEND:${formattedEndDate}Z
+    SUMMARY:${eventName}
+    DESCRIPTION:${eventDescription}
+    LOCATION:${location}
+    END:VEVENT
+    END:VCALENDAR`;
     const blob = new Blob([icsContent], {
       type: 'text/calendar;charset=utf-8',
     });
-    // Create a download link for the Blob
     const downloadLink = document.createElement('a');
     downloadLink.href = URL.createObjectURL(blob);
     downloadLink.download = 'event.ics';
-    // Trigger the download
     downloadLink.click();
   }
-
-  
 
 }

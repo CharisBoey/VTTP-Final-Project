@@ -22,7 +22,6 @@
             </td>
           </tr>
           <tr>
-                  <!-- <td><input type="date" formControlName="duedate" (input)="isInvalid(serviceRequestForm.value.duedate)">&nbsp;{{message}}</td> -->
             <td></td>
             <td>Due Date:</td>
             <td colspan="2">
@@ -81,13 +80,10 @@
           <tr>
             <td></td>
             <td colspan="3" >
-              <!-- [disabled]="isInvalid(serviceRequestForm.value.duedate)" -->
-              <!-- <button class="btns" type="button" (click)="addRequest()" [disabled]="isInvalid(serviceRequestForm.value.duedate)">Add Request</button> -->
               <button class="btns" type="button" (click)="addRequest()" [disabled]="isInvalid()">Add Request</button>
 
               &nbsp;&nbsp;&nbsp;
               <button class="btns" type="submit" [disabled]="listOfReq.length <= 0">Submit</button>
-              <!-- <button class="btns" type="submit" *ngIf="req$ | async as reqs" [disabled]="reqs.length <= 0">Submit</button> -->
             </td>
           </tr>
           <br><br><br>
@@ -95,7 +91,6 @@
       </form>
       </td>
       <br>
-      <!-- <div *ngIf="req$ | async as reqs">>>> {{reqs |json}}</div> -->
 
       <!-- SECTION 2 -->
       <td class="results-table" width="50%">
@@ -140,37 +135,3 @@
 </table>
 
 
-<!-- <div >
-  <div *ngIf="reqs.length > 0 ; else noReq">
-    <table mat-table border="1">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Service Request</th>
-          <th>Location</th>
-          <th>Due Date</th>
-          <th>Priority</th>
-          <th>Image</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let r of reqs">
-            <td style="width: 5%">{{ r.requestID }}</td>
-            <td style="width: 15%">{{ r.request }}</td>
-            <td style="width: 15%">{{ r.locationaddress }}</td>
-            <td style="width: 15%">{{ r.duedate }}</td>
-            <td style="width: 15%">{{ r.priority }}</td>
-            <td style="width: 30%">
-              <img [width]="width" src = "{{r.photo}}">
-            </td>
-            <td style="width: 5%">
-              <button type="button" (click)="deleteRequest(r.requestID)">X</button>
-            </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
- -->

@@ -1,8 +1,3 @@
-<!-- 
-<button type="button" [routerLink]="['/Standard', username]">STANDARD Home Page</button>
-<h1>Progress Submission Form</h1> -->
-
-<!-- <div class="spacing"><button class="home-btn" type="button" [routerLink]="['/Standard', username]" mat-raised-button>Home Page</button></div> -->
 <div class="spacing">
   <button class="homebtn" type="button" [routerLink]="['/Standard', username]" mat-raised-button>Home Page</button>
 </div>
@@ -43,12 +38,7 @@
             <td colspan="2" >
               <button class="btns" type="button" (click)=addUpdatedImg() [disabled]="progressSubmissionForm.invalid">Add Submission</button>
               &nbsp;&nbsp;&nbsp;
-              <!-- <button *ngIf="updatedReq$ | async as updReqs" class="btns" type="submit" [disabled]="updReqs.length <= 0" >Submit</button> -->
               <button class="btns" type="submit" [disabled]="listOfReq.length <= 0" >Submit</button>
-
-              <!-- <button class="btns" type="button" (click)="addRequest()" [disabled]="isInvalid(serviceRequestForm.value.duedate)">Add Request</button>
-              &nbsp;&nbsp;
-              <button class="btns" *ngIf="req$ | async as reqs" type="submit" [disabled]="reqs.length <= 0">Submit</button> -->
             </td>
           </tr>
         </table>
@@ -60,8 +50,6 @@
 
   <!-- SECTION 2 -->
     <td class="results-table" width="50%">
-      <!-- <div class="spacing-table" *ngIf="updatedReq$ | async as updReqs"> -->
-        <!-- {{updReqs|json}} -->
       <div class="spacing-table">
         <div *ngIf="listOfReq.length ; else noReq">
           <h2><u>Submissions Added:</u></h2>

@@ -57,7 +57,6 @@ export class MapAutocompleteComponent {
 
   }
 
-  //if need photo??
   getPhotoUrl(
     place: google.maps.places.PlaceResult | undefined
   ): string | undefined {
@@ -71,20 +70,5 @@ export class MapAutocompleteComponent {
       google.maps.event.clearInstanceListeners(this.autocomplete);
     }
   }
-
-  
-
-
-
-
-  // locationDetails(){
-  //   console.log(">>>Location: ",this.inputField.nativeElement.value)
-
-  // }
-  
-  // print(){
-  //   console.log("LocationInput", this.locationInput);
-  // }
-
   
 }

@@ -20,7 +20,6 @@ export class ProgressSubmissionComponent implements OnInit{
   protected uploaded: boolean = false
   protected reqListIDs$!: Observable<serviceRequest[]>
   private mainSvc = inject(MainService)
-  //protected updated$!: Subscription;
   protected updatedReq$!: Observable<serviceRequest[]>
   protected sub$!: Subscription;
   protected allReqUpd$!: Subscription;
@@ -44,8 +43,6 @@ export class ProgressSubmissionComponent implements OnInit{
   private createProgressSubmissionForm(): FormGroup{
     return this.fb.group({
       requestID: this.fb.control<string>('', [Validators.required]),
-      // contractorName: this.fb.control<string>('', [Validators.required, Validators.minLength(5)]),
-      // completionDate: this.fb.control<string>('', [Validators.required]),
       fixedphoto: this.fb.control('', [Validators.required]),
     })
   }
@@ -61,17 +58,7 @@ export class ProgressSubmissionComponent implements OnInit{
 
   ngOnInit(): void {
     this.progressSubmissionForm = this.createProgressSubmissionForm()
-    //this.reqListIDs$ = this.mainSvc.getAllRequest().pipe(takeUntil(this.ngUnsubscribe)).subscribe(ID => this.reqListIDs$ = ID);
     this.reqListIDs$ = this.mainSvc.getAllRequest()
-
-    /* this.updatedReq$ = this.reqStore.select(
-      (slice: ServiceRequestSlice) => slice.requestLists
-    ).pipe(takeUntil(this.ngUnsubscribe)); */
-
-    // this.updatedReq$ = this.reqStore.select(
-    //   (slice: ServiceRequestSlice) => slice.requestLists
-    // )
-
 
     this.reqStore.getReq.subscribe({
       next: (result) => {
@@ -80,12 +67,10 @@ export class ProgressSubmissionComponent implements OnInit{
           if(!this.listOfReqIDs.includes(svcReq.requestID)){
             this.listOfReqIDs.push(svcReq.requestID);
             this.listOfReq.push(svcReq);
-            console.log("..,.,.,.,.", this.listOfReqIDs.forEach.toString())
+            console.log("IDs", this.listOfReqIDs.forEach.toString())
           }
-          // if (this.listOfReq.includes(svcReq.requestID)){}
-          // this.sentence = result[i].adminname+ result[i].photo
+          
         }
-        //this.reqStore.resetReqStore()
       },
     })
 
@@ -98,10 +83,7 @@ export class ProgressSubmissionComponent implements OnInit{
         for (let i = 0; i<result.length; i++){
           this.mainSvc.updServiceRequestToSB(result[i]);
           this.reqStore.deleteReq(result[i].requestID)
-          // this.reqStore.reset()
-
         }
-        //this.reqStore.resetReqStore()
       },
       error: (err) => { console.log(err) },
       complete: () => { this.allReqUpd$.unsubscribe() }
@@ -119,10 +101,6 @@ export class ProgressSubmissionComponent implements OnInit{
     
     console.log("ID>>>", requestUpdateSvcReq.requestID)
 
-
-    // console.log("!@#$", this.progressSubmissionForm.get("fixedphoto")?.value)
-
-    //requestUpdateSvcReq.requestID = this.requestID.nativeElement.value
     requestUpdateSvcReq.completeddate = new Date().toISOString().split('T')[0]   
     requestUpdateSvcReq.contractorname = this.username
 
@@ -132,7 +110,6 @@ export class ProgressSubmissionComponent implements OnInit{
     this.mainSvc.sendResolvedImgtoSB(fixedPhotoRequestID, this.photoElem)
       .then(response => { 
         alert("Successfully uploaded to Digital Ocean: "+ JSON.stringify(response));
-        //this.mainSvc.getURL(JSON.stringify(response));
         console.log("Image URL",response.imageURL);
         requestUpdateSvcReq.fixedphoto = response.imageURL;
       })
@@ -141,8 +118,6 @@ export class ProgressSubmissionComponent implements OnInit{
         console.log("ERROR RESPONSE>>>", error);
       });
     
-    // this.reqList$ = this.mainSvc.getAllRequest()
-
     this.mainSvc.getAllRequestByID(requestUpdateSvcReq.requestID).subscribe({
       next: (svcReq) => {
         requestUpdateSvcReq.request = svcReq.request
@@ -164,10 +139,6 @@ export class ProgressSubmissionComponent implements OnInit{
       
       this.progressSubmissionForm = this.createProgressSubmissionForm()
 
-
-    //   this.serviceRequestForm = this.createServiceRequestForm()  
-    // this.uploaded = false
-    // this.mainSvc.setLocationValid(false)
   }
 
   deleteRequest(requestID:string){
@@ -175,38 +146,3 @@ export class ProgressSubmissionComponent implements OnInit{
   }
   
 }
-
-
-
-
-
-
-  // click(){
-  //   console.log(">>> ", this.progressSubmissionForm)
-  //   console.log("<<< ", this.requestID.nativeElement.value)
-
-  //   this.updatedReq$ = this.reqStore.select(
-  //     (slice: ServiceRequestSlice) => slice.requestLists
-  //   )
-
-  // }
-
-
-  // process(){
-  //   console.log(">>> ", this.progressSubmissionForm)
-  //   console.log("<<< ", this.requestID.nativeElement.value)
-
-  //   const requestUpdate = this.progressSubmissionForm.value as updateServiceRequest
-
-  //   requestUpdate.requestID = this.requestID.nativeElement.value
-  //   requestUpdate.completeddate = new Date().toISOString().split('T')[0]
-
-  //   this.mainSvc.updateServiceRequestToSB(requestUpdate)
-  //   .then(response => { 
-  //     alert(JSON.stringify(response));
-  //   })
-  //   .catch(error => {
-  //     alert(JSON.stringify(error));
-  //     console.log("ERROR RESPONSE>>>", error);
-  //   });
-  // }

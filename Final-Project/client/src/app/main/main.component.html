@@ -3,9 +3,7 @@
         <td rowspan="2"> <h1>Fix It Fox.</h1> </td>
         <td><div class="logo"><img width=100px src="/assets/logos/Logo.png"></div></td>
     </tr>
-    <tr>
-        <!-- "*ngIf="userStatus != 'Undetermined'" -->
-    
+    <tr>    
         <td class="userstatus" *ngIf="userStatus != 'Undetermined'"><p style="line-height:200%">{{userStatus}}</p> &nbsp;&nbsp;&nbsp;<button class="userstatus" mat-raised-button type="button" [routerLink]="['/Login']">Logout</button></td>
     </tr>
 </table>

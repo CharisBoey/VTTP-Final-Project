@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 
 import com.mongodb.client.result.UpdateResult;
 
-import sg.com.vttp.Final.Project.Models.FixedPhoto;
 import sg.com.vttp.Final.Project.Models.ServiceRequest;
 import sg.com.vttp.Final.Project.Models.UpdateServiceRequest;
 import sg.com.vttp.Final.Project.Models.UpdateServiceRequestStatus;

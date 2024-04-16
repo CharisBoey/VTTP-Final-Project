@@ -18,7 +18,6 @@ export class StandardComponent {
   directToPage(iconName: string) {
     const replacedName = iconName.replace(/\s+/g, '-')
     this.router.navigate([ '/Standard/', this.username, replacedName])
-    //this.router.navigate("['/{{encodeURIComponent(i.iconName)}}']")
   }
   
 }

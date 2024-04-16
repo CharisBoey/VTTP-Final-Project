@@ -11,18 +11,13 @@ import { MainService } from '../main.service';
 })
 export class MainComponent implements OnInit{
   
-  
-  // private readonly ngUnsubscribe = new Subject();
-  // private userRoleStore = inject(UserRoleStore)
   private mainSvc = inject(MainService);
   protected activatedRoute = inject(ActivatedRoute);
   protected username: string = this.activatedRoute.snapshot.params['username'];
 
   protected userStatus: String= ""
-  //private mainSvc = inject(MainService)
 
   ngOnInit(): void {
-    // this.userRoleStore.getRole.pipe(takeUntil(this.ngUnsubscribe)).subscribe(status => this.userStatus = status);
     this.mainSvc.getUserStatus().subscribe(status => this.userStatus = status)
   }
 

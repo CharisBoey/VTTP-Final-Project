@@ -18,9 +18,7 @@ export class AdminComponent {
   directToPage(iconName: string) {
     const replacedName = iconName.replace(/\s+/g, '-')
     this.router.navigate([ '/Admin/', this.username, replacedName ])
-
     
-    //this.router.navigate("['/{{encodeURIComponent(i.iconName)}}']")
   }
 
  

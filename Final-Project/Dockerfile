@@ -9,7 +9,7 @@ COPY client/angular.json .
 COPY client/tsconfig.* .
 COPY client/src src
 
-RUN npm ci && ng build
+RUN npm ci --force && ng build
 
 # /ngapp/dist/frontend/browser/*
 

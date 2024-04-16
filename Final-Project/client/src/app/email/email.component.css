@@ -33,16 +33,12 @@ h1{
 }
 
 .email-btn{
-    /* color-scheme: #D6EDED; */
     font-family: "Montserrat", sans-serif;
     font-weight: normal;
     font-size: 20px;
     padding: 20px 30px;
     background-color: #D6EDED;
     border-radius: 8px;
-    /* display: flex;
-    flex-direction: flex-end;
-    justify-content: center; */
     border-color: transparent;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
     width: 40%;

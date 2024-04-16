@@ -63,8 +63,3 @@ export interface PlaceSearchResult {
     iconUrl?: string;
     name?: string;
 }
-
-// export interface searchQuery {
-//     search: string
-// }
-

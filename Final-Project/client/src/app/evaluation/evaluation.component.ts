@@ -17,9 +17,6 @@ export class EvaluationComponent implements OnInit{
   protected reason: string = ''
   private mainSvc = inject(MainService)
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
-  // protected updatedReq$!: Observable<serviceRequest[]>
-  // protected allReqUpd$!: Subscription;
-
 
   protected requestUpdateSvcReqStatus: serviceRequest = {
     requestID: '',
@@ -40,9 +37,6 @@ export class EvaluationComponent implements OnInit{
   ngOnInit() {
     console.log('Request ID:', this.data.reqId);
     this.requestUpdateSvcReqStatus.requestID = this.data.reqId
-    // this.updatedReq$ = this.reqStore.select(
-    //   (slice: ServiceRequestSlice) => slice.requestLists
-    // )
   }
 
   updateApproved(){
@@ -61,26 +55,7 @@ export class EvaluationComponent implements OnInit{
     console.log("...reject", this.reason)
     this.requestUpdateSvcReqStatus.approvalstatus = approvalStatus.REJECTED
     this.requestUpdateSvcReqStatus.rejectreason = this.reason
-    
-    // this.mainSvc.getAllRequestByID(this.requestUpdateSvcReqStatus.requestID).subscribe({
-    //   next: (svcReq) => {
-
-    //     this.requestUpdateSvcReqStatus.request = svcReq.request
-    //     this.requestUpdateSvcReqStatus.duedate = svcReq.duedate
-    //     this.requestUpdateSvcReqStatus.completeddate = svcReq.completeddate
-    //     this.requestUpdateSvcReqStatus.priority = svcReq.priority
-    //     this.requestUpdateSvcReqStatus.photo = svcReq.photo
-    //     this.requestUpdateSvcReqStatus.fixedphoto = svcReq.fixedphoto
-    //     this.requestUpdateSvcReqStatus.locationaddress = svcReq.locationaddress
-    //     this.requestUpdateSvcReqStatus.adminname = svcReq.adminname
-    //     this.requestUpdateSvcReqStatus.contractorname = svcReq.contractorname
-
-    //     console.log("HERE")
-    //   },
-    //   error: (err) => { console.log(err) }
-    //   });
-
-      this.mainSvc.updServiceRequestStatusToSB(this.requestUpdateSvcReqStatus)
+    this.mainSvc.updServiceRequestStatusToSB(this.requestUpdateSvcReqStatus)
   }
 
   

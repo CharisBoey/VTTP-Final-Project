@@ -1,19 +1,11 @@
-<!-- <p>project-timeline works!</p> -->
-
-<!-- <button type="button" [routerLink]="['/Admin', username]">ADMIN Home Page</button>
-<button type="button" [routerLink]="['/Standard', username]">STANDARD Home Page</button> -->
-
 <div class="spacing">
   <button *ngIf="userStatus==='Admin'" class="home-btn" type="button" [routerLink]="['/Admin', username]" mat-raised-button>Home Page</button>
   <button *ngIf="userStatus==='Standard'"class="home-btn" type="button" [routerLink]="['/Standard', username]" mat-raised-button>Home Page</button>
-    <!-- <button class="home-btn" type="button" [routerLink]="['/Admin', username]" mat-raised-button>ADMIN Home Page</button>
-    <button class="home-btn" type="button" [routerLink]="['/Standard', username]" mat-raised-button>STANDARD Home Page</button> -->
   </div>
 
   <br>
   <h1 style="text-align: center;">Schedule Calendar</h1>
   <br>
-<!-- <br> -->
 <div class="spacing-calendar">
     <iframe src="https://calendar.google.com/calendar/embed?height=700&wkst=1&ctz=Asia%2FSingapore&bgcolor=%23d6eded&title&showTitle=0&src=cmlzLmRldmVsb3BlcnRlc3RpbmdAZ21haWwuY29t&src=ZW4uc2luZ2Fwb3JlI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%230B8043" style="border:solid 20px #D6EDED; border-radius: 20px;" width="1500" height="900" frameborder="0" scrolling="no"></iframe>
 

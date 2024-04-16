@@ -1,11 +1,6 @@
-<!-- <button type="button" [routerLink]="['/Admin', username]">ADMIN Home Page</button>
-<button type="button" [routerLink]="['/Standard', username]">STANDARD Home Page</button> -->
-
 <div class="spacing">
-  
   <button *ngIf="userStatus==='Admin'" class="home-btn" type="button" [routerLink]="['/Admin', username]" mat-raised-button>Home Page</button>
   <button *ngIf="userStatus==='Standard'"class="home-btn" type="button" [routerLink]="['/Standard', username]" mat-raised-button>Home Page</button>
-  <!-- <button class="home-btn" type="button" [routerLink]="['/Admin', username]" mat-raised-button>Home Page</button> -->
 </div>
 
 
@@ -13,10 +8,6 @@
 <table>
   <tr>
     <td><h1>Request List</h1></td>
-    
-      <!-- <select >
-        <option *ngFor="let t of priorityListSet$ | async " value="{{t}}">{{t}}</option>
-    </select> -->
       <td>
         <form class="form-details" [formGroup]="priorityForm">
         <mat-form-field *ngIf="priorityListSet$ | async as priority">
@@ -41,7 +32,6 @@
 <div *ngIf="filter; else noFilter">
       <div class="spacing-table" *ngIf="filteredList$ | async as filteredReqs">
 
-        <!-- {{reqs|json}} border="1"-->
         <div *ngIf="filteredReqs.length > 0; else noFilter">
         <table class="table table-striped" style="text-align: center">
             <thead style="font-weight: bolder; font-size: 25px;">
@@ -91,9 +81,6 @@
                   </ng-template>
                   </td>
                   
-                  <!-- <td style="width: 20%"><img width=300px src="/assets/logos/WorkInProgress.png">EITHER INPUT IMAGE OR DEFAULT</td> -->
-                  <!-- <td style="width: 10%">Approved/Not Approved/Pending Completion/To be Validated</td> -->
-                  <!-- <td style="width: 10%">{{r.approvalstatus}}</td> -->
                   <td style="width: 11%; vertical-align:middle;">
                     <img style="width:100%; vertical-align: 100%" src="/assets/logos/{{r.approvalstatus}}.png">
                     <div *ngIf="r.rejectreason" style="text-align: left;">
@@ -123,7 +110,6 @@
 <ng-template #noFilter>
         <div class="spacing-table" *ngIf="reqList$ | async as reqs">
 
-          <!-- {{reqs|json}} border="1"-->
           <div *ngIf="reqs.length > 0 ; else noReqList">
 
           <table class="table table-striped" style="text-align: center">
@@ -173,10 +159,7 @@
 
                     </ng-template>
                     </td>
-                    
-                    <!-- <td style="width: 20%"><img width=300px src="/assets/logos/WorkInProgress.png">EITHER INPUT IMAGE OR DEFAULT</td> -->
-                    <!-- <td style="width: 10%">Approved/Not Approved/Pending Completion/To be Validated</td> -->
-                    <!-- <td style="width: 10%">{{r.approvalstatus}}</td> -->
+
                     <td style="width: 11%; vertical-align:middle;">
                       <img style="width:100%; vertical-align: 100%" src="/assets/logos/{{r.approvalstatus}}.png">
                       <div *ngIf="r.rejectreason" style="text-align: left;">

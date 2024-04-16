@@ -14,9 +14,7 @@ import { EmailComponent } from './email/email.component';
 
 const routes: Routes = [
   {path:'', component: LoginComponent, title: 'Login Page'},
-  //{path: 'login', component: LoginComponent, title: 'Login Page'},
   {path:'Admin/:username', component: AdminComponent, title: 'Admin Access Page', canActivate:[ canProceedAdmin ]},
-  //{path: 'Service Request', component: ServiceRequestComponent, title: 'Service Request Page'},
   {path:'Admin/:username/Service-Request', component: ServiceRequestComponent, title:'Service Request Page', canActivate:[ canProceedAdmin ]},
   {path:'Admin/:username/Request-List', component: RequestListComponent, title:'Request List Page', canActivate:[ canProceedAdmin ]},
   {path:'Admin/:username/Project-Timeline', component: ProjectTimelineComponent, title:'Project Timeline Page', canActivate:[ canProceedAdmin ]},
@@ -38,17 +36,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
-
-
-/* const routes: Routes = [
-  {path: '', component: MainComponent, title: 'MAINNNNNNN'},
-  {path: 'login', component: LoginComponent, title: 'Login Page', canActivate: [ asAdmin ]},
-  {path: 'admin', component: AdminComponent, canActivate: [ asAdmin ]},
-  //{path: 'admin', component: AdminComponent, title: 'Admin Page'},
-  {path: 'standard', component: StandardComponent, title: 'User Page'},
-
-  //canDeactivate: [ asUser ] },
-  //{path: 'posts/:tag/:duration', component: NewslistComponent},
-  {path: '**', redirectTo: ''}
-]; */
