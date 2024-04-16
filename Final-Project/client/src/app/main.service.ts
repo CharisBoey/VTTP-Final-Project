@@ -103,9 +103,9 @@ export class MainService {
       icon_emoji: ':Loudspeaker:' 
     };
 
-    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }); // Set correct Content-Type
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }); 
 
-    return firstValueFrom(this.http.post("https://hooks.slack.com/services/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", payload, { headers }));
+    return firstValueFrom(this.http.post("https://hooks.slack.com/services/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", payload, { headers }));
   }
   
 }
