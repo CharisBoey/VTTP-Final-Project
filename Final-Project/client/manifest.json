@@ -1,0 +1,63 @@
+{
+    "short_name": "Fif",
+    "name": "Fix It Fox",
+    "icons": [
+      {
+        "src": "/assets/logos/Approved.png",
+        "type": "image/png",
+        "sizes": "4025x825"
+      },
+      {
+        "src": "/assets/logos/Email.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      },
+      {
+        "src": "/assets/logos/Logo.png",
+        "type": "image/png",
+        "sizes": "1346x1301"
+      },
+      {
+        "src": "/assets/logos/Pending.png",
+        "type": "image/png",
+        "sizes": "4025x825"
+      },
+      {
+        "src": "/assets/logos/Progress%20Submission.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      },
+      {
+        "src": "/assets/logos/Project%20Timeline.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      },
+      {
+        "src": "/assets/logos/Rejected.png",
+        "type": "image/png",
+        "sizes": "4025x825"
+      },
+      {
+        "src": "/assets/logos/Request%20List.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      },
+      {
+        "src": "/assets/logos/Service%20Request.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      },
+      {
+        "src": "/assets/logos/WorkInProgress.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "id": "/",
+    "start_url": "/",
+    "background_color": "#FFFFFF",
+    "display": "browser",
+    "scope": "/",
+    "theme_color": "#D6EDED",
+    "description": "Requisition and Inspection Project Management"
+  }

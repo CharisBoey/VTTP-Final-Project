@@ -27,12 +27,12 @@ export class RequestStore extends ComponentStore<ServiceRequestSlice>{
   )
 
   readonly deleteReq = this.updater<string>(
-      (slice: ServiceRequestSlice, requestIDInput: string) => {
-          return {
-          requestLists: slice.requestLists.filter(req => requestIDInput != req.requestID)
-          }
-      }
-  )
+    (slice: ServiceRequestSlice, requestIDInput: string) => {
+        return {
+        requestLists: slice.requestLists.filter(req => requestIDInput != req.requestID)
+        }
+    }
+)
 
   readonly getReqByID = (requestID: string) => {
       return this.select<serviceRequest>(

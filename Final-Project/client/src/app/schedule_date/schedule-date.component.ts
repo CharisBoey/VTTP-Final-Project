@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MainService } from '../main.service';
 declare var createGoogleEvent: any;
+declare var gapiLoaded: any;
 
 @Component({
   selector: 'app-schedule-date',
@@ -29,6 +29,8 @@ export class ScheduleDateComponent implements OnInit{
     });
     console.log(">>>", this.requestId, this.locationaddress);
     
+    gapiLoaded()
+
   }
 
   private createScheduleForm(): FormGroup{
@@ -64,9 +66,12 @@ export class ScheduleDateComponent implements OnInit{
       endTime: endTime,
     };
     console.info(eventDetails);
-    createGoogleEvent(eventDetails);
-    this.router.navigate(['/Standard', this.username, 'Request-List']);
-
+    try {
+      createGoogleEvent(eventDetails);
+      this.router.navigate(['/Standard', this.username, 'Request-List']);
+    } catch (error) {
+      alert("Unsuccessful, try again")
+    }
   }
 
   getEndTime(scheduleTime: Date) {

@@ -52,8 +52,6 @@ h2{
     border-radius: 4px 4px 0px 0px;
     border: 0;
     border-bottom: 1px solid #8E8E8E;
-    width: 47%;
-
 }
 
 .calendar:hover{
@@ -72,20 +70,15 @@ h2{
     border-bottom: 2px solid #3F51B5;
     outline:none;
     color: #3F51B5;
-    /* font-size: 12px;
-    padding: 5px 15px; */
 }
 
 .btns{
-    /* color-scheme: #D6EDED; */
     font-family: "Montserrat", sans-serif;
     font-weight: normal;
     font-size: 20px;
     padding: 20px 30px;
     background-color: #D6EDED;
     border-radius: 8px;
-    /* color: black;
-    border-radius: 8px; */
     border-color: transparent;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
     width: 80%;
@@ -93,5 +86,6 @@ h2{
 
 .error-msg{
     color: #F44336;
-    font-size: 11px;
+    font-size: 15px;
+    font-style: italic;
 }

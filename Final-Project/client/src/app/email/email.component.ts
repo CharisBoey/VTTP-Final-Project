@@ -22,9 +22,7 @@ export class EmailComponent implements OnInit{
 
   private createEmailForm(): FormGroup{
     return this.fb.group({
-      fromName: this.fb.control<string>('', [Validators.required, Validators.minLength(3)]),
       fromEmail: this.fb.control<string>('', [Validators.required, Validators.email]),
-      // toName: this.fb.control<string>('', [Validators.required, Validators.minLength(5)]),
       subject: this.fb.control('', [Validators.required, Validators.minLength(5)]),
       message:this.fb.control('', [Validators.required, Validators.minLength(5)])
     })
@@ -40,7 +38,7 @@ export class EmailComponent implements OnInit{
     console.log("Sent to Management!")
     emailjs.init('rayelJTKYKRy_K73S')
     let response = await emailjs.send("service_vttpfinalproject","template_vly3jbj",{
-      from_name: this.emailForm.value.fromName,
+      from_name: this.username,
       to_name: "Management Team",
       from_email: this.emailForm.value.fromEmail,
       subject: this.emailForm.value.subject,
@@ -53,7 +51,7 @@ export class EmailComponent implements OnInit{
     console.log("Sent to Contractor Team!")
     emailjs.init('rayelJTKYKRy_K73S')
     let response = await emailjs.send("service_vttpfinalproject","template_vly3jbj",{
-      from_name: this.emailForm.value.fromName,
+      from_name: this.username,
       to_name: "Contractor Team",
       from_email: this.emailForm.value.fromEmail,
       subject: this.emailForm.value.subject,

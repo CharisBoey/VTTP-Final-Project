@@ -1,14 +1,24 @@
-const CLIENT_ID =
-  "279744208752-9odck6g3k3tfsgdoqt78fa4sfp3jpo1t.apps.googleusercontent.com";
-const API_KEY = "AIzaSyDlLJsT8l0PqOgRRrM8_Ztnz4XBp3hmWDc";
-const DISCOVERY_DOC = "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest";
-const SCOPES = "https://www.googleapis.com/auth/calendar";
+const CLIENT_ID="279744208752-9odck6g3k3tfsgdoqt78fa4sfp3jpo1t.apps.googleusercontent.com"; 
+const API_KEY="AIzaSyDlLJsT8l0PqOgRRrM8_Ztnz4XBp3hmWDc";
+const DISCOVERY_DOC="https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest";
+const SCOPES="https://www.googleapis.com/auth/calendar";
 let tokenClient;
 let gapiInited = false;
 let gisInited = false;
+let gapiInitilized; 
 
 function gapiLoaded() {
   gapi.load("client", initializeGapiClient);
+}
+
+function gapiLoaded() {
+  gapiInitilized = new Promise((successful, reject) => {
+    gapi.load("client", () => {
+      initializeGapiClient()
+        .then(() => successful())
+        .catch((error) => reject(error));
+    });
+  });
 }
 
 async function initializeGapiClient() {
@@ -23,22 +33,29 @@ function gisLoaded() {
   tokenClient = google.accounts.oauth2.initTokenClient({
     client_id: CLIENT_ID,
     scope: SCOPES,
-    callback: "", // defined later
+    callback: "",
   });
   gisInited = true;
 }
 
-function createGoogleEvent(eventDetails) {
-  tokenClient.callback = async (resp) => {
-    if (resp.error !== undefined) {
-      throw resp;
+async function createGoogleEvent(eventDetails) {
+  try {
+    await gapiInitilized
+
+    tokenClient.callback = async (resp) => {
+      if (resp.error !== undefined) {
+        throw resp;
+      }
+      await scheduleEvent(eventDetails);
+    };
+    if (gapi.client.getToken() === null) {
+      tokenClient.requestAccessToken({ prompt: "consent" });
+    } else {
+      tokenClient.requestAccessToken({ prompt: "" });
     }
-    await scheduleEvent(eventDetails);
-  };
-  if (gapi.client.getToken() === null) {
-    tokenClient.requestAccessToken({ prompt: "consent" });
-  } else {
-    tokenClient.requestAccessToken({ prompt: "" });
+
+  } catch (error) {
+    console.log(error);
   }
 }
 
@@ -55,7 +72,6 @@ function scheduleEvent(eventDetails) {
       dateTime: eventDetails.endTime,
       timeZone: "Asia/Singapore",
     },
-    //recurrence: ["RRULE:FREQ=DAILY;COUNT=2"],
     attendees: [{ email: eventDetails.email }, { email: "ris.developertesting@gmail.com" }],
     reminders: {
       useDefault: false,
@@ -64,8 +80,6 @@ function scheduleEvent(eventDetails) {
         { method: "popup", minutes: 10 },
       ],
     },
-
-    //calendarId: calendarId,
   };
 
   const request = gapi.client.calendar.events.insert({

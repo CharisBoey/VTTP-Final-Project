@@ -129,19 +129,26 @@ export class ServiceRequestComponent implements OnInit, Validators{
     const dateObject = new Date(request.duedate);
     request.duedate = dateObject.toISOString().slice(0,10)
 
-    this.reqStore.addReq(request)
-  
-    this.mainSvc.sendImgToSB(request.requestID, this.photoElem)
+    if (this.reqStore.getReqByID(request.requestID)){
+      
+      this.reqStore.addReq(request)
+      this.mainSvc.sendImgToSB(request.requestID, this.photoElem)
       .then(response => { 
-        alert(JSON.stringify(response));
+        // alert(JSON.stringify(response));
+        alert("Successfully uploaded to Digital Ocean: "+ JSON.stringify(response));
         console.log("Image URL",response.imageURL);
         request.photo = response.imageURL;
 
       })
       .catch(error => {
-        alert(JSON.stringify(error));
+        // alert(JSON.stringify(error));
+        alert("Error unsuccessful: "+JSON.stringify(error));
         console.log("ERROR RESPONSE>>>", error);
       });
+    }
+    console.log("fail")
+  
+    
 
     this.serviceRequestForm = this.createServiceRequestForm()  
     this.uploaded = false
@@ -149,6 +156,7 @@ export class ServiceRequestComponent implements OnInit, Validators{
   }
 
   deleteRequest(requestID:string){
+    console.log("del",requestID)
     this.reqStore.deleteReq(requestID)
   }
 

@@ -105,7 +105,7 @@ export class MainService {
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }); // Set correct Content-Type
 
-    return firstValueFrom(this.http.post("https://hooks.slack.com/services/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", payload, { headers }));
+    return firstValueFrom(this.http.post("https://hooks.slack.com/services/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", payload, { headers }));
   }
   
 }
